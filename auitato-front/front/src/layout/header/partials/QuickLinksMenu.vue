@@ -77,7 +77,7 @@
           <span class="svg-icon svg-icon-3x svg-icon-success mb-2">
             <inline-svg src="media/icons/duotune/finance/fin006.svg" />
           </span>
-          <span class="fs-5 fw-semobold text-gray-800 mb-0">Customers</span>
+          <span class="fs-5 fw-semobold text-gray-800 mb-0">Customers2</span>
           <span class="fs-7 text-gray-400">Latest cases</span>
         </a>
       </div>

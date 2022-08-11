@@ -134,7 +134,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/apps/Calendar.vue"),
       },
       {
-        path: "/apps/chat/private-chat",
+        path: "/apps/representations/chat/private-chat",
         name: "apps-private-chat",
         component: () => import("@/views/apps/chat/Chat.vue"),
       },
@@ -238,6 +238,61 @@ const routes: Array<RouteRecordRaw> = [
         path: "/crafted/widgets/feeds",
         name: "widgets-feeds",
         component: () => import("@/views/crafted/widgets/Feeds.vue"),
+      },
+      {
+        path: "/apps/forms/registration",
+        name: "registration-forms",
+        component: () => import("@/views/forms/Registration.vue"),
+      },
+      {
+        path: "/apps/forms/authorization",
+        name: "authorization-forms",
+        component: () => import("@/views/forms/Authorization.vue"),
+      },
+      {
+        path: "/apps/forms/edit-profile",
+        name: "edit-profile-forms",
+        component: () => import("@/views/forms/EditProfile.vue"),
+      },
+      {
+        path: "/apps/forms/create-task",
+        name: "create-task-forms",
+        component: () => import("@/views/forms/CreateTask.vue"),
+      },
+      {
+        path: "/apps/forms/edit-task",
+        name: "edit-task-forms",
+        component: () => import("@/views/forms/EditTask.vue"),
+      },
+      {
+        path: "/apps/forms/search-task",
+        name: "search-task-forms",
+        component: () => import("@/views/forms/SearchTask.vue"),
+      },
+      {
+        path: "/apps/forms/replenishment-balance",
+        name: "replenishment-balance-forms",
+        component: () => import("@/views/forms/ReplenishmentBalance.vue"),
+      },
+      {
+        path: "/apps/representations/categories",
+        name: "categories-representations",
+        component: () => import("@/views/representations/Categories.vue"),
+      },
+      {
+        path: "/apps/representations/list-of-tasks",
+        name: "list-tasks-representations",
+        component: () => import("@/views/representations/ListTasks.vue"),
+      },
+      {
+        path: "/apps/representations/list-of-responses",
+        name: "list-responses-representations",
+        component: () => import("@/views/representations/ListResponses.vue"),
+      },
+      {
+        path: "/apps/representations/article",
+        name: "article-representations",
+        component: () => import("@/views/representations/Article.vue"),
       },
     ],
   },

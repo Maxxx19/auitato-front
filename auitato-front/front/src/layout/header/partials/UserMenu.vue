@@ -36,16 +36,16 @@
 
     <!--begin::Menu item-->
     <div class="menu-item px-5">
-      <router-link to="/pages/profile/overview" class="menu-link px-5">
-        My Profile
+      <router-link to="/crafted/pages/profile/overview" class="menu-link px-5">
+        Мой профиль
       </router-link>
     </div>
     <!--end::Menu item-->
 
     <!--begin::Menu item-->
     <div class="menu-item px-5">
-      <router-link to="/pages/profile/overview" class="menu-link px-5">
-        <span class="menu-text">My Projects</span>
+      <router-link to="/apps/forms/search-task" class="menu-link px-5">
+        <span class="menu-text">Мои задачи</span>
         <span class="menu-badge">
           <span class="badge badge-light-danger badge-circle fw-bold fs-7"
             >3</span

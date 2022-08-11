@@ -32,7 +32,6 @@
           <strong>demo</strong> to continue.
         </div>
       </div>
-
       <!--begin::Input group-->
       <div class="fv-row mb-10">
         <!--begin::Label-->

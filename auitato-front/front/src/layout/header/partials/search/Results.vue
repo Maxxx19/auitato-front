@@ -96,7 +96,7 @@
       </a>
       <!--end::Item-->
       <!--begin::Category title-->
-      <h3 class="fs-5 text-muted m-0 pt-5 pb-5">Customers</h3>
+      <h3 class="fs-5 text-muted m-0 pt-5 pb-5">Customers2</h3>
       <!--end::Category title-->
       <!--begin::Item-->
       <a
