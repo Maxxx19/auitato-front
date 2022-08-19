@@ -35,7 +35,7 @@
       <!--begin::Input group-->
       <div class="fv-row mb-10">
         <!--begin::Label-->
-        <label class="form-label fs-6 fw-bold text-dark">Email</label>
+        <label class="form-label fs-6 fw-bold text-dark">Phone</label>
         <!--end::Label-->
 
         <!--begin::Input-->
@@ -43,13 +43,13 @@
           tabindex="1"
           class="form-control form-control-lg form-control-solid"
           type="text"
-          name="email"
+          name="phone"
           autocomplete="off"
         />
         <!--end::Input-->
         <div class="fv-plugins-message-container">
           <div class="fv-help-block">
-            <ErrorMessage name="email" />
+            <ErrorMessage name="phone" />
           </div>
         </div>
       </div>
@@ -110,11 +110,11 @@
         <!--end::Submit button-->
 
         <!--begin::Separator-->
-        <div class="text-center text-muted text-uppercase fw-bold mb-5">or</div>
+        <!-- <div class="text-center text-muted text-uppercase fw-bold mb-5">or</div> -->
         <!--end::Separator-->
 
         <!--begin::Google link-->
-        <a
+        <!-- <a
           href="#"
           class="btn btn-flex flex-center btn-light btn-lg w-100 mb-5"
         >
@@ -124,11 +124,11 @@
             class="h-20px me-3"
           />
           Continue with Google
-        </a>
+        </a> -->
         <!--end::Google link-->
 
         <!--begin::Google link-->
-        <a
+        <!-- <a
           href="#"
           class="btn btn-flex flex-center btn-light btn-lg w-100 mb-5"
         >
@@ -138,18 +138,18 @@
             class="h-20px me-3"
           />
           Continue with Facebook
-        </a>
+        </a> -->
         <!--end::Google link-->
 
         <!--begin::Google link-->
-        <a href="#" class="btn btn-flex flex-center btn-light btn-lg w-100">
+        <!-- <a href="#" class="btn btn-flex flex-center btn-light btn-lg w-100">
           <img
             alt="Logo"
             src="media/svg/brand-logos/apple-black.svg"
             class="h-20px me-3"
           />
           Continue with Apple
-        </a>
+        </a> -->
         <!--end::Google link-->
       </div>
       <!--end::Actions-->
@@ -183,7 +183,8 @@ export default defineComponent({
 
     //Create form validation object
     const login = Yup.object().shape({
-      email: Yup.string().email().required().label("Email"),
+      // email: Yup.string().required().label("Email"),
+      phone: Yup.string().min(11).max(12).required().label("Phone"),
       password: Yup.string().min(4).required().label("Password"),
     });
 

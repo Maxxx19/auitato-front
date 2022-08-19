@@ -7,6 +7,7 @@ export interface User {
   name: string;
   surname: string;
   email: string;
+  phone: BigInteger;
   password: string;
   api_token: string;
 }

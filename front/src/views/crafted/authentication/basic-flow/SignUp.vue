@@ -245,6 +245,7 @@ export default defineComponent({
       first_name: Yup.string().required().label("Name"),
       last_name: Yup.string().required().label("Surname"),
       email: Yup.string().min(4).required().email().label("Email"),
+      phone: Yup.string().min(11).max(12).required().label("Phone"),
       password: Yup.string().required().label("Password"),
       password_confirmation: Yup.string()
         .required()
