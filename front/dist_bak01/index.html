@@ -1,0 +1,15 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Roboto:300,400,500,600,700|Material+Icons" rel="stylesheet"><title>Metronic | Vue Demo</title><script defer="defer" src="/metronic8/vue/demo1/js/chunk-vendors.2c23e271.js"></script><script defer="defer" src="/metronic8/vue/demo1/js/app.deb6e805.js"></script><link href="/metronic8/vue/demo1/css/chunk-vendors.fd9deb68.css" rel="stylesheet"><link href="/metronic8/vue/demo1/css/app.819a7bda.css" rel="stylesheet"></head><body style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px"><script>if (document.documentElement) {
+        var defaultThemeMode = "system";
+
+        var name = document.body.getAttribute("data-kt-name");
+        var themeMode = localStorage.getItem("kt_" + (name ? name + "_" : "") + "theme_mode_value");
+
+        if (themeMode === null) {
+            if (defaultThemeMode === "system") {
+                themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+            } else {
+                themeMode = defaultThemeMode;
+            }
+        }
+        document.documentElement.setAttribute("data-theme", themeMode);
+    }</script><noscript><strong>We're sorry but metronic-vue doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id="app" class="d-flex flex-column flex-root"></div></body></html>
