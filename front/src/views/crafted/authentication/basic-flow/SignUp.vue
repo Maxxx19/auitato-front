@@ -28,14 +28,14 @@
       <!--end::Heading-->
 
       <!--begin::Action-->
-      <button type="button" class="btn btn-light-primary fw-bold w-100 mb-10">
+      <!-- <button type="button" class="btn btn-light-primary fw-bold w-100 mb-10">
         <img
           alt="Logo"
           src="media/svg/brand-logos/google-icon.svg"
           class="h-20px me-3"
         />
         Sign in with Google
-      </button>
+      </button> -->
       <!--end::Action-->
 
       <!--begin::Separator-->
@@ -49,8 +49,8 @@
       <!--begin::Input group-->
       <div class="row fv-row mb-7">
         <!--begin::Col-->
-        <div class="col-xl-6">
-          <label class="form-label fw-bold text-dark fs-6">First Name</label>
+        <div class="fv-row mb-7">
+          <label class="form-label fw-bold text-dark fs-6">Name</label>
           <Field
             class="form-control form-control-lg form-control-solid"
             type="text"
@@ -67,7 +67,7 @@
         <!--end::Col-->
 
         <!--begin::Col-->
-        <div class="col-xl-6">
+        <!-- <div class="col-xl-6">
           <label class="form-label fw-bold text-dark fs-6">Last Name</label>
           <Field
             class="form-control form-control-lg form-control-solid"
@@ -81,24 +81,24 @@
               <ErrorMessage name="last_name" />
             </div>
           </div>
-        </div>
+        </div> -->
         <!--end::Col-->
       </div>
       <!--end::Input group-->
 
       <!--begin::Input group-->
       <div class="fv-row mb-7">
-        <label class="form-label fw-bold text-dark fs-6">Email</label>
+        <label class="form-label fw-bold text-dark fs-6">Phone</label>
         <Field
           class="form-control form-control-lg form-control-solid"
-          type="email"
+          type="text"
           placeholder=""
-          name="email"
+          name="phone"
           autocomplete="off"
         />
         <div class="fv-plugins-message-container">
           <div class="fv-help-block">
-            <ErrorMessage name="email" />
+            <ErrorMessage name="phone" />
           </div>
         </div>
       </div>
@@ -243,8 +243,8 @@ export default defineComponent({
 
     const registration = Yup.object().shape({
       first_name: Yup.string().required().label("Name"),
-      last_name: Yup.string().required().label("Surname"),
-      email: Yup.string().min(4).required().email().label("Email"),
+      // last_name: Yup.string().required().label("Surname"),
+      // email: Yup.string().min(4).required().email().label("Email"),
       phone: Yup.string().min(11).max(12).required().label("Phone"),
       password: Yup.string().required().label("Password"),
       password_confirmation: Yup.string()
