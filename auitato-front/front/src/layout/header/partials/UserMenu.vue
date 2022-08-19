@@ -199,6 +199,46 @@
         <!--begin::Menu item-->
         <div class="menu-item px-3">
           <a
+            @click="setLang('ua')"
+            href="#"
+            class="menu-link d-flex px-5"
+            :class="{ active: currentLanguage('ua') }"
+          >
+            <span class="symbol symbol-20px me-4">
+              <img
+                class="rounded-1"
+                src="media/flags/ukraine.svg"
+                alt="metronic"
+              />
+            </span>
+            Ukrainian
+          </a>
+        </div>
+        <!--end::Menu item-->
+
+        <!--begin::Menu item-->
+        <div class="menu-item px-3">
+          <a
+            @click="setLang('ru')"
+            href="#"
+            class="menu-link d-flex px-5"
+            :class="{ active: currentLanguage('ru') }"
+          >
+            <span class="symbol symbol-20px me-4">
+              <img
+                class="rounded-1"
+                src="media/flags/russia.svg"
+                alt="metronic"
+              />
+            </span>
+            Russian
+          </a>
+        </div>
+        <!--end::Menu item-->
+
+        <!--begin::Menu item-->
+        <div class="menu-item px-3">
+          <a
             @click="setLang('es')"
             href="#"
             class="menu-link d-flex px-5"
@@ -320,6 +360,14 @@ export default defineComponent({
       en: {
         flag: "media/flags/united-states.svg",
         name: "English",
+      },
+      ua: {
+        flag: "media/flags/ukraine.svg",
+        name: "Ukrainian",
+      },
+      ru: {
+        flag: "media/flags/russia.svg",
+        name: "Russian",
       },
       es: {
         flag: "media/flags/spain.svg",
