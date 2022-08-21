@@ -232,74 +232,74 @@ const DocMenuConfig = [
     route: "/apps",
     pages: [
       {
-        sectionTitle: "Формы",
+        sectionTitle: "forms",
         route: "/forms",
         svgIcon: "media/icons/duotune/finance/fin006.svg",
         fontIcon: "bi-printer",
         sub: [
           {
-            heading: "Форма регистрации",
+            heading: "registrationForm",
             route: "/apps/forms/registration",
           },
           {
-            heading: "Форма авторизации",
+            heading: "authorizationForm",
             route: "/apps/forms/authorization",
           },
           {
-            heading: "Форма редактирования профиля",
+            heading: "editProfileForm",
             route: "/apps/forms/edit-profile",
           },
           {
-            heading: "Форма создания задачи",
+            heading: "createTaskForm",
             route: "/apps/forms/create-task",
           },
           {
-            heading: "Форма редактирования задачи",
+            heading: "editTaskForm",
             route: "/apps/forms/edit-task",
           },
           {
-            heading: "Форма поиска задач",
+            heading: "searchingTaskForm",
             route: "/apps/forms/search-task",
           },
           {
-            heading: "Форма пополнения баланса",
+            heading: "replenishmentBalanceForm",
             route: "/apps/forms/replenishment-balance",
           },
         ],
       },
       {
-        sectionTitle: "Представления",
+        sectionTitle: "representations",
         route: "/representations",
         svgIcon: "media/icons/duotune/finance/fin006.svg",
         fontIcon: "bi-printer",
         sub: [
           {
-            heading: "Категории",
+            heading: "categories",
             route: "/apps/representations/categories",
           },
           {
-            heading: "Списки задач",
+            heading: "listOfTasks",
             route: "/apps/representations/list-of-tasks",
           },
           {
-            heading: "Списки откликов",
+            heading: "listOfResponses",
             route: "/apps/representations/list-of-responses",
           },
           {
-            heading: "Чат",
+            heading: "privateChat",
             route: "/apps/representations/chat/private-chat",
           },
           {
-            heading: "Рубрики статей",
+            heading: "rubricsOfArticles",
             route: "/apps/representations/rubrics-of-articles",
           },
           {
-            heading: "Статья",
+            heading: "singleArticle",
             route: "/apps/representations/article",
           },
           {
-            heading: "Задача",
-            route: "/apps/representations/",
+            heading: "singleTask",
+            route: "/apps/representations/task",
           },
         ],
       },
