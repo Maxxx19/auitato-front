@@ -16,13 +16,13 @@
         <!--begin::Username-->
         <div class="d-flex flex-column">
           <div class="fw-bold d-flex align-items-center fs-5">
-            Max Smith
+            {{ selectedUser }}
             <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2"
               >Pro</span
             >
           </div>
-          <a href="#" class="fw-semobold text-muted text-hover-primary fs-7"
-            >max@kt.com</a
+          <a href="#" class="fw-semobold text-muted text-hover-primary fs-7">
+            {{ email }}</a
           >
         </div>
         <!--end::Username-->
@@ -37,7 +37,7 @@
     <!--begin::Menu item-->
     <div class="menu-item px-5">
       <router-link to="/crafted/pages/profile/overview" class="menu-link px-5">
-        Мой профиль
+        {{ translate("myProfile") }}
       </router-link>
     </div>
     <!--end::Menu item-->
@@ -45,7 +45,7 @@
     <!--begin::Menu item-->
     <div class="menu-item px-5">
       <router-link to="/apps/forms/search-task" class="menu-link px-5">
-        <span class="menu-text">Мои задачи</span>
+        <span class="menu-text">{{ translate("myTasks") }}</span>
         <span class="menu-badge">
           <span class="badge badge-light-danger badge-circle fw-bold fs-7"
             >3</span
@@ -224,10 +224,10 @@
             class="menu-link d-flex px-5"
             :class="{ active: currentLanguage('ru') }"
           >
-            <span class="symbol symbol-20px me-4">
+            <span class="symbol symbol-25px me-4">
               <img
                 class="rounded-1"
-                src="media/flags/russia.svg"
+                src="media/flags/russia.png"
                 alt="metronic"
               />
             </span>
@@ -330,7 +330,9 @@
 
     <!--begin::Menu item-->
     <div class="menu-item px-5">
-      <a @click="signOut()" class="menu-link px-5"> Sign Out </a>
+      <a @click="signOut()" class="menu-link px-5">
+        {{ translate("SignOut") }}
+      </a>
     </div>
     <!--end::Menu item-->
   </div>
@@ -338,15 +340,28 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent, computed, onMounted } from "vue";
 import { useI18n } from "vue-i18n/index";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { Actions } from "@/store/enums/StoreEnums";
+import { useRoute } from "vue-router";
 
 export default defineComponent({
   name: "kt-user-menu",
   components: {},
+  data: function () {
+    return {
+      selectedUser: null,
+      email: null,
+    };
+  },
+  mounted: function () {
+    const store = useStore();
+    //alert(store.state.AuthModule.user.email);
+    this.selectedUser = store.state.AuthModule.user.name;
+    this.email = store.state.AuthModule.user.email;
+  },
   setup() {
     const router = useRouter();
     const i18n = useI18n();
@@ -366,7 +381,7 @@ export default defineComponent({
         name: "Ukrainian",
       },
       ru: {
-        flag: "media/flags/russia.svg",
+        flag: "media/flags/russia.png",
         name: "Russian",
       },
       es: {
@@ -406,12 +421,29 @@ export default defineComponent({
       return countries[i18n.locale.value];
     });
 
+    const { t, te } = useI18n();
+    const route = useRoute();
+
+    const translate = (text) => {
+      if (te(text)) {
+        return t(text);
+      } else {
+        return text;
+      }
+    };
+
+    const hasActiveChildren = (match) => {
+      return route.path.indexOf(match) !== -1;
+    };
+
     return {
       signOut,
       setLang,
       currentLanguage,
       currentLangugeLocale,
       countries,
+      hasActiveChildren,
+      translate,
     };
   },
 });

@@ -254,7 +254,7 @@
               class="nav-link text-active-primary me-6"
               active-class="active"
             >
-              Overview
+              {{ translate("profileOverview") }}
             </router-link>
           </li>
           <!--end::Nav item-->
@@ -265,7 +265,7 @@
               class="nav-link text-active-primary me-6"
               active-class="active"
             >
-              Settings
+              {{ translate("settings") }}
             </router-link>
           </li>
           <!--end::Nav item-->
@@ -281,11 +281,33 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Dropdown3 from "@/components/dropdown/Dropdown3.vue";
+import { useI18n } from "vue-i18n/index";
+import { useRoute } from "vue-router";
 
 export default defineComponent({
   name: "kt-account",
   components: {
     Dropdown3,
+  },
+  setup() {
+    const { t, te } = useI18n();
+    const route = useRoute();
+
+    const translate = (text) => {
+      if (te(text)) {
+        return t(text);
+      } else {
+        return text;
+      }
+    };
+
+    const hasActiveChildren = (match) => {
+      return route.path.indexOf(match) !== -1;
+    };
+    return {
+      hasActiveChildren,
+      translate,
+    };
   },
 });
 </script>

@@ -9,6 +9,7 @@ enum Actions {
   LOGIN = "login",
   LOGOUT = "logout",
   REGISTER = "register",
+  GET_USER = "getUser",
   UPDATE_USER = "updateUser",
   FORGOT_PASSWORD = "forgotPassword",
   SET_BREADCRUMB_ACTION = "setBreadcrumbAction",

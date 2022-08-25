@@ -12,7 +12,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: "/dashboard",
         name: "dashboard",
-        component: () => import("@/views/Dashboard.vue"),
+        component: () => import("@/views/DashboardOrder.vue"),
       },
       {
         path: "/builder",
@@ -325,6 +325,11 @@ const routes: Array<RouteRecordRaw> = [
     name: "multi-step-sign-up",
     component: () =>
       import("@/views/crafted/authentication/MultiStepSignUp.vue"),
+  },
+  {
+    path: "/dashboard",
+    name: "dashboard-order",
+    component: () => import("@/views/DashboardOrder.vue"),
   },
   {
     // the 404 route, when none of the above matches

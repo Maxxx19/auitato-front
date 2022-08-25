@@ -20,7 +20,7 @@
       >
         <!--begin::Title-->
         <h1 class="d-flex align-items-center text-dark fw-bold my-1 fs-3">
-          {{ title }}
+          {{ translate("dashboard") }}
         </h1>
         <!--end::Title-->
 
@@ -104,6 +104,8 @@
 import { defineComponent } from "vue";
 import Dropdown1 from "@/components/dropdown/Dropdown1.vue";
 import { toolbarWidthFluid } from "@/core/helpers/config";
+import { useI18n } from "vue-i18n/index";
+import { useRoute } from "vue-router";
 
 export default defineComponent({
   name: "KToolbar",
@@ -115,7 +117,23 @@ export default defineComponent({
     Dropdown1,
   },
   setup() {
+    const { t, te } = useI18n();
+    const route = useRoute();
+
+    const translate = (text) => {
+      if (te(text)) {
+        return t(text);
+      } else {
+        return text;
+      }
+    };
+
+    const hasActiveChildren = (match) => {
+      return route.path.indexOf(match) !== -1;
+    };
     return {
+      hasActiveChildren,
+      translate,
       toolbarWidthFluid,
     };
   },

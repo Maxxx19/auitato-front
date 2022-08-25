@@ -199,13 +199,28 @@ export default defineComponent({
         // Activate indicator
         submitButton.value.setAttribute("data-kt-indicator", "on");
       }
-
+      //const store = useStore();
       // Send login request
       await store.dispatch(Actions.LOGIN, values);
       const [errorName] = Object.keys(store.getters.getErrors);
       const error = store.getters.getErrors[errorName];
+      if (error) {
+        Swal.fire({
+          text: error[0],
+          icon: "error",
+          buttonsStyling: false,
+          confirmButtonText: "Try again!",
+          customClass: {
+            confirmButton: "btn fw-semobold btn-light-danger",
+          },
+        });
+      }
 
       if (!error) {
+        await store.dispatch(
+          Actions.GET_USER,
+          store.state.AuthModule.user.api_token
+        );
         Swal.fire({
           text: "You have successfully logged in!",
           icon: "success",

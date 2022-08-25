@@ -56,7 +56,7 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
   @Mutation
   [Mutations.SET_AUTH](user) {
     this.isAuthenticated = true;
-    this.user = user;
+    this.user.api_token = user;
     this.errors = {};
     JwtService.saveToken(user.api_token);
   }
@@ -84,6 +84,17 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
     return ApiService.post("login", credentials)
       .then(({ data }) => {
         this.context.commit(Mutations.SET_AUTH, data);
+      })
+      .catch(({ response }) => {
+        this.context.commit(Mutations.SET_ERROR, response.data.errors);
+      });
+  }
+
+  @Action
+  [Actions.GET_USER](credentials) {
+    return ApiService.get("profile", credentials)
+      .then(({ data }) => {
+        this.context.commit(Mutations.SET_USER, data);
       })
       .catch(({ response }) => {
         this.context.commit(Mutations.SET_ERROR, response.data.errors);

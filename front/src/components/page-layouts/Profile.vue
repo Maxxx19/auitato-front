@@ -30,7 +30,7 @@
                 <a
                   href="#"
                   class="text-gray-800 text-hover-primary fs-2 fw-bold me-1"
-                  >Max Smith</a
+                  >{{ selectedUser }}</a
                 >
                 <a href="#">
                   <span class="svg-icon svg-icon-1 svg-icon-primary">
@@ -71,7 +71,7 @@
                       src="media/icons/duotune/communication/com011.svg"
                     />
                   </span>
-                  max@kt.com
+                  {{ email }}
                 </a>
               </div>
               <!--end::Info-->
@@ -246,7 +246,7 @@
               class="nav-link text-active-primary me-6"
               active-class="active"
             >
-              Overview
+              {{ translate("profileOverview") }}
             </router-link>
           </li>
           <!--end::Nav item-->
@@ -257,7 +257,7 @@
               to="/crafted/pages/profile/projects"
               active-class="active"
             >
-              Projects
+              {{ translate("projects") }}
             </router-link>
           </li>
           <!--end::Nav item-->
@@ -268,7 +268,7 @@
               to="/crafted/pages/profile/campaigns"
               active-class="active"
             >
-              Campaigns
+              {{ translate("campaigns") }}
             </router-link>
           </li>
           <!--end::Nav item-->
@@ -279,7 +279,7 @@
               to="/crafted/pages/profile/documents"
               active-class="active"
             >
-              Documents
+              {{ translate("documents") }}
             </router-link>
           </li>
           <!--end::Nav item-->
@@ -290,7 +290,7 @@
               to="/crafted/pages/profile/connections"
               active-class="active"
             >
-              Connections
+              {{ translate("connections") }}
             </router-link>
           </li>
           <!--end::Nav item-->
@@ -301,7 +301,7 @@
               to="/crafted/pages/profile/activity"
               active-class="active"
             >
-              Activity
+              {{ translate("activity") }}
             </router-link>
           </li>
           <!--end::Nav item-->
@@ -317,11 +317,47 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Dropdown3 from "@/components/dropdown/Dropdown3.vue";
+import { useI18n } from "vue-i18n/index";
+import { useRoute } from "vue-router";
+import { useStore } from "vuex";
 
 export default defineComponent({
   name: "profile-page-layout",
   components: {
     Dropdown3,
+  },
+  setup() {
+    const { t, te } = useI18n();
+    const route = useRoute();
+
+    const translate = (text) => {
+      if (te(text)) {
+        return t(text);
+      } else {
+        return text;
+      }
+    };
+
+    const hasActiveChildren = (match) => {
+      return route.path.indexOf(match) !== -1;
+    };
+    return {
+      hasActiveChildren,
+      translate,
+    };
+  },
+  data() {
+    const store = useStore();
+    return {
+      selectedUser: null,
+      email: null,
+    };
+  },
+  mounted: function () {
+    const store = useStore();
+    //alert(store.state.AuthModule.user.email);
+    this.selectedUser = store.state.AuthModule.user.name;
+    this.email = store.state.AuthModule.user.email;
   },
 });
 </script>
