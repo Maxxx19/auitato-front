@@ -17,12 +17,18 @@
         <div
           class="d-flex flex-row-fluid flex-column flex-center p-10 pt-lg-20"
         >
+          <!--begin::Menu item-->
+          <div>
+            <router-link to="/sign-in" class="link-primary fw-bold"
+              >Sign in</router-link
+            >
+          </div>
+          <!--end::Menu item-->
           <!--begin::Logo-->
           <router-link to="/dashboard" class="mb-10 mb-lg-20">
             <img alt="Logo" src="media/logos/default.svg" class="h-40px" />
           </router-link>
           <!--end::Logo-->
-
           <!--begin::Nav-->
           <div class="stepper-nav">
             <!--begin::Step 1-->
@@ -281,6 +287,13 @@
       <!--end::Footer-->
     </div>
     <!--end::Body-->
+    <!--begin::Body-->
+    <div class="d-flex flex-column flex-lg-row-fluid py-10">
+      <!--begin::Content-->
+      <div class="d-flex flex-top flex-column flex-column-fluid pt-lg-20">
+        <h3 class="stepper-title">{{ translate("FAQ") }}</h3>
+      </div>
+    </div>
   </div>
   <!--end::Authentication - Multi-steps-->
 </template>
@@ -478,7 +491,7 @@ export default defineComponent({
         window.location.reload();
       });
     };
-
+    store.dispatch(Actions.GET_FAQ);
     return {
       wizardRef,
       previousStep,

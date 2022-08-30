@@ -298,6 +298,17 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/",
+    component: () => import("@/views/DashboardMain.vue"),
+    children: [
+      {
+        path: "/main",
+        name: "main",
+        component: () => import("@/views/DashboardMain.vue"),
+      },
+    ],
+  },
+  {
+    path: "/",
     component: () => import("@/components/page-layouts/Auth.vue"),
     children: [
       {

@@ -96,6 +96,8 @@ const messages = {
     myProfile: "My profile",
     myTasks: "My tasks",
     SignOut: "Sign Out",
+    helpToFindExecutor: "We will help you to find performer to your task",
+    FAQ: "Frequently asked questions",
   },
   ua: {
     dashboard: "Панель приладів",
@@ -191,6 +193,8 @@ const messages = {
     myProfile: "Мій профіль",
     myTasks: "Мої задачі",
     SignOut: "Вийти",
+    helpToFindExecutor: "Ми допоможемо знайти виконавця для вашого завдання",
+    FAQ: "Часто задавані питання",
   },
   ru: {
     dashboard: "Панель приборов",
@@ -286,6 +290,8 @@ const messages = {
     myProfile: "Мой профиль",
     myTasks: "Мои задачи",
     SignOut: "Выйти",
+    helpToFindExecutor: "Поможем найти исполнителя для вашего задания",
+    FAQ: "Часто задаваемые вопросы",
   },
   es: {
     dashboard: "Tablero",

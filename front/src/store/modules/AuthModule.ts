@@ -10,6 +10,7 @@ export interface User {
   phone: BigInteger;
   password: string;
   api_token: string;
+  FAQ: string;
 }
 
 export interface UserAuthInfo {
@@ -67,6 +68,11 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
   }
 
   @Mutation
+  [Mutations.SET_FAQ](FAQ) {
+    this.user.FAQ = FAQ;
+  }
+
+  @Mutation
   [Mutations.SET_PASSWORD](password) {
     this.user.password = password;
   }
@@ -95,6 +101,17 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
     return ApiService.get("profile", credentials)
       .then(({ data }) => {
         this.context.commit(Mutations.SET_USER, data);
+      })
+      .catch(({ response }) => {
+        this.context.commit(Mutations.SET_ERROR, response.data.errors);
+      });
+  }
+
+  @Action
+  [Actions.GET_FAQ]() {
+    return ApiService.get("main")
+      .then(({ data }) => {
+        this.context.commit(Mutations.SET_FAQ, data);
       })
       .catch(({ response }) => {
         this.context.commit(Mutations.SET_ERROR, response.data.errors);

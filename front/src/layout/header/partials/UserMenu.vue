@@ -237,7 +237,7 @@
         <!--end::Menu item-->
 
         <!--begin::Menu item-->
-        <div class="menu-item px-3">
+        <!-- <div class="menu-item px-3">
           <a
             @click="setLang('es')"
             href="#"
@@ -253,11 +253,11 @@
             </span>
             Spanish
           </a>
-        </div>
+        </div> -->
         <!--end::Menu item-->
 
         <!--begin::Menu item-->
-        <div class="menu-item px-3">
+        <!-- <div class="menu-item px-3">
           <a
             @click="setLang('de')"
             href="#"
@@ -273,11 +273,11 @@
             </span>
             German
           </a>
-        </div>
+        </div> -->
         <!--end::Menu item-->
 
         <!--begin::Menu item-->
-        <div class="menu-item px-3">
+        <!-- <div class="menu-item px-3">
           <a
             @click="setLang('ja')"
             href="#"
@@ -293,11 +293,11 @@
             </span>
             Japanese
           </a>
-        </div>
+        </div> -->
         <!--end::Menu item-->
 
         <!--begin::Menu item-->
-        <div class="menu-item px-3">
+        <!-- <div class="menu-item px-3">
           <a
             @click="setLang('fr')"
             href="#"
@@ -313,7 +313,7 @@
             </span>
             French
           </a>
-        </div>
+        </div> -->
         <!--end::Menu item-->
       </div>
       <!--end::Menu sub-->
@@ -403,9 +403,7 @@ export default defineComponent({
     };
 
     const signOut = () => {
-      store
-        .dispatch(Actions.LOGOUT)
-        .then(() => router.push({ name: "sign-in" }));
+      store.dispatch(Actions.LOGOUT).then(() => router.push({ name: "main" }));
     };
 
     const setLang = (lang) => {

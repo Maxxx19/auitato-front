@@ -126,7 +126,7 @@ export default defineComponent({
     onMounted(() => {
       //check if current user is authenticated
       if (!store.getters.isUserAuthenticated) {
-        router.push({ name: "sign-in" });
+        router.push({ name: "main" });
       }
 
       nextTick(() => {
@@ -147,7 +147,7 @@ export default defineComponent({
 
         // check if current user is authenticated
         if (!store.getters.isUserAuthenticated) {
-          router.push({ name: "sign-in" });
+          router.push({ name: "main" });
         }
 
         nextTick(() => {
