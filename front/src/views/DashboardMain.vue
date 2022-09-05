@@ -291,7 +291,12 @@
     <div class="d-flex flex-column flex-lg-row-fluid py-10">
       <!--begin::Content-->
       <div class="d-flex flex-top flex-column flex-column-fluid pt-lg-20">
-        <h3 class="stepper-title">{{ translate("FAQ") }}</h3>
+        <ul>
+          <h3 class="stepper-title">{{ translate("FAQ") }}</h3>
+          <li v-for="(item, index) in items" :key="item.id">
+            {{ index + 1 }} {{ item.question }}
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -501,6 +506,10 @@ export default defineComponent({
       currentStepIndex,
       getIllustrationsPath,
       translate,
+      items:
+        Object.keys(store.state.AuthModule.user).length != 0
+          ? store.state.AuthModule.user.FAQ.faq
+          : store.state.AuthModule.user,
     };
   },
 });
