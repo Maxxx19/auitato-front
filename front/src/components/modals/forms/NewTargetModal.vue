@@ -40,7 +40,7 @@
             <!--begin::Heading-->
             <div class="mb-13 text-center">
               <!--begin::Title-->
-              <h1 class="mb-3">Set First Target</h1>
+              <h1 class="mb-3">{{ translate("CreateTask") }}</h1>
               <!--end::Title-->
 
               <!--begin::Description-->
@@ -56,7 +56,7 @@
             <div class="d-flex flex-column mb-8 fv-row">
               <!--begin::Label-->
               <label class="d-flex align-items-center fs-6 fw-semobold mb-2">
-                <span class="required">Target Title</span>
+                <span class="required">{{ translate("TaskTitle") }} </span>
                 <i
                   class="fas fa-exclamation-circle ms-2 fs-7"
                   data-bs-toggle="tooltip"
@@ -79,7 +79,9 @@
             <div class="row g-9 mb-8">
               <!--begin::Col-->
               <div class="col-md-6 fv-row">
-                <label class="required fs-6 fw-semobold mb-2">Assign</label>
+                <label class="required fs-6 fw-semobold mb-2">
+                  {{ translate("Assign") }}
+                </label>
 
                 <el-form-item prop="assign">
                   <el-select
@@ -107,7 +109,9 @@
 
               <!--begin::Col-->
               <div class="col-md-6 fv-row">
-                <label class="required fs-6 fw-semobold mb-2">Due Date</label>
+                <label class="required fs-6 fw-semobold mb-2">
+                  {{ translate("DueDate") }}
+                </label>
 
                 <!--begin::Input-->
                 <div class="position-relative align-items-center">
@@ -141,7 +145,9 @@
 
             <!--begin::Input group-->
             <div class="d-flex flex-column mb-8">
-              <label class="fs-6 fw-semobold mb-2">Target Details</label>
+              <label class="fs-6 fw-semobold mb-2">
+                {{ translate("TaskDetails") }}
+              </label>
 
               <el-form-item prop="targetDetails">
                 <el-input
@@ -159,7 +165,7 @@
             <div class="d-flex flex-column mb-8 fv-row">
               <!--begin::Label-->
               <label class="d-flex align-items-center fs-6 fw-semobold mb-2">
-                <span class="required">Tags</span>
+                <span class="required">{{ translate("Importance") }}</span>
                 <i
                   class="fas fa-exclamation-circle ms-2 fs-7"
                   data-bs-toggle="tooltip"
@@ -225,7 +231,7 @@
               <div class="d-flex flex-stack">
                 <!--begin::Label-->
                 <div class="fw-semobold me-5">
-                  <label class="fs-6">Notifications</label>
+                  <label class="fs-6">{{ translate("Notifications") }}</label>
 
                   <div class="fs-7 text-gray-400">
                     Allow Notifications by Phone or Email
@@ -329,6 +335,8 @@
 import { defineComponent, ref } from "vue";
 import { hideModal } from "@/core/helpers/dom";
 import Swal from "sweetalert2/dist/sweetalert2.js";
+import { useI18n } from "vue-i18n/index";
+import { useRoute } from "vue-router";
 
 interface NewAddressData {
   targetTitle: string;
@@ -353,6 +361,17 @@ export default defineComponent({
       targetDetails: "",
       tags: ["important", "urgent"],
     });
+
+    const { t, te } = useI18n();
+    const route = useRoute();
+
+    const translate = (text) => {
+      if (te(text)) {
+        return t(text);
+      } else {
+        return text;
+      }
+    };
 
     const rules = ref({
       targetTitle: [
@@ -427,6 +446,7 @@ export default defineComponent({
     return {
       targetData,
       submit,
+      translate,
       loading,
       formRef,
       rules,

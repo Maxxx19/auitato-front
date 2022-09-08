@@ -108,24 +108,24 @@
         :checkbox-enabled="true"
         checkbox-label="id"
       >
-        <template v-slot:name="{ row: customer }">
-          {{ customer.name }}
+        <template v-slot:name="{ row: categories }">
+          {{ categories.category_description[0].name }}
         </template>
-        <template v-slot:email="{ row: customer }">
+        <template v-slot:description="{ row: categories }">
           <a href="#" class="text-gray-600 text-hover-primary mb-1">
-            {{ customer.email }}
+            {{ categories.category_description[0].description }}
           </a>
         </template>
         <template v-slot:company="{ row: customer }">
           {{ customer.company }}
         </template>
-        <template v-slot:paymentMethod="{ row: customer }">
-          <img :src="customer.payment.icon" class="w-35px me-3" alt="" />{{
+        <template>
+          <!-- v-slot:paymentMethod="{ row: customer }"<img :src="customer.payment.icon" class="w-35px me-3" alt="" />{{
             customer.payment.ccnumber
-          }}
+          }} -->
         </template>
-        <template v-slot:date="{ row: customer }">
-          {{ customer.date }}
+        <template v-slot:date="{ row: categories }">
+          {{ categories.category_description[0].updated_at }}
         </template>
         <template v-slot:actions="{ row: customer }">
           <a
@@ -181,6 +181,7 @@ import { setCurrentPageBreadcrumbs } from "@/core/helpers/breadcrumb";
 import customers from "@/core/data/customers";
 import { ICustomer } from "@/core/data/customers";
 import arraySort from "array-sort";
+import { useStore } from "vuex";
 
 export default defineComponent({
   name: "categories-representations",
@@ -188,6 +189,17 @@ export default defineComponent({
     Datatable,
     ExportCustomerModal,
     AddCustomerModal,
+  },
+  data: function () {
+    return {
+      categories: null,
+      email: null,
+    };
+  },
+  mounted: function () {
+    const store = useStore();
+    this.categories =
+      store.state.AuthModule.faq.categories[0].category_description[0].name;
   },
   setup() {
     const tableHeader = ref([
@@ -198,8 +210,8 @@ export default defineComponent({
         columnWidth: 175,
       },
       {
-        columnName: "Email",
-        columnLabel: "email",
+        columnName: "Description",
+        columnLabel: "description",
         sortEnabled: true,
         columnWidth: 230,
       },
@@ -229,13 +241,12 @@ export default defineComponent({
       },
     ]);
     const selectedIds = ref<Array<number>>([]);
-
-    const tableData = ref<Array<ICustomer>>(customers);
-    const initCustomers = ref<Array<ICustomer>>([]);
-
+    const store = useStore();
+    const tableData = store.state.AuthModule.faq.categories;
+    const initCustomers = [];
     onMounted(() => {
       setCurrentPageBreadcrumbs("Categories", ["Representations"]);
-      initCustomers.value.splice(0, tableData.value.length, ...tableData.value);
+      initCustomers.splice(0, tableData.length);
     });
 
     const deleteFewCustomers = () => {
@@ -255,7 +266,7 @@ export default defineComponent({
 
     const search = ref<string>("");
     const searchItems = () => {
-      tableData.value.splice(0, tableData.value.length, ...initCustomers.value);
+      tableData.value.splice(0, tableData.value.length, ...initCustomers);
       if (search.value !== "") {
         let results: Array<ICustomer> = [];
         for (let j = 0; j < tableData.value.length; j++) {
@@ -302,6 +313,7 @@ export default defineComponent({
       deleteFewCustomers,
       sort,
       onItemSelect,
+      items: store.state.AuthModule.faq,
     };
   },
 });

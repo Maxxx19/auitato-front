@@ -13,16 +13,37 @@ export interface User {
   FAQ: string;
 }
 
+export interface Category {
+  name: string;
+  desctiption: string;
+}
+
+export interface FAQ {
+  question: string;
+  answer: string;
+}
+
 export interface UserAuthInfo {
   errors: unknown;
   user: User;
   isAuthenticated: boolean;
 }
 
+export interface Data {
+  errors: unknown;
+  categories: Category;
+  faq: FAQ;
+}
+
 @Module
-export default class AuthModule extends VuexModule implements UserAuthInfo {
+export default class AuthModule
+  extends VuexModule
+  implements UserAuthInfo, Data
+{
   errors = {};
   user = {} as User;
+  categories = {} as Category;
+  faq = {} as FAQ;
   isAuthenticated = !!JwtService.getToken();
 
   /**
@@ -69,7 +90,7 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
 
   @Mutation
   [Mutations.SET_FAQ](FAQ) {
-    this.user.FAQ = FAQ;
+    this.faq = FAQ;
   }
 
   @Mutation
@@ -152,20 +173,20 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
       });
   }
 
-  @Action
-  [Actions.VERIFY_AUTH](payload) {
-    if (JwtService.getToken()) {
-      ApiService.setHeader();
-      ApiService.post("verify_token", payload)
-        .then(({ data }) => {
-          this.context.commit(Mutations.SET_AUTH, data);
-        })
-        .catch(({ response }) => {
-          this.context.commit(Mutations.SET_ERROR, response.data.errors);
-          this.context.commit(Mutations.PURGE_AUTH);
-        });
-    } else {
-      this.context.commit(Mutations.PURGE_AUTH);
-    }
-  }
+  // @Action
+  // [Actions.VERIFY_AUTH](payload) {
+  //   if (JwtService.getToken()) {
+  //     ApiService.setHeader();
+  //     ApiService.post("verify_token", payload)
+  //       .then(({ data }) => {
+  //         this.context.commit(Mutations.SET_AUTH, data);
+  //       })
+  //       .catch(({ response }) => {
+  //         this.context.commit(Mutations.SET_ERROR, response.data.errors);
+  //         this.context.commit(Mutations.PURGE_AUTH);
+  //       });
+  //   } else {
+  //     this.context.commit(Mutations.PURGE_AUTH);
+  //   }
+  // }
 }

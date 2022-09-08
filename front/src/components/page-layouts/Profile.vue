@@ -356,8 +356,8 @@ export default defineComponent({
   mounted: function () {
     const store = useStore();
     //alert(store.state.AuthModule.user.email);
-    this.selectedUser = store.state.AuthModule.user.name;
-    this.email = store.state.AuthModule.user.email;
+    this.selectedUser = store.state.AuthModule.user.user.name;
+    this.email = store.state.AuthModule.user.user.email;
   },
 });
 </script>

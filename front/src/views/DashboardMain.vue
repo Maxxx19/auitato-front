@@ -359,6 +359,17 @@ export default defineComponent({
     Step4,
     Step5,
   },
+  data: function () {
+    return {
+      items: null,
+      xy: null,
+    };
+  },
+  mounted: function () {
+    const store = useStore();
+    //alert(store.state.AuthModule.faq.faq);
+    this.items = store.state.AuthModule.faq.faq;
+  },
   setup() {
     const store = useStore();
     const _stepperObj = ref<StepperComponent | null>(null);
@@ -373,7 +384,6 @@ export default defineComponent({
         return text;
       }
     };
-
     const hasActiveChildren = (match) => {
       return route.path.indexOf(match) !== -1;
     };
@@ -395,7 +405,8 @@ export default defineComponent({
       cardCvv: "123",
       saveCard: "1",
     });
-
+    store.dispatch(Actions.GET_FAQ);
+    //methodName1();
     onMounted(() => {
       _stepperObj.value = StepperComponent.createInsance(
         wizardRef.value as HTMLElement
@@ -409,7 +420,6 @@ export default defineComponent({
     onUnmounted(() => {
       store.dispatch(Actions.REMOVE_BODY_CLASSNAME, "bg-body");
     });
-
     const createAccountSchema = [
       Yup.object({
         accountType: Yup.string().required().label("Account Type"),
@@ -496,7 +506,6 @@ export default defineComponent({
         window.location.reload();
       });
     };
-    store.dispatch(Actions.GET_FAQ);
     return {
       wizardRef,
       previousStep,
@@ -506,10 +515,6 @@ export default defineComponent({
       currentStepIndex,
       getIllustrationsPath,
       translate,
-      items:
-        Object.keys(store.state.AuthModule.user).length != 0
-          ? store.state.AuthModule.user.FAQ.faq
-          : store.state.AuthModule.user,
     };
   },
 });
