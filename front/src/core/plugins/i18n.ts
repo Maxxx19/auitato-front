@@ -105,6 +105,8 @@ const messages = {
     Importance: "Importance",
     Notifications: "Notifications",
     Assign: "Assign",
+    BudgetData: "Budget",
+    SelectCategory: "Select category",
   },
   ua: {
     dashboard: "Панель приладів",
@@ -209,6 +211,8 @@ const messages = {
     Importance: "Важливість",
     Notifications: "Повідомлення",
     Assign: "Назначити",
+    BudgetData: "Бюджет",
+    SelectCategory: "Вибрати категорію",
   },
   ru: {
     dashboard: "Панель приборов",
@@ -313,6 +317,7 @@ const messages = {
     Importance: "Важность",
     Notifications: "Уведомления",
     Assign: "Назначить",
+    BudgetData: "Бюджет",
   },
   es: {
     dashboard: "Tablero",

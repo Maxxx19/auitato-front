@@ -11,6 +11,12 @@ export interface User {
   password: string;
   api_token: string;
   FAQ: string;
+  task: string;
+}
+
+export interface Task {
+  targetTitle: string;
+  targetDetails: string;
 }
 
 export interface Category {
@@ -89,6 +95,11 @@ export default class AuthModule
   }
 
   @Mutation
+  [Mutations.SET_TASK](task) {
+    this.user.task = task;
+  }
+
+  @Mutation
   [Mutations.SET_FAQ](FAQ) {
     this.faq = FAQ;
   }
@@ -122,6 +133,17 @@ export default class AuthModule
     return ApiService.get("profile", credentials)
       .then(({ data }) => {
         this.context.commit(Mutations.SET_USER, data);
+      })
+      .catch(({ response }) => {
+        this.context.commit(Mutations.SET_ERROR, response.data.errors);
+      });
+  }
+
+  @Action
+  [Actions.CREATE_TASK](credentials) {
+    return ApiService.post("task", credentials)
+      .then(({ data }) => {
+        this.context.commit(Mutations.SET_TASK, data);
       })
       .catch(({ response }) => {
         this.context.commit(Mutations.SET_ERROR, response.data.errors);

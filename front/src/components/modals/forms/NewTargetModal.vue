@@ -44,10 +44,10 @@
               <!--end::Title-->
 
               <!--begin::Description-->
-              <div class="text-gray-400 fw-semobold fs-5">
+              <!-- <div class="text-gray-400 fw-semobold fs-5">
                 If you need more info, please check
                 <a href="#" class="fw-bold link-primary">Project Guidelines</a>.
-              </div>
+              </div> -->
               <!--end::Description-->
             </div>
             <!--end::Heading-->
@@ -65,20 +65,69 @@
               </label>
               <!--end::Label-->
 
-              <el-form-item prop="targetTitle">
+              <el-form-item prop="title">
                 <el-input
-                  v-model="targetData.targetTitle"
+                  v-model="targetData.title"
                   placeholder="Enter Target Title"
-                  name="targetTitle"
+                  name="title"
+                ></el-input>
+              </el-form-item>
+              <el-form-item prop="customer_id">
+                <el-input
+                  v-model="targetData.customer_id"
+                  placeholder="Enter Target Title"
+                  name="customer_id"
+                  type="hidden"
                 ></el-input>
               </el-form-item>
             </div>
             <!--end::Input group-->
 
             <!--begin::Input group-->
-            <div class="row g-9 mb-8">
+            <div class="row mb-6">
+              <!--begin::Label-->
+              <label class="col-lg-4 col-form-label fw-semobold fs-6">
+                <span class="required">{{ translate("SelectCategory") }}</span>
+
+                <i
+                  class="fas fa-exclamation-circle ms-1 fs-7"
+                  data-bs-toggle="tooltip"
+                  title="Select category"
+                ></i>
+              </label>
+              <!--end::Label-->
+
               <!--begin::Col-->
-              <div class="col-md-6 fv-row">
+              <div class="col-lg-8 fv-row">
+                <Field
+                  as="select"
+                  name="category"
+                  placeholder="Select category"
+                  class="form-select form-select-solid form-select-lg fw-semobold"
+                  v-model="targetData.category"
+                >
+                  <option
+                    v-for="category in targetData.categories"
+                    :key="category"
+                    :value="category.category_description[0].category_id"
+                  >
+                    {{ category.category_description[0].name }}
+                  </option>
+                </Field>
+                <div class="fv-plugins-message-container">
+                  <div class="fv-help-block">
+                    <ErrorMessage name="category" />
+                  </div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+
+            <!--begin::Input group-->
+            <!-- <div class="row g-9 mb-8"> -->
+            <!--begin::Col-->
+            <!-- <div class="col-md-6 fv-row">
                 <label class="required fs-6 fw-semobold mb-2">
                   {{ translate("Assign") }}
                 </label>
@@ -104,19 +153,19 @@
                     <el-option label="Sean Bean" value="5">Sean Bean</el-option>
                   </el-select>
                 </el-form-item>
-              </div>
-              <!--end::Col-->
+              </div> -->
+            <!--end::Col-->
 
-              <!--begin::Col-->
-              <div class="col-md-6 fv-row">
+            <!--begin::Col-->
+            <!-- <div class="col-md-6 fv-row">
                 <label class="required fs-6 fw-semobold mb-2">
                   {{ translate("DueDate") }}
-                </label>
+                </label> -->
 
-                <!--begin::Input-->
-                <div class="position-relative align-items-center">
-                  <!--begin::Icon-->
-                  <div class="symbol symbol-20px me-4 position-absolute ms-4">
+            <!--begin::Input-->
+            <!-- <div class="position-relative align-items-center"> -->
+            <!--begin::Icon-->
+            <!-- <div class="symbol symbol-20px me-4 position-absolute ms-4">
                     <span class="symbol-label bg-secondary">
                       <span class="svg-icon">
                         <inline-svg
@@ -124,23 +173,23 @@
                         />
                       </span>
                     </span>
-                  </div>
-                  <!--end::Icon-->
+                  </div> -->
+            <!--end::Icon-->
 
-                  <!--begin::Datepicker-->
-                  <el-form-item prop="dueDate">
+            <!--begin::Datepicker-->
+            <!-- <el-form-item prop="dueDate">
                     <el-date-picker
                       v-model="targetData.dueDate"
                       placeholder="Select a date"
                       name="dueDate"
                     />
-                  </el-form-item>
-                  <!--end::Datepicker-->
-                </div>
-                <!--end::Input-->
-              </div>
-              <!--end::Col-->
-            </div>
+                  </el-form-item> -->
+            <!--end::Datepicker-->
+            <!-- </div> -->
+            <!--end::Input-->
+            <!-- </div> -->
+            <!--end::Col-->
+            <!-- </div> -->
             <!--end::Input group-->
 
             <!--begin::Input group-->
@@ -149,32 +198,45 @@
                 {{ translate("TaskDetails") }}
               </label>
 
-              <el-form-item prop="targetDetails">
+              <el-form-item prop="description">
                 <el-input
-                  v-model="targetData.targetDetails"
+                  v-model="targetData.description"
                   type="textarea"
-                  rows="3"
-                  name="targetDetails"
-                  placeholder="Type Target Details"
+                  name="description"
+                  placeholder="Type Task Details"
                 />
               </el-form-item>
             </div>
             <!--end::Input group-->
-
-            <!--begin::Input group-->
             <div class="d-flex flex-column mb-8 fv-row">
               <!--begin::Label-->
               <label class="d-flex align-items-center fs-6 fw-semobold mb-2">
+                <span>{{ translate("BudgetData") }} </span>
+              </label>
+              <!--end::Label-->
+              <el-form-item prop="budget">
+                <el-input
+                  v-model="targetData.budget"
+                  placeholder="Enter Budget Data"
+                  type="number"
+                  name="budget"
+                ></el-input>
+              </el-form-item>
+            </div>
+            <!--begin::Input group-->
+            <div class="d-flex flex-column mb-8 fv-row">
+              <!--begin::Label-->
+              <!-- <label class="d-flex align-items-center fs-6 fw-semobold mb-2">
                 <span class="required">{{ translate("Importance") }}</span>
                 <i
                   class="fas fa-exclamation-circle ms-2 fs-7"
                   data-bs-toggle="tooltip"
                   title="Specify a target priorty"
                 ></i>
-              </label>
+              </label> -->
               <!--end::Label-->
 
-              <el-form-item prop="tags">
+              <!-- <el-form-item prop="tags">
                 <el-select
                   v-model="targetData.tags"
                   multiple
@@ -189,14 +251,14 @@
                   <el-option label="low" value="low"> </el-option>
                   <el-option label="medium" value="medium"> </el-option>
                 </el-select>
-              </el-form-item>
+              </el-form-item> -->
             </div>
             <!--end::Input group-->
 
             <!--begin::Input group-->
-            <div class="d-flex flex-stack mb-8">
-              <!--begin::Label-->
-              <div class="me-5">
+            <!-- <div class="d-flex flex-stack mb-8"> -->
+            <!--begin::Label-->
+            <!-- <div class="me-5">
                 <label class="fs-6 fw-semobold"
                   >Adding Users by Team Members</label
                 >
@@ -204,11 +266,11 @@
                 <div class="fs-7 fw-semobold text-gray-400">
                   If you need more info, please check budget planning
                 </div>
-              </div>
-              <!--end::Label-->
+              </div> -->
+            <!--end::Label-->
 
-              <!--begin::Switch-->
-              <label
+            <!--begin::Switch-->
+            <!-- <label
                 class="form-check form-switch form-check-custom form-check-solid"
               >
                 <input
@@ -220,29 +282,29 @@
                 <span class="form-check-label fw-semobold text-gray-400">
                   Allowed
                 </span>
-              </label>
-              <!--end::Switch-->
-            </div>
+              </label> -->
+            <!--end::Switch-->
+            <!-- </div> -->
             <!--end::Input group-->
 
             <!--begin::Input group-->
-            <div class="mb-15 fv-row">
-              <!--begin::Wrapper-->
-              <div class="d-flex flex-stack">
-                <!--begin::Label-->
-                <div class="fw-semobold me-5">
+            <!-- <div class="mb-15 fv-row"> -->
+            <!--begin::Wrapper-->
+            <!-- <div class="d-flex flex-stack"> -->
+            <!--begin::Label-->
+            <!-- <div class="fw-semobold me-5">
                   <label class="fs-6">{{ translate("Notifications") }}</label>
 
                   <div class="fs-7 text-gray-400">
                     Allow Notifications by Phone or Email
                   </div>
-                </div>
-                <!--end::Label-->
+                </div> -->
+            <!--end::Label-->
 
-                <!--begin::Checkboxes-->
-                <div class="d-flex align-items-center">
-                  <!--begin::Checkbox-->
-                  <label
+            <!--begin::Checkboxes-->
+            <!-- <div class="d-flex align-items-center"> -->
+            <!--begin::Checkbox-->
+            <!-- <label
                     class="form-check form-check-custom form-check-solid me-10"
                   >
                     <input
@@ -254,11 +316,11 @@
                     />
 
                     <span class="form-check-label fw-semobold"> Email </span>
-                  </label>
-                  <!--end::Checkbox-->
+                  </label> -->
+            <!--end::Checkbox-->
 
-                  <!--begin::Checkbox-->
-                  <label class="form-check form-check-custom form-check-solid">
+            <!--begin::Checkbox-->
+            <!-- <label class="form-check form-check-custom form-check-solid">
                     <input
                       class="form-check-input h-20px w-20px"
                       type="checkbox"
@@ -267,13 +329,13 @@
                     />
 
                     <span class="form-check-label fw-semobold"> Phone </span>
-                  </label>
-                  <!--end::Checkbox-->
-                </div>
-                <!--end::Checkboxes-->
-              </div>
-              <!--end::Wrapper-->
-            </div>
+                  </label> -->
+            <!--end::Checkbox-->
+            <!-- </div> -->
+            <!--end::Checkboxes-->
+            <!-- </div> -->
+            <!--end::Wrapper-->
+            <!-- </div> -->
             <!--end::Input group-->
 
             <!--begin::Actions-->
@@ -337,29 +399,39 @@ import { hideModal } from "@/core/helpers/dom";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { useI18n } from "vue-i18n/index";
 import { useRoute } from "vue-router";
+import { useStore } from "vuex";
+import { Actions } from "@/store/enums/StoreEnums";
+import { Field } from "vee-validate";
 
 interface NewAddressData {
-  targetTitle: string;
-  assign: string;
-  dueDate: string;
-  targetDetails: string;
-  tags: Array<string>;
+  title: string;
+  description: string;
+  customer_id: string;
+  budget: string;
+  currency_id: string;
+  category: string;
+  categories: string;
 }
 
 export default defineComponent({
   name: "new-target-modal",
-  components: {},
+  components: {
+    Field,
+  },
   setup() {
     const formRef = ref<null | HTMLFormElement>(null);
     const newTargetModalRef = ref<null | HTMLElement>(null);
     const loading = ref<boolean>(false);
+    const store = useStore();
 
     const targetData = ref<NewAddressData>({
-      targetTitle: "",
-      assign: "",
-      dueDate: "",
-      targetDetails: "",
-      tags: ["important", "urgent"],
+      title: "",
+      description: "",
+      customer_id: store.state.AuthModule.user.user.id,
+      budget: "",
+      currency_id: "1",
+      category: "",
+      categories: store.state.AuthModule.faq.categories,
     });
 
     const { t, te } = useI18n();
@@ -374,34 +446,27 @@ export default defineComponent({
     };
 
     const rules = ref({
-      targetTitle: [
+      title: [
         {
           required: true,
-          message: "Please input Activity name",
+          message: "Please input Title of task",
           trigger: "blur",
         },
       ],
-      assign: [
-        {
-          required: true,
-          message: "Please select Activity zone",
-          trigger: "change",
-        },
-      ],
-      dueDate: [
-        {
-          required: true,
-          message: "Please select Activity zone",
-          trigger: "change",
-        },
-      ],
-      tags: [
-        {
-          required: true,
-          message: "Please select Activity zone",
-          trigger: "change",
-        },
-      ],
+      // assign: [
+      //   {
+      //     required: true,
+      //     message: "Please select Activity zone",
+      //     trigger: "change",
+      //   },
+      // ],
+      // tags: [
+      //   {
+      //     required: true,
+      //     message: "Please select Activity zone",
+      //     trigger: "change",
+      //   },
+      // ],
     });
 
     const submit = () => {
@@ -425,6 +490,8 @@ export default defineComponent({
                 confirmButton: "btn btn-primary",
               },
             }).then(() => {
+              alert(targetData);
+              store.dispatch(Actions.CREATE_TASK, targetData);
               hideModal(newTargetModalRef.value);
             });
           }, 2000);
