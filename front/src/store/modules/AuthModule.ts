@@ -100,6 +100,11 @@ export default class AuthModule
   }
 
   @Mutation
+  [Mutations.SET_TASKS](task) {
+    this.user.task = task;
+  }
+
+  @Mutation
   [Mutations.SET_FAQ](FAQ) {
     this.faq = FAQ;
   }
@@ -144,6 +149,17 @@ export default class AuthModule
     return ApiService.post("task", credentials)
       .then(({ data }) => {
         this.context.commit(Mutations.SET_TASK, data);
+      })
+      .catch(({ response }) => {
+        this.context.commit(Mutations.SET_ERROR, response.data.errors);
+      });
+  }
+
+  @Action
+  [Actions.SHOW_TASKS](credentials) {
+    return ApiService.get("tasks", credentials)
+      .then(({ data }) => {
+        this.context.commit(Mutations.SET_TASKS, data);
       })
       .catch(({ response }) => {
         this.context.commit(Mutations.SET_ERROR, response.data.errors);

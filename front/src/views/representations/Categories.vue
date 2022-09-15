@@ -50,7 +50,7 @@
             <span class="svg-icon svg-icon-2">
               <inline-svg src="media/icons/duotune/arrows/arr075.svg" />
             </span>
-            Добавить категорию
+            {{ translate("AddCategory") }}
           </button>
           <!--end::Add customer-->
         </div>
@@ -182,6 +182,8 @@ import customers from "@/core/data/customers";
 import { ICustomer } from "@/core/data/customers";
 import arraySort from "array-sort";
 import { useStore } from "vuex";
+import { useI18n } from "vue-i18n/index";
+import { useRoute } from "vue-router";
 
 export default defineComponent({
   name: "categories-representations",
@@ -244,6 +246,20 @@ export default defineComponent({
     const store = useStore();
     const tableData = store.state.AuthModule.faq.categories;
     const initCustomers = [];
+    const { t, te } = useI18n();
+    const route = useRoute();
+
+    const translate = (text) => {
+      if (te(text)) {
+        return t(text);
+      } else {
+        return text;
+      }
+    };
+
+    const hasActiveChildren = (match) => {
+      return route.path.indexOf(match) !== -1;
+    };
     onMounted(() => {
       setCurrentPageBreadcrumbs("Categories", ["Representations"]);
       initCustomers.splice(0, tableData.length);
@@ -314,6 +330,8 @@ export default defineComponent({
       sort,
       onItemSelect,
       items: store.state.AuthModule.faq,
+      hasActiveChildren,
+      translate,
     };
   },
 });

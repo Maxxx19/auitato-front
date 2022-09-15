@@ -267,7 +267,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: "/apps/forms/search-task",
         name: "search-task-forms",
-        component: () => import("@/views/forms/SearchTask.vue"),
+        component: () => import("@/views/representations/ListTasks.vue"),
       },
       {
         path: "/apps/forms/replenishment-balance",

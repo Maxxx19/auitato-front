@@ -45,12 +45,12 @@
             type="button"
             class="btn btn-primary"
             data-bs-toggle="modal"
-            data-bs-target="#kt_modal_add_customer"
+            data-bs-target="#kt_modal_new_target"
           >
             <span class="svg-icon svg-icon-2">
               <inline-svg src="media/icons/duotune/arrows/arr075.svg" />
             </span>
-            Добавить задачу
+            {{ translate("CreateTask") }}
           </button>
           <!--end::Add customer-->
         </div>
@@ -108,24 +108,23 @@
         :checkbox-enabled="true"
         checkbox-label="id"
       >
-        <template v-slot:name="{ row: customer }">
-          {{ customer.name }}
+        <template v-slot:name="{ row: tasks }">
+          {{ tasks.title }}
         </template>
-        <template v-slot:email="{ row: customer }">
+        <template v-slot:description="{ row: tasks }">
           <a href="#" class="text-gray-600 text-hover-primary mb-1">
-            {{ customer.email }}
+            {{ tasks.description }}
           </a>
         </template>
-        <template v-slot:company="{ row: customer }">
-          {{ customer.company }}
+        <template v-slot:budget="{ row: tasks }">
+          {{ tasks.budget }}
         </template>
-        <template v-slot:paymentMethod="{ row: customer }">
-          <img :src="customer.payment.icon" class="w-35px me-3" alt="" />{{
-            customer.payment.ccnumber
-          }}
+        <template v-slot:status="{ row: tasks }">
+          <!-- <img :src="customer.payment.icon" class="w-35px me-3" alt="" />-->
+          {{ tasks.status.name }}
         </template>
-        <template v-slot:date="{ row: customer }">
-          {{ customer.date }}
+        <template v-slot:date="{ row: tasks }">
+          {{ tasks.created_at }}
         </template>
         <template v-slot:actions="{ row: customer }">
           <a
@@ -169,6 +168,7 @@
 
   <ExportCustomerModal></ExportCustomerModal>
   <AddCustomerModal></AddCustomerModal>
+  <KTNewTargetModal></KTNewTargetModal>
 </template>
 
 <script lang="ts">
@@ -181,6 +181,10 @@ import { setCurrentPageBreadcrumbs } from "@/core/helpers/breadcrumb";
 import customers from "@/core/data/customers";
 import { ICustomer } from "@/core/data/customers";
 import arraySort from "array-sort";
+import { useStore } from "vuex";
+import KTNewTargetModal from "@/components/modals/forms/NewTargetModal.vue";
+import { useI18n } from "vue-i18n/index";
+import { useRoute } from "vue-router";
 
 export default defineComponent({
   name: "list-tasks-representation",
@@ -188,6 +192,17 @@ export default defineComponent({
     Datatable,
     ExportCustomerModal,
     AddCustomerModal,
+    KTNewTargetModal,
+  },
+  data: function () {
+    return {
+      tasks: null,
+    };
+  },
+  mounted: function () {
+    const store = useStore();
+    this.tasks = store.state.AuthModule.user.tasks;
+    //alert(this.tasks);
   },
   setup() {
     const tableHeader = ref([
@@ -198,20 +213,20 @@ export default defineComponent({
         columnWidth: 175,
       },
       {
-        columnName: "Email",
-        columnLabel: "email",
+        columnName: "Description",
+        columnLabel: "description",
         sortEnabled: true,
         columnWidth: 230,
       },
       {
-        columnName: "Company",
-        columnLabel: "company",
+        columnName: "Budget",
+        columnLabel: "budget",
         sortEnabled: true,
         columnWidth: 175,
       },
       {
-        columnName: "Payment Method",
-        columnLabel: "paymentMethod",
+        columnName: "Status",
+        columnLabel: "status",
         sortEnabled: true,
         columnWidth: 175,
       },
@@ -229,15 +244,15 @@ export default defineComponent({
       },
     ]);
     const selectedIds = ref<Array<number>>([]);
-
-    const tableData = ref<Array<ICustomer>>(customers);
-    const initCustomers = ref<Array<ICustomer>>([]);
-
+    const store = useStore();
+    const i18n = useI18n();
+    const tableData = store.state.AuthModule.user.tasks;
+    const initCustomers = [];
     onMounted(() => {
       setCurrentPageBreadcrumbs("ListTasks", ["Representations"]);
-      initCustomers.value.splice(0, tableData.value.length, ...tableData.value);
+      initCustomers.splice(0, tableData.length);
     });
-
+    //.value .value.value
     const deleteFewCustomers = () => {
       selectedIds.value.forEach((item) => {
         deleteCustomer(item);
@@ -255,7 +270,8 @@ export default defineComponent({
 
     const search = ref<string>("");
     const searchItems = () => {
-      tableData.value.splice(0, tableData.value.length, ...initCustomers.value);
+      tableData.value.splice(0, tableData.value.length, ...initCustomers);
+      //.value
       if (search.value !== "") {
         let results: Array<ICustomer> = [];
         for (let j = 0; j < tableData.value.length; j++) {
@@ -266,7 +282,19 @@ export default defineComponent({
         tableData.value.splice(0, tableData.value.length, ...results);
       }
     };
+    const { t, te } = useI18n();
+    const route = useRoute();
 
+    const translate = (text) => {
+      if (te(text)) {
+        return t(text);
+      } else {
+        return text;
+      }
+    };
+    const hasActiveChildren = (match) => {
+      return route.path.indexOf(match) !== -1;
+    };
     const searchingFunc = (obj, value): boolean => {
       for (let key in obj) {
         if (!Number.isInteger(obj[key]) && !(typeof obj[key] === "object")) {
@@ -302,6 +330,8 @@ export default defineComponent({
       deleteFewCustomers,
       sort,
       onItemSelect,
+      translate,
+      hasActiveChildren,
     };
   },
 });

@@ -17,6 +17,7 @@ enum Actions {
   SET_THEME_MODE_ACTION = "setThemeModeAction",
   GET_CATEGORIES = "getCategories",
   CREATE_TASK = "createTask",
+  SHOW_TASKS = "showTasks",
 }
 
 enum Mutations {
@@ -35,6 +36,7 @@ enum Mutations {
   OVERRIDE_PAGE_LAYOUT_CONFIG = "overridePageLayoutConfig",
   SET_THEME_MODE_MUTATION = "setThemeModeMutation",
   SET_TASK = "setTask",
+  SET_TASKS = "setTasks",
 }
 
 export { Actions, Mutations };

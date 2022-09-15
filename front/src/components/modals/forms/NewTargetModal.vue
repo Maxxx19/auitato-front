@@ -490,7 +490,7 @@ export default defineComponent({
                 confirmButton: "btn btn-primary",
               },
             }).then(() => {
-              alert(targetData);
+              //alert(targetData);
               store.dispatch(Actions.CREATE_TASK, targetData);
               hideModal(newTargetModalRef.value);
             });

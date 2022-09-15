@@ -55,12 +55,12 @@
             class="form-control form-control-lg form-control-solid"
             type="text"
             placeholder=""
-            name="first_name"
+            name="name"
             autocomplete="off"
           />
           <div class="fv-plugins-message-container">
             <div class="fv-help-block">
-              <ErrorMessage name="first_name" />
+              <ErrorMessage name="name" />
             </div>
           </div>
         </div>
@@ -178,6 +178,36 @@
       <!--end::Input group-->
 
       <!--begin::Input group-->
+      <div class="row mb-6">
+        <!--begin::Label-->
+        <label class="form-label fw-bold text-dark fs-6">
+          <span class="required">{{ translate("SelectRole") }}</span>
+
+          <i
+            class="fas fa-exclamation-circle ms-1 fs-7"
+            data-bs-toggle="tooltip"
+            title="Select role"
+          ></i>
+        </label>
+        <!--end::Label-->
+        <div class="col-lg-8 fv-row">
+          <Field
+            as="select"
+            name="user_role_id"
+            placeholder="Select role"
+            class="form-select form-select-solid form-select-lg fw-semobold"
+            >Select role
+            <option value="1">Заказчик</option>
+            <option value="2">Исполнитель</option>
+          </Field>
+          <div class="fv-plugins-message-container">
+            <div class="fv-help-block">
+              <ErrorMessage name="user_role_id" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--begin::Input group-->
       <div class="fv-row mb-10">
         <label class="form-check form-check-custom form-check-solid">
           <Field
@@ -227,6 +257,8 @@ import { useRouter } from "vue-router";
 import { Actions } from "@/store/enums/StoreEnums";
 import { PasswordMeterComponent } from "@/assets/ts/components";
 import Swal from "sweetalert2/dist/sweetalert2.min.js";
+import { useI18n } from "vue-i18n/index";
+import { useRoute } from "vue-router";
 
 export default defineComponent({
   name: "sign-up",
@@ -242,9 +274,10 @@ export default defineComponent({
     const submitButton = ref<HTMLButtonElement | null>(null);
 
     const registration = Yup.object().shape({
-      first_name: Yup.string().required().label("Name"),
+      name: Yup.string().required().label("Name"),
       // last_name: Yup.string().required().label("Surname"),
       // email: Yup.string().min(4).required().email().label("Email"),
+      user_role_id: Yup.string().required().label("Select role"),
       phone: Yup.string().min(11).max(12).required().label("Phone"),
       password: Yup.string().required().label("Password"),
       password_confirmation: Yup.string()
@@ -286,7 +319,7 @@ export default defineComponent({
           },
         }).then(function () {
           // Go to page after successfully login
-          router.push({ name: "dashboard" });
+          router.push({ name: "sign-in" });
         });
       } else {
         Swal.fire({
@@ -304,11 +337,24 @@ export default defineComponent({
       // eslint-disable-next-line
       submitButton.value!.disabled = false;
     };
-
+    const { t, te } = useI18n();
+    const route = useRoute();
+    const translate = (text) => {
+      if (te(text)) {
+        return t(text);
+      } else {
+        return text;
+      }
+    };
+    const hasActiveChildren = (match) => {
+      return route.path.indexOf(match) !== -1;
+    };
     return {
       registration,
       onSubmitRegister,
       submitButton,
+      translate,
+      hasActiveChildren,
     };
   },
 });

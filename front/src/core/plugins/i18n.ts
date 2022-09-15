@@ -107,6 +107,8 @@ const messages = {
     Assign: "Assign",
     BudgetData: "Budget",
     SelectCategory: "Select category",
+    AddCategory: "Add Category",
+    SelectRole: "Select Role",
   },
   ua: {
     dashboard: "Панель приладів",
@@ -213,6 +215,8 @@ const messages = {
     Assign: "Назначити",
     BudgetData: "Бюджет",
     SelectCategory: "Вибрати категорію",
+    AddCategory: "Додати категорію",
+    SelectRole: "Виберіть роль",
   },
   ru: {
     dashboard: "Панель приборов",
@@ -318,6 +322,9 @@ const messages = {
     Notifications: "Уведомления",
     Assign: "Назначить",
     BudgetData: "Бюджет",
+    SelectCategory: "Выбрать категорию",
+    AddCategory: "Добавить категорию",
+    SelectRole: "Выберите роль",
   },
   es: {
     dashboard: "Tablero",

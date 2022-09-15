@@ -384,7 +384,7 @@ export default defineComponent({
       );
 
       store.dispatch(Actions.ADD_BODY_CLASSNAME, "bg-body");
-
+      store.dispatch(Actions.SHOW_TASKS, store.state.AuthModule.user.api_token);
       setCurrentPageBreadcrumbs("Horizontal", ["Pages", "Wizards"]);
     });
 

@@ -367,11 +367,13 @@ export default defineComponent({
   },
   mounted: function () {
     const store = useStore();
+    store.dispatch(Actions.GET_FAQ);
     //alert(store.state.AuthModule.faq.faq);
     this.items = store.state.AuthModule.faq.faq;
   },
   setup() {
     const store = useStore();
+    store.dispatch(Actions.GET_FAQ);
     const _stepperObj = ref<StepperComponent | null>(null);
     const wizardRef = ref<HTMLElement | null>(null);
     const currentStepIndex = ref(0);
@@ -405,13 +407,11 @@ export default defineComponent({
       cardCvv: "123",
       saveCard: "1",
     });
-    store.dispatch(Actions.GET_FAQ);
     //methodName1();
     onMounted(() => {
       _stepperObj.value = StepperComponent.createInsance(
         wizardRef.value as HTMLElement
       );
-
       store.dispatch(Actions.ADD_BODY_CLASSNAME, "bg-body");
 
       setCurrentPageBreadcrumbs("Horizontal", ["Pages", "Wizards"]);
