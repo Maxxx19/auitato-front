@@ -21,7 +21,7 @@
           <!--begin::Modal header-->
           <div class="modal-header" id="kt_modal_new_address_header">
             <!--begin::Modal title-->
-            <h2>Регистрация</h2>
+            <h2>{{ translate("registrationForm") }}</h2>
             <!--end::Modal title-->
 
             <!--begin::Close-->
@@ -50,35 +50,14 @@
               data-kt-scroll-wrappers="#kt_modal_new_address_scroll"
               data-kt-scroll-offset="300px"
             >
-              <!--begin::Notice-->
-              <div
-                class="notice d-flex bg-light-warning rounded border-warning border border-dashed mb-9 p-6"
-              >
-                <span class="svg-icon svg-icon-2tx svg-icon-warning me-4">
-                  <inline-svg src="media/icons/duotune/general/gen044.svg" />
-                </span>
-                <!--begin::Wrapper-->
-                <div class="d-flex flex-stack flex-grow-1">
-                  <!--begin::Content-->
-                  <div class="fw-semobold">
-                    <h4 class="text-gray-800 fw-bold">Warning</h4>
-                    <div class="fs-6 text-gray-600">
-                      Updating address may affter to your
-                      <a href="#">Tax Location</a>
-                    </div>
-                  </div>
-                  <!--end::Content-->
-                </div>
-                <!--end::Wrapper-->
-              </div>
-              <!--end::Notice-->
-
               <!--begin::Input group-->
               <div class="row mb-5">
                 <!--begin::Col-->
                 <div class="col-md-6 fv-row">
                   <!--begin::Label-->
-                  <label class="required fs-5 fw-semobold mb-2">Имя</label>
+                  <label class="required fs-5 fw-semobold mb-2">
+                    {{ translate("UserName") }}
+                  </label>
                   <!--end::Label-->
 
                   <!--begin::Input-->
@@ -101,7 +80,9 @@
                 <!--begin::Col-->
                 <div class="col-md-6 fv-row">
                   <!--end::Label-->
-                  <label class="required fs-5 fw-semobold mb-2">Фамилия</label>
+                  <label class="required fs-5 fw-semobold mb-2">
+                    {{ translate("UserSurname") }}
+                  </label>
                   <!--end::Label-->
 
                   <!--end::Input-->
@@ -125,7 +106,9 @@
 
               <!--begin::Col-->
               <div class="col-md-6 fv-row">
-                <label class="required fs-6 fw-semobold mb-2">Due Date</label>
+                <label class="required fs-6 fw-semobold mb-2">
+                  {{ translate("DateOfBirth") }}
+                </label>
 
                 <!--begin::Input-->
                 <div class="position-relative align-items-center">
@@ -177,7 +160,7 @@
               <div class="row mb-6">
                 <!--begin::Label-->
                 <label class="col-lg-4 col-form-label fw-semobold fs-6">
-                  <span class="required">Телефон</span>
+                  <span class="required">{{ translate("PhoneNumber") }}</span>
                   <i
                     class="fas fa-exclamation-circle ms-1 fs-7"
                     data-bs-toggle="tooltip"
@@ -421,6 +404,8 @@ import { ErrorMessage, Field, Form } from "vee-validate";
 import { hideModal } from "@/core/helpers/dom";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as Yup from "yup";
+import { useRoute } from "vue-router";
+import { useI18n } from "vue-i18n/index";
 
 interface NewAddressData {
   firstName: string;
@@ -474,6 +459,19 @@ export default defineComponent({
       state: Yup.string().required().label("State/Province"),
       postCode: Yup.string().required().label("Post code"),
     });
+    const { t, te } = useI18n();
+    const route = useRoute();
+    const hasActiveChildren = (match) => {
+      return route.path.indexOf(match) !== -1;
+    };
+
+    const translate = (text) => {
+      if (te(text)) {
+        return t(text);
+      } else {
+        return text;
+      }
+    };
 
     const submit = () => {
       if (!submitButtonRef.value) {
@@ -512,6 +510,8 @@ export default defineComponent({
       submit,
       submitButtonRef,
       newAddressModalRef,
+      hasActiveChildren,
+      translate,
     };
   },
 });

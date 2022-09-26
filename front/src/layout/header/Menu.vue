@@ -20,153 +20,306 @@
       id="#kt_header_menu"
       data-kt-menu="true"
     >
-      <template v-for="(item, i) in MainMenuConfig" :key="i">
-        <template v-if="!item.heading">
-          <template v-for="(menuItem, j) in item.pages" :key="j">
-            <div v-if="menuItem.heading" class="menu-item me-lg-1">
-              <router-link
-                class="menu-link"
-                :to="menuItem.route"
-                active-class="active"
-              >
-                <span class="menu-title">{{
-                  translate(menuItem.heading)
-                }}</span>
-              </router-link>
-            </div>
-          </template>
-        </template>
-        <div
-          v-if="item.heading"
-          data-kt-menu-trigger="click"
-          data-kt-menu-placement="bottom-start"
-          class="menu-item menu-lg-down-accordion me-lg-1"
-        >
-          <span
-            class="menu-link py-3"
-            :class="{ active: hasActiveChildren(item.route) }"
-          >
-            <span class="menu-title">{{ translate(item.heading) }}</span>
-            <span class="menu-arrow d-lg-none"></span>
-          </span>
-          <div
-            class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px"
-          >
+      <div class="d-flex flex-row" v-show="order">
+        <template v-for="(item, i) in MainMenuConfig" :key="i">
+          <template v-if="!item.heading">
             <template v-for="(menuItem, j) in item.pages" :key="j">
-              <div
-                v-if="menuItem.sectionTitle"
-                data-kt-menu-trigger="{default:'click', lg: 'hover'}"
-                data-kt-menu-placement="right-start"
-                class="menu-item menu-lg-down-accordion"
-              >
-                <span
-                  class="menu-link py-3"
-                  :class="{ active: hasActiveChildren(menuItem.route) }"
-                >
-                  <span class="menu-icon">
-                    <i
-                      v-if="headerMenuIcons === 'font'"
-                      :class="menuItem.fontIcon"
-                      class="bi fs-3"
-                    ></i>
-                    <span
-                      v-if="headerMenuIcons === 'svg'"
-                      class="svg-icon svg-icon-2"
-                    >
-                      <inline-svg :src="menuItem.svgIcon" />
-                    </span>
-                  </span>
-                  <span class="menu-title">{{
-                    translate(menuItem.sectionTitle)
-                  }}</span>
-                  <span class="menu-arrow"></span>
-                </span>
-                <div
-                  class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg py-lg-4 w-lg-225px"
-                >
-                  <template v-for="(menuItem1, k) in menuItem.sub" :key="k">
-                    <div
-                      v-if="menuItem1.sectionTitle"
-                      data-kt-menu-trigger="{default:'click', lg: 'hover'}"
-                      data-kt-menu-placement="right-start"
-                      class="menu-item menu-lg-down-accordion"
-                    >
-                      <span
-                        class="menu-link py-3"
-                        :class="{ active: hasActiveChildren(menuItem1.route) }"
-                      >
-                        <span class="menu-bullet">
-                          <span class="bullet bullet-dot"></span>
-                        </span>
-                        <span class="menu-title">{{
-                          translate(menuItem1.sectionTitle)
-                        }}</span>
-                        <span class="menu-arrow"></span>
-                      </span>
-                      <div
-                        class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg py-lg-4 w-lg-225px"
-                      >
-                        <template
-                          v-for="(menuItem2, l) in menuItem1.sub"
-                          :key="l"
-                        >
-                          <div class="menu-item">
-                            <router-link
-                              class="menu-link py-3"
-                              active-class="active"
-                              :to="menuItem2.route"
-                            >
-                              <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                              </span>
-                              <span class="menu-title">{{
-                                translate(menuItem2.heading)
-                              }}</span>
-                            </router-link>
-                          </div>
-                        </template>
-                      </div>
-                    </div>
-                    <div v-if="menuItem1.heading" class="menu-item">
-                      <router-link
-                        class="menu-link"
-                        active-class="active"
-                        :to="menuItem1.route"
-                      >
-                        <span class="menu-bullet">
-                          <span class="bullet bullet-dot"></span>
-                        </span>
-                        <span class="menu-title">{{
-                          translate(menuItem1.heading)
-                        }}</span>
-                      </router-link>
-                    </div>
-                  </template>
-                </div>
-              </div>
-              <div v-if="menuItem.heading" class="menu-item">
+              <div v-if="menuItem.heading" class="menu-item me-lg-1">
                 <router-link
                   class="menu-link"
-                  active-class="active"
                   :to="menuItem.route"
+                  active-class="active"
                 >
-                  <span class="menu-icon">
-                    <span class="svg-icon svg-icon-2">
-                      <inline-svg
-                        src="media/icons/duotune/layouts/lay009.svg"
-                      />
-                    </span>
-                  </span>
                   <span class="menu-title">{{
                     translate(menuItem.heading)
                   }}</span>
                 </router-link>
               </div>
             </template>
+          </template>
+          <div
+            v-if="item.heading"
+            data-kt-menu-trigger="click"
+            data-kt-menu-placement="bottom-start"
+            class="menu-item menu-lg-down-accordion me-lg-1"
+          >
+            <span
+              class="menu-link py-3"
+              :class="{ active: hasActiveChildren(item.route) }"
+            >
+              <span class="menu-title">{{ translate(item.heading) }}</span>
+              <span class="menu-arrow d-lg-none"></span>
+            </span>
+            <div
+              class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px"
+            >
+              <template v-for="(menuItem, j) in item.pages" :key="j">
+                <div
+                  v-if="menuItem.sectionTitle"
+                  data-kt-menu-trigger="{default:'click', lg: 'hover'}"
+                  data-kt-menu-placement="right-start"
+                  class="menu-item menu-lg-down-accordion"
+                >
+                  <span
+                    class="menu-link py-3"
+                    :class="{ active: hasActiveChildren(menuItem.route) }"
+                  >
+                    <span class="menu-icon">
+                      <i
+                        v-if="headerMenuIcons === 'font'"
+                        :class="menuItem.fontIcon"
+                        class="bi fs-3"
+                      ></i>
+                      <span
+                        v-if="headerMenuIcons === 'svg'"
+                        class="svg-icon svg-icon-2"
+                      >
+                        <inline-svg :src="menuItem.svgIcon" />
+                      </span>
+                    </span>
+                    <span class="menu-title">{{
+                      translate(menuItem.sectionTitle)
+                    }}</span>
+                    <span class="menu-arrow"></span>
+                  </span>
+                  <div
+                    class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg py-lg-4 w-lg-225px"
+                  >
+                    <template v-for="(menuItem1, k) in menuItem.sub" :key="k">
+                      <div
+                        v-if="menuItem1.sectionTitle"
+                        data-kt-menu-trigger="{default:'click', lg: 'hover'}"
+                        data-kt-menu-placement="right-start"
+                        class="menu-item menu-lg-down-accordion"
+                      >
+                        <span
+                          class="menu-link py-3"
+                          :class="{
+                            active: hasActiveChildren(menuItem1.route),
+                          }"
+                        >
+                          <span class="menu-bullet">
+                            <span class="bullet bullet-dot"></span>
+                          </span>
+                          <span class="menu-title">{{
+                            translate(menuItem1.sectionTitle)
+                          }}</span>
+                          <span class="menu-arrow"></span>
+                        </span>
+                        <div
+                          class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg py-lg-4 w-lg-225px"
+                        >
+                          <template
+                            v-for="(menuItem2, l) in menuItem1.sub"
+                            :key="l"
+                          >
+                            <div class="menu-item">
+                              <router-link
+                                class="menu-link py-3"
+                                active-class="active"
+                                :to="menuItem2.route"
+                              >
+                                <span class="menu-bullet">
+                                  <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">{{
+                                  translate(menuItem2.heading)
+                                }}</span>
+                              </router-link>
+                            </div>
+                          </template>
+                        </div>
+                      </div>
+                      <div v-if="menuItem1.heading" class="menu-item">
+                        <router-link
+                          class="menu-link"
+                          active-class="active"
+                          :to="menuItem1.route"
+                        >
+                          <span class="menu-bullet">
+                            <span class="bullet bullet-dot"></span>
+                          </span>
+                          <span class="menu-title">{{
+                            translate(menuItem1.heading)
+                          }}</span>
+                        </router-link>
+                      </div>
+                    </template>
+                  </div>
+                </div>
+                <div v-if="menuItem.heading" class="menu-item">
+                  <router-link
+                    class="menu-link"
+                    active-class="active"
+                    :to="menuItem.route"
+                  >
+                    <span class="menu-icon">
+                      <span class="svg-icon svg-icon-2">
+                        <inline-svg
+                          src="media/icons/duotune/layouts/lay009.svg"
+                        />
+                      </span>
+                    </span>
+                    <span class="menu-title">{{
+                      translate(menuItem.heading)
+                    }}</span>
+                  </router-link>
+                </div>
+              </template>
+            </div>
           </div>
-        </div>
-      </template>
-
+        </template>
+      </div>
+      <div class="d-flex flex-row" v-show="perform">
+        <template v-for="(item, i) in MainMenuConfig2" :key="i">
+          <template v-if="!item.heading">
+            <template v-for="(menuItem, j) in item.pages" :key="j">
+              <div v-if="menuItem.heading" class="menu-item me-lg-1">
+                <router-link
+                  class="menu-link"
+                  :to="menuItem.route"
+                  active-class="active"
+                >
+                  <span class="menu-title">{{
+                    translate(menuItem.heading)
+                  }}</span>
+                </router-link>
+              </div>
+            </template>
+          </template>
+          <div
+            v-if="item.heading"
+            data-kt-menu-trigger="click"
+            data-kt-menu-placement="bottom-start"
+            class="menu-item menu-lg-down-accordion me-lg-1"
+          >
+            <span
+              class="menu-link py-3"
+              :class="{ active: hasActiveChildren(item.route) }"
+            >
+              <span class="menu-title">{{ translate(item.heading) }}</span>
+              <span class="menu-arrow d-lg-none"></span>
+            </span>
+            <div
+              class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px"
+            >
+              <template v-for="(menuItem, j) in item.pages" :key="j">
+                <div
+                  v-if="menuItem.sectionTitle"
+                  data-kt-menu-trigger="{default:'click', lg: 'hover'}"
+                  data-kt-menu-placement="right-start"
+                  class="menu-item menu-lg-down-accordion"
+                >
+                  <span
+                    class="menu-link py-3"
+                    :class="{ active: hasActiveChildren(menuItem.route) }"
+                  >
+                    <span class="menu-icon">
+                      <i
+                        v-if="headerMenuIcons === 'font'"
+                        :class="menuItem.fontIcon"
+                        class="bi fs-3"
+                      ></i>
+                      <span
+                        v-if="headerMenuIcons === 'svg'"
+                        class="svg-icon svg-icon-2"
+                      >
+                        <inline-svg :src="menuItem.svgIcon" />
+                      </span>
+                    </span>
+                    <span class="menu-title">{{
+                      translate(menuItem.sectionTitle)
+                    }}</span>
+                    <span class="menu-arrow"></span>
+                  </span>
+                  <div
+                    class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg py-lg-4 w-lg-225px"
+                  >
+                    <template v-for="(menuItem1, k) in menuItem.sub" :key="k">
+                      <div
+                        v-if="menuItem1.sectionTitle"
+                        data-kt-menu-trigger="{default:'click', lg: 'hover'}"
+                        data-kt-menu-placement="right-start"
+                        class="menu-item menu-lg-down-accordion"
+                      >
+                        <span
+                          class="menu-link py-3"
+                          :class="{
+                            active: hasActiveChildren(menuItem1.route),
+                          }"
+                        >
+                          <span class="menu-bullet">
+                            <span class="bullet bullet-dot"></span>
+                          </span>
+                          <span class="menu-title">{{
+                            translate(menuItem1.sectionTitle)
+                          }}</span>
+                          <span class="menu-arrow"></span>
+                        </span>
+                        <div
+                          class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg py-lg-4 w-lg-225px"
+                        >
+                          <template
+                            v-for="(menuItem2, l) in menuItem1.sub"
+                            :key="l"
+                          >
+                            <div class="menu-item">
+                              <router-link
+                                class="menu-link py-3"
+                                active-class="active"
+                                :to="menuItem2.route"
+                              >
+                                <span class="menu-bullet">
+                                  <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">{{
+                                  translate(menuItem2.heading)
+                                }}</span>
+                              </router-link>
+                            </div>
+                          </template>
+                        </div>
+                      </div>
+                      <div v-if="menuItem1.heading" class="menu-item">
+                        <router-link
+                          class="menu-link"
+                          active-class="active"
+                          :to="menuItem1.route"
+                        >
+                          <span class="menu-bullet">
+                            <span class="bullet bullet-dot"></span>
+                          </span>
+                          <span class="menu-title">{{
+                            translate(menuItem1.heading)
+                          }}</span>
+                        </router-link>
+                      </div>
+                    </template>
+                  </div>
+                </div>
+                <div v-if="menuItem.heading" class="menu-item">
+                  <router-link
+                    class="menu-link"
+                    active-class="active"
+                    :to="menuItem.route"
+                  >
+                    <span class="menu-icon">
+                      <span class="svg-icon svg-icon-2">
+                        <inline-svg
+                          src="media/icons/duotune/layouts/lay009.svg"
+                        />
+                      </span>
+                    </span>
+                    <span class="menu-title">{{
+                      translate(menuItem.heading)
+                    }}</span>
+                  </router-link>
+                </div>
+              </template>
+            </div>
+          </div>
+        </template>
+      </div>
       <!--<div
         data-kt-menu-trigger="click"
         data-kt-menu-placement="bottom-start"
@@ -439,8 +592,10 @@ import { defineComponent } from "vue";
 import { useRoute } from "vue-router";
 import { useI18n } from "vue-i18n/index";
 import MainMenuConfig from "@/core/config/MainMenuConfig";
+import MainMenuConfig2 from "@/core/config/MainMenuConfig2";
 import { headerMenuIcons } from "@/core/helpers/config";
 import { version } from "@/core/helpers/documentation";
+import { useStore } from "vuex";
 
 export default defineComponent({
   name: "KTMenu",
@@ -448,7 +603,14 @@ export default defineComponent({
   setup() {
     const { t, te } = useI18n();
     const route = useRoute();
-
+    const store = useStore();
+    var order = false;
+    var perform = false;
+    if (store.state.AuthModule.user.user.user_role_id == 1) {
+      order = true;
+    } else {
+      perform = true;
+    }
     const hasActiveChildren = (match) => {
       return route.path.indexOf(match) !== -1;
     };
@@ -465,8 +627,11 @@ export default defineComponent({
       hasActiveChildren,
       headerMenuIcons,
       MainMenuConfig,
+      MainMenuConfig2,
       translate,
       version,
+      order,
+      perform,
     };
   },
 });

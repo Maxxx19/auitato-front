@@ -98,7 +98,7 @@
           id="kt_sign_in_submit"
           class="btn btn-lg btn-primary w-100 mb-5"
         >
-          <span class="indicator-label"> Continue </span>
+          <span class="indicator-label">{{ translate("ContinuePage") }}</span>
 
           <span class="indicator-progress">
             Please wait...
@@ -165,6 +165,7 @@ import { ErrorMessage, Field, Form } from "vee-validate";
 import { Actions } from "@/store/enums/StoreEnums";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n/index";
 import Swal from "sweetalert2/dist/sweetalert2.min.js";
 import * as Yup from "yup";
 
@@ -178,7 +179,15 @@ export default defineComponent({
   setup() {
     const store = useStore();
     const router = useRouter();
+    const { t, te } = useI18n();
 
+    const translate = (text) => {
+      if (te(text)) {
+        return t(text);
+      } else {
+        return text;
+      }
+    };
     const submitButton = ref<HTMLButtonElement | null>(null);
 
     //Create form validation object
@@ -234,7 +243,7 @@ export default defineComponent({
           if (store.state.AuthModule.user.user.user_role_id == 1) {
             router.push({ name: "dashboard" });
           } else {
-            router.push({ name: "dashboard" });
+            router.push({ name: "dashboard2" });
           }
         });
       } else {
@@ -259,6 +268,7 @@ export default defineComponent({
       onSubmitLogin,
       login,
       submitButton,
+      translate,
     };
   },
 });

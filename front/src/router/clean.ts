@@ -18,6 +18,18 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/",
+    redirect: "/dashboard2",
+    component: () => import("@/layout/Layout.vue"),
+    children: [
+      {
+        path: "/dashboard2",
+        name: "dashboard2",
+        component: () => import("@/views/Dashboard.vue"),
+      },
+    ],
+  },
+  {
+    path: "/",
     component: () => import("@/components/page-layouts/Auth.vue"),
     children: [
       {

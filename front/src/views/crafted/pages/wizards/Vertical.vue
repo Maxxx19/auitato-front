@@ -195,7 +195,7 @@
               <span class="svg-icon svg-icon-4 me-1">
                 <inline-svg src="media/icons/duotune/arrows/arr063.svg" />
               </span>
-              Back
+              {{ translate("BackPage") }}
             </button>
           </div>
           <!--end::Wrapper-->
@@ -224,7 +224,7 @@
             </button>
 
             <button v-else type="submit" class="btn btn-lg btn-primary">
-              Continue
+              {{ translate("ContinuePage") }}
               <span class="svg-icon svg-icon-4 ms-1 me-0">
                 <inline-svg src="media/icons/duotune/arrows/arr064.svg" />
               </span>
@@ -253,6 +253,8 @@ import Swal from "sweetalert2/dist/sweetalert2.min.js";
 import * as Yup from "yup";
 import { useForm } from "vee-validate";
 import { setCurrentPageBreadcrumbs } from "@/core/helpers/breadcrumb";
+import { useRoute } from "vue-router";
+import { useI18n } from "vue-i18n/index";
 
 interface IStep1 {
   accountType: string;
@@ -409,7 +411,14 @@ export default defineComponent({
         window.location.reload();
       });
     };
-
+    const { t, te } = useI18n();
+    const translate = (text) => {
+      if (te(text)) {
+        return t(text);
+      } else {
+        return text;
+      }
+    };
     return {
       verticalWizardRef,
       previousStep,
@@ -417,6 +426,7 @@ export default defineComponent({
       formSubmit,
       totalSteps,
       currentStepIndex,
+      translate,
     };
   },
 });

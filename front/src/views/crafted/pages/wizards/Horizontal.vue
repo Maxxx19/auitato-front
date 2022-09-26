@@ -93,7 +93,7 @@
                 <span class="svg-icon svg-icon-4 me-1">
                   <inline-svg src="media/icons/duotune/arrows/arr063.svg" />
                 </span>
-                Back
+                {{ translate("BackPage") }}
               </button>
             </div>
             <!--end::Wrapper-->
@@ -122,7 +122,7 @@
               </button>
 
               <button v-else type="submit" class="btn btn-lg btn-primary">
-                Continue
+                {{ translate("ContinuePage") }}
                 <span class="svg-icon svg-icon-4 ms-1 me-0">
                   <inline-svg src="media/icons/duotune/arrows/arr064.svg" />
                 </span>
@@ -153,6 +153,8 @@ import Step3 from "@/components/wizard/steps/Step3.vue";
 import Step4 from "@/components/wizard/steps/Step4.vue";
 import Step5 from "@/components/wizard/steps/Step5.vue";
 import { setCurrentPageBreadcrumbs } from "@/core/helpers/breadcrumb";
+import { useRoute } from "vue-router";
+import { useI18n } from "vue-i18n/index";
 
 interface IStep1 {
   accountType: string;
@@ -313,7 +315,14 @@ export default defineComponent({
         window.location.reload();
       });
     };
-
+    const { t, te } = useI18n();
+    const translate = (text) => {
+      if (te(text)) {
+        return t(text);
+      } else {
+        return text;
+      }
+    };
     return {
       horizontalWizardRef,
       previousStep,
@@ -321,6 +330,7 @@ export default defineComponent({
       formSubmit,
       totalSteps,
       currentStepIndex,
+      translate,
     };
   },
 });

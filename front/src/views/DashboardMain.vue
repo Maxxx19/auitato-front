@@ -170,7 +170,7 @@
       <!--begin::Content-->
       <div class="d-flex flex-center flex-column flex-column-fluid">
         <!--begin::Wrapper-->
-        <div class="w-lg-700px p-10 p-lg-15 mx-auto">
+        <div class="w-lg-500px p-10 p-lg-15 mx-auto">
           <!--begin::Form-->
           <form
             class="my-auto pb-5"
@@ -221,7 +221,7 @@
                   <span class="svg-icon svg-icon-4 me-1">
                     <inline-svg src="media/icons/duotune/arrows/arr063.svg" />
                   </span>
-                  Back
+                  {{ translate("BackPage") }}
                 </button>
               </div>
               <!--end::Wrapper-->
@@ -250,7 +250,7 @@
                 </button>
 
                 <button v-else type="submit" class="btn btn-lg btn-primary">
-                  Continue
+                  {{ translate("ContinuePage") }}
                   <span class="svg-icon svg-icon-4 ms-1 me-0">
                     <inline-svg src="media/icons/duotune/arrows/arr064.svg" />
                   </span>
@@ -266,6 +266,31 @@
       </div>
       <!--end::Content-->
 
+      <!--begin::Body-->
+      <div class="d-flex flex-column flex-lg-row-fluid py-10">
+        <!--begin::Content-->
+        <div class="d-flex flex-center flex-column flex-column-fluid">
+          <ul>
+            <h3 class="stepper-title">{{ translate("FAQ") }}</h3>
+            <li v-for="(item, index) in items" :key="item.id">
+              <p
+                @click="showProd(item.id)"
+                class="fw-bold text-gray-800 text-hover-primary fs-5 cursor-pointer"
+              >
+                {{ index + 1 }} {{ item.question }}
+              </p>
+              <div
+                ref="dropProd"
+                class="dropProd"
+                :class="{ activate: active_el == 6 }"
+                v-if="value1"
+              >
+                <p>{{ item.answer }}</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
       <!--begin::Footer-->
       <div class="d-flex flex-center flex-wrap fs-6 p-5 pb-0">
         <!--begin::Links-->
@@ -287,18 +312,6 @@
       <!--end::Footer-->
     </div>
     <!--end::Body-->
-    <!--begin::Body-->
-    <div class="d-flex flex-column flex-lg-row-fluid py-10">
-      <!--begin::Content-->
-      <div class="d-flex flex-top flex-column flex-column-fluid pt-lg-20">
-        <ul>
-          <h3 class="stepper-title">{{ translate("FAQ") }}</h3>
-          <li v-for="(item, index) in items" :key="item.id">
-            {{ index + 1 }} {{ item.question }}
-          </li>
-        </ul>
-      </div>
-    </div>
   </div>
   <!--end::Authentication - Multi-steps-->
 </template>
@@ -362,13 +375,22 @@ export default defineComponent({
   data: function () {
     return {
       items: null,
-      xy: null,
+      value1: false,
     };
   },
-  mounted: function () {
+  methods: {
+    showProd() {
+      if (!this.value1) {
+        this.value1 = true;
+      } else {
+        this.value1 = false;
+      }
+      console.log(this.$refs.dropProd);
+    },
+  },
+  mounted: async function () {
     const store = useStore();
-    store.dispatch(Actions.GET_FAQ);
-    //alert(store.state.AuthModule.faq.faq);
+    await store.dispatch(Actions.GET_FAQ);
     this.items = store.state.AuthModule.faq.faq;
   },
   setup() {

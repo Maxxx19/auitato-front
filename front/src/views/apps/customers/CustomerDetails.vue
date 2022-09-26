@@ -19,8 +19,7 @@
             <a
               href="#"
               class="fs-3 text-gray-800 text-hover-primary fw-bold mb-1"
-            >
-              Max Smith
+              >{{ selectedUser }}
             </a>
             <!--end::Name-->
 
@@ -126,8 +125,8 @@
               <!--begin::Details item-->
               <div class="fw-bold mt-5">Billing Email</div>
               <div class="text-gray-600">
-                <a href="#" class="text-gray-600 text-hover-primary"
-                  >info@keenthemes.com</a
+                <a href="#" class="text-gray-600 text-hover-primary">
+                  {{ email }}</a
                 >
               </div>
               <!--begin::Details item-->
@@ -475,6 +474,9 @@ import Logs from "@/components/customers/cards/events-and-logs/Logs.vue";
 
 import Earnings from "@/components/customers/cards/statments/Earnings.vue";
 import Statement from "@/components/customers/cards/statments/Statement.vue";
+import { useStore } from "vuex";
+import { useI18n } from "vue-i18n/index";
+import { useRoute } from "vue-router";
 
 export default defineComponent({
   name: "customer-details",
@@ -490,12 +492,40 @@ export default defineComponent({
     Dropdown3,
     NewCardModal,
   },
+  data() {
+    const store = useStore();
+    return {
+      selectedUser: null,
+      email: null,
+    };
+  },
+  mounted: function () {
+    const store = useStore();
+    this.selectedUser = store.state.AuthModule.user.user.name;
+    this.email = store.state.AuthModule.user.user.email;
+  },
   setup() {
     onMounted(() => {
       setCurrentPageBreadcrumbs("Customer Details", ["Apps", "Customers"]);
     });
+    const { t, te } = useI18n();
+    const route = useRoute();
 
-    return {};
+    const translate = (text) => {
+      if (te(text)) {
+        return t(text);
+      } else {
+        return text;
+      }
+    };
+
+    const hasActiveChildren = (match) => {
+      return route.path.indexOf(match) !== -1;
+    };
+    return {
+      translate,
+      hasActiveChildren,
+    };
   },
 });
 </script>

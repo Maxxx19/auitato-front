@@ -125,6 +125,46 @@
             <!--end::Input group-->
 
             <!--begin::Input group-->
+            <div class="row mb-6">
+              <!--begin::Label-->
+              <label class="col-lg-4 col-form-label fw-semobold fs-6">
+                <span class="required">{{ translate("SelectCurrency") }}</span>
+
+                <i
+                  class="fas fa-exclamation-circle ms-1 fs-7"
+                  data-bs-toggle="tooltip"
+                  title="Select currency"
+                ></i>
+              </label>
+              <!--end::Label-->
+
+              <!--begin::Col-->
+              <div class="col-lg-8 fv-row">
+                <Field
+                  as="select"
+                  name="category"
+                  placeholder="Select category"
+                  class="form-select form-select-solid form-select-lg fw-semobold"
+                  v-model="targetData.currency"
+                >
+                  <option
+                    v-for="currency in targetData.currency"
+                    :key="currency"
+                    :value="currency"
+                  >
+                    {{ currency.symbol }}
+                  </option>
+                </Field>
+                <div class="fv-plugins-message-container">
+                  <div class="fv-help-block">
+                    <ErrorMessage name="currency" />
+                  </div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
             <!-- <div class="row g-9 mb-8"> -->
             <!--begin::Col-->
             <!-- <div class="col-md-6 fv-row">
@@ -411,6 +451,7 @@ interface NewAddressData {
   currency_id: string;
   category: string;
   categories: string;
+  currency: string;
 }
 
 export default defineComponent({
@@ -432,6 +473,7 @@ export default defineComponent({
       currency_id: "1",
       category: "",
       categories: store.state.AuthModule.faq.categories,
+      currency: store.state.AuthModule.user.currencies,
     });
 
     const { t, te } = useI18n();

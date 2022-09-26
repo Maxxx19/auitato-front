@@ -30,8 +30,9 @@
                 <a
                   href="#"
                   class="text-gray-800 text-hover-primary fs-2 fw-bold me-1"
-                  >Max Smith</a
                 >
+                  {{ selectedUser }}
+                </a>
                 <a href="#">
                   <span class="svg-icon svg-icon-1 svg-icon-primary">
                     <inline-svg src="media/icons/duotune/general/gen026.svg" />
@@ -79,7 +80,7 @@
                       src="media/icons/duotune/communication/com011.svg"
                     />
                   </span>
-                  max@kt.com
+                  {{ email }}
                 </a>
               </div>
               <!--end::Info-->
@@ -283,6 +284,7 @@ import { defineComponent } from "vue";
 import Dropdown3 from "@/components/dropdown/Dropdown3.vue";
 import { useI18n } from "vue-i18n/index";
 import { useRoute } from "vue-router";
+import { useStore } from "vuex";
 
 export default defineComponent({
   name: "kt-account",
@@ -308,6 +310,17 @@ export default defineComponent({
       hasActiveChildren,
       translate,
     };
+  },
+  data() {
+    return {
+      selectedUser: null,
+      email: null,
+    };
+  },
+  mounted: function () {
+    const store = useStore();
+    this.selectedUser = store.state.AuthModule.user.user.name;
+    this.email = store.state.AuthModule.user.user.email;
   },
 });
 </script>

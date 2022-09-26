@@ -29,7 +29,7 @@
 
         <!--begin::Col-->
         <div class="col-lg-8">
-          <span class="fw-bold fs-6 text-dark">Max Smith</span>
+          <span class="fw-bold fs-6 text-dark">{{ selectedUser }}</span>
         </div>
         <!--end::Col-->
       </div>
@@ -80,9 +80,9 @@
 
         <!--begin::Col-->
         <div class="col-lg-8">
-          <a href="#" class="fw-semobold fs-6 text-dark text-hover-primary"
-            >keenthemes.com</a
-          >
+          <a href="#" class="fw-semobold fs-6 text-dark text-hover-primary">
+            {{ email }}
+          </a>
         </div>
         <!--end::Col-->
       </div>
@@ -211,6 +211,7 @@ import KTListWidget5 from "@/components/widgets/lists/Widget5.vue";
 import KTTableWidget5 from "@/components/widgets/tables/Widget5.vue";
 import KTListWidget1 from "@/components/widgets/lists/Widget1.vue";
 import { setCurrentPageBreadcrumbs } from "@/core/helpers/breadcrumb";
+import { useStore } from "vuex";
 
 export default defineComponent({
   name: "account-overview",
@@ -219,6 +220,17 @@ export default defineComponent({
     KTListWidget5,
     KTTableWidget5,
     KTListWidget1,
+  },
+  data() {
+    return {
+      selectedUser: null,
+      email: null,
+    };
+  },
+  mounted: function () {
+    const store = useStore();
+    this.selectedUser = store.state.AuthModule.user.user.name;
+    this.email = store.state.AuthModule.user.user.email;
   },
   setup() {
     onMounted(() => {

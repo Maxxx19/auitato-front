@@ -50,29 +50,6 @@
               data-kt-scroll-wrappers="#kt_modal_new_address_scroll"
               data-kt-scroll-offset="300px"
             >
-              <!--begin::Notice-->
-              <div
-                class="notice d-flex bg-light-warning rounded border-warning border border-dashed mb-9 p-6"
-              >
-                <span class="svg-icon svg-icon-2tx svg-icon-warning me-4">
-                  <inline-svg src="media/icons/duotune/general/gen044.svg" />
-                </span>
-                <!--begin::Wrapper-->
-                <div class="d-flex flex-stack flex-grow-1">
-                  <!--begin::Content-->
-                  <div class="fw-semobold">
-                    <h4 class="text-gray-800 fw-bold">Warning</h4>
-                    <div class="fs-6 text-gray-600">
-                      Updating address may affter to your
-                      <a href="#">Tax Location</a>
-                    </div>
-                  </div>
-                  <!--end::Content-->
-                </div>
-                <!--end::Wrapper-->
-              </div>
-              <!--end::Notice-->
-
               <!--begin::Input group-->
               <div class="row mb-5">
                 <!--begin::Col-->

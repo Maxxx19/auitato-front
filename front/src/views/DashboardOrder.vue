@@ -215,7 +215,7 @@
                   <span class="svg-icon svg-icon-4 me-1">
                     <inline-svg src="media/icons/duotune/arrows/arr063.svg" />
                   </span>
-                  Back
+                  {{ translate("BackPage") }}
                 </button>
               </div>
               <!--end::Wrapper-->
@@ -244,7 +244,7 @@
                 </button>
 
                 <button v-else type="submit" class="btn btn-lg btn-primary">
-                  Continue
+                  {{ translate("ContinuePage") }}
                   <span class="svg-icon svg-icon-4 ms-1 me-0">
                     <inline-svg src="media/icons/duotune/arrows/arr064.svg" />
                   </span>
@@ -378,13 +378,16 @@ export default defineComponent({
       saveCard: "1",
     });
 
-    onMounted(() => {
+    onMounted(async () => {
       _stepperObj.value = StepperComponent.createInsance(
         wizardRef.value as HTMLElement
       );
 
       store.dispatch(Actions.ADD_BODY_CLASSNAME, "bg-body");
-      store.dispatch(Actions.SHOW_TASKS, store.state.AuthModule.user.api_token);
+      await store.dispatch(
+        Actions.SHOW_TASKS,
+        store.state.AuthModule.user.api_token
+      );
       setCurrentPageBreadcrumbs("Horizontal", ["Pages", "Wizards"]);
     });
 

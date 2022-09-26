@@ -110,7 +110,7 @@
                     name="fname"
                     class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
                     placeholder="First name"
-                    v-model="profileDetails.name"
+                    v-model="this.selectedUser"
                   />
                   <div class="fv-plugins-message-container">
                     <div class="fv-help-block">
@@ -218,7 +218,7 @@
                 name="website"
                 class="form-control form-control-lg form-control-solid"
                 placeholder="Company website"
-                v-model="profileDetails.companySite"
+                v-model="this.email"
               />
               <div class="fv-plugins-message-container">
                 <div class="fv-help-block">
@@ -2249,6 +2249,7 @@ import { ErrorMessage, Field, Form } from "vee-validate";
 import { setCurrentPageBreadcrumbs } from "@/core/helpers/breadcrumb";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import * as Yup from "yup";
+import { useStore } from "vuex";
 
 interface ProfileDetails {
   avatar: string;
@@ -2256,7 +2257,7 @@ interface ProfileDetails {
   surname: string;
   company: string;
   contactPhone: string;
-  companySite: string;
+  //companySite: string;
   country: string;
   language: string;
   timezone: string;
@@ -2274,6 +2275,17 @@ export default defineComponent({
     ErrorMessage,
     Field,
     Form,
+  },
+  data() {
+    return {
+      selectedUser: null,
+      email: null,
+    };
+  },
+  mounted: function () {
+    const store = useStore();
+    this.selectedUser = store.state.AuthModule.user.user.name;
+    this.email = store.state.AuthModule.user.user.email;
   },
   setup() {
     const submitButton1 = ref<HTMLElement | null>(null);
@@ -2320,7 +2332,7 @@ export default defineComponent({
       surname: "Smith",
       company: "Keenthemes",
       contactPhone: "044 3276 454 935",
-      companySite: "keenthemes.com",
+      //companySite: "keenthemes.com",
       country: "MY",
       language: "msa",
       timezone: "Kuala Lumpur",

@@ -18,24 +18,31 @@
     <!--begin::Brand-->
     <div class="aside-logo flex-column-auto" id="kt_aside_logo">
       <!--begin::Logo-->
-      <a href="#" v-if="asideTheme === 'dark'">
+      <a href="#" v-if="order">
         <img
           alt="Logo"
-          src="media/logos/default-dark.svg"
+          src="media/logos/order-online-logo.png"
+          class="h-25px app-sidebar-logo-default"
+        />
+      </a>
+      <a href="#" v-if="performer">
+        <img
+          alt="Logo"
+          src="media/logos/Logo-DocuPerformer.jpg"
           class="h-25px app-sidebar-logo-default"
         />
       </a>
       <a href="#" v-if="asideTheme === 'light'">
         <img
-          v-if="themeMode === 'light'"
+          v-if="order"
           alt="Logo"
-          src="media/logos/default.svg"
+          src="media/logos/Logo-DocuPerformer.jpg"
           class="theme-light-show h-25px app-sidebar-logo-default"
         />
         <img
           v-else
           alt="Logo"
-          src="media/logos/default-dark.svg"
+          src="media/logos/Logo-DocuPerformer.jpg"
           class="theme-dark-show h-25px app-sidebar-logo-default"
         />
       </a>
@@ -109,7 +116,13 @@ export default defineComponent({
   setup() {
     const { t } = useI18n();
     const store = useStore();
-
+    var order = false;
+    var performer = false;
+    if (store.state.AuthModule.user.user.user_role_id == 1) {
+      order = true;
+    } else {
+      performer = true;
+    }
     const themeMode = computed(() => {
       return store.getters.getThemeMode;
     });
@@ -118,6 +131,8 @@ export default defineComponent({
       asideTheme,
       themeMode,
       t,
+      order,
+      performer,
     };
   },
 });
