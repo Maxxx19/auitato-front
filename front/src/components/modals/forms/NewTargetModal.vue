@@ -261,6 +261,11 @@
                   type="number"
                   name="budget"
                 ></el-input>
+                <el-input
+                  v-model="targetData._method"
+                  type="hidden"
+                  name="_method"
+                ></el-input>
               </el-form-item>
             </div>
             <!--begin::Input group-->
@@ -452,6 +457,7 @@ interface NewAddressData {
   category: string;
   categories: string;
   currency: string;
+  _method: string;
 }
 
 export default defineComponent({
@@ -474,6 +480,7 @@ export default defineComponent({
       category: "",
       categories: store.state.AuthModule.faq.categories,
       currency: store.state.AuthModule.user.currencies,
+      _method: "",
     });
 
     const { t, te } = useI18n();

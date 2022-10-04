@@ -1,19 +1,19 @@
 <template>
   <KTModalCard
-    title="New Card Modal Example"
-    description="Click on the below buttons to launch <br/>a new card example."
-    :image="getIllustrationsPath('6.png')"
-    button-text="Add New Card"
-    modal-id="kt_modal_new_card"
+    title="Редактировать задачу"
+    description="Click on the below buttons to launch <br/>a new target example."
+    :image="getIllustrationsPath('17.png')"
+    button-text="Редактировать задачу"
+    modal-id="kt_modal_new_target"
   ></KTModalCard>
 
-  <KTNewCardModal></KTNewCardModal>
+  <KTNewTargetModal></KTNewTargetModal>
 </template>
 
 <script lang="ts">
 import { defineComponent, onMounted } from "vue";
 import KTModalCard from "@/components/cards/Card.vue";
-import KTNewCardModal from "@/components/modals/forms/NewCardModal.vue";
+import KTNewTargetModal from "@/components/modals/forms/NewTargetModal.vue";
 import { setCurrentPageBreadcrumbs } from "@/core/helpers/breadcrumb";
 import { getIllustrationsPath } from "@/core/helpers/assets";
 
@@ -21,7 +21,7 @@ export default defineComponent({
   name: "edit-task-forms",
   components: {
     KTModalCard,
-    KTNewCardModal,
+    KTNewTargetModal,
   },
   setup() {
     onMounted(() => {

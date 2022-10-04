@@ -90,6 +90,14 @@ export default class AuthModule
   }
 
   @Mutation
+  [Mutations.SET_AUTH_MAIN](user) {
+    //this.isAuthenticated = true;
+    //this.user.api_token = user;
+    //this.errors = {};
+    //JwtService.saveToken(user.api_token);
+  }
+
+  @Mutation
   [Mutations.SET_USER](user) {
     this.user = user;
   }
@@ -194,6 +202,18 @@ export default class AuthModule
     return ApiService.post("register", credentials)
       .then(({ data }) => {
         this.context.commit(Mutations.SET_AUTH, data);
+      })
+      .catch(({ response }) => {
+        this.context.commit(Mutations.SET_ERROR, response.data.errors);
+      });
+  }
+
+  @Action
+  [Actions.MAINREGISTER](credentials) {
+    return ApiService.post("main/task", credentials)
+      .then(({ data }) => {
+        alert("main");
+        this.context.commit(Mutations.SET_AUTH_MAIN, data);
       })
       .catch(({ response }) => {
         this.context.commit(Mutations.SET_ERROR, response.data.errors);

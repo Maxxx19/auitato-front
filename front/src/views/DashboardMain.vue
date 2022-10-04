@@ -232,9 +232,9 @@
                   type="button"
                   class="btn btn-lg btn-primary me-3"
                   data-kt-stepper-action="submit"
-                  v-if="currentStepIndex === totalSteps - 1"
                   @click="formSubmit()"
                 >
+                  <!-- v-if="currentStepIndex === totalSteps - 1" -->
                   <span class="indicator-label">
                     Submit
                     <span class="svg-icon svg-icon-3 ms-2 me-0">
@@ -249,7 +249,7 @@
                   </span>
                 </button>
 
-                <button v-else type="submit" class="btn btn-lg btn-primary">
+                <button type="text" class="btn btn-lg btn-primary">
                   {{ translate("ContinuePage") }}
                   <span class="svg-icon svg-icon-4 ms-1 me-0">
                     <inline-svg src="media/icons/duotune/arrows/arr064.svg" />
