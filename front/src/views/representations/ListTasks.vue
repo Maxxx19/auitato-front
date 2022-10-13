@@ -123,9 +123,6 @@
           <!-- <img :src="customer.payment.icon" class="w-35px me-3" alt="" />-->
           {{ tasks.status.name }}
         </template>
-        <template v-slot:date="{ row: tasks }">
-          {{ tasks.created_at }}
-        </template>
         <template v-slot:actions="{ row: customer }">
           <a
             href="#"
@@ -140,16 +137,22 @@
           </a>
           <!--begin::Menu-->
           <div
-            class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semobold fs-7 w-125px py-4"
+            class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primarfw-semobold fs-7 w-125px py-4"
             data-kt-menu="true"
           >
             <!--begin::Menu item-->
             <div class="menu-item px-3">
-              <router-link
-                to="/apps/customers/customer-details"
-                class="menu-link px-3"
-                >View</router-link
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#kt_modal_new_address"
               >
+                <span class="svg-icon svg-icon-2">
+                  <inline-svg src="media/icons/duotune/arrows/arr075.svg" />
+                </span>
+                {{ translate("EditTask") }}
+              </button>
             </div>
             <!--end::Menu item-->
             <!--begin::Menu item-->
@@ -169,6 +172,13 @@
   <ExportCustomerModal></ExportCustomerModal>
   <AddCustomerModal></AddCustomerModal>
   <KTNewTargetModal></KTNewTargetModal>
+  <KTNewTargetEditModal
+    :titleData="getTask[0].title"
+    :categoryData="getTask[0].category.id"
+    :descriptionData="getTask[0].description"
+    :budgetData="getTask[0].budget"
+  >
+  </KTNewTargetEditModal>
 </template>
 
 <script lang="ts">
@@ -183,8 +193,10 @@ import { ICustomer } from "@/core/data/customers";
 import arraySort from "array-sort";
 import { useStore } from "vuex";
 import KTNewTargetModal from "@/components/modals/forms/NewTargetModal.vue";
+import KTNewTargetEditModal from "@/components/modals/forms/NewTargetEditModal.vue";
 import { useI18n } from "vue-i18n/index";
 import { useRoute } from "vue-router";
+import moment from "moment";
 
 export default defineComponent({
   name: "list-tasks-representation",
@@ -193,11 +205,19 @@ export default defineComponent({
     ExportCustomerModal,
     AddCustomerModal,
     KTNewTargetModal,
+    KTNewTargetEditModal,
   },
   data: function () {
     return {
       tasks: null,
     };
+  },
+  computed: {
+    getTask() {
+      const store = useStore();
+      var tasks = store.state.AuthModule.user.tasks;
+      return tasks;
+    },
   },
   mounted: function () {
     const store = useStore();

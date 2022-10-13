@@ -141,14 +141,24 @@
           </a>
           <!--begin::Menu-->
           <div
-            class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semobold fs-7 w-125px py-4"
+            class="
+              menu
+              menu-sub
+              menu-sub-dropdown
+              menu-column
+              menu-rounded
+              menu-gray-600
+              menu-state-bg-light-primary
+              fw-semobold
+              fs-7
+              w-125px
+              py-4
+            "
             data-kt-menu="true"
           >
             <!--begin::Menu item-->
             <div class="menu-item px-3">
-              <router-link
-                to="/apps/customers/customer-details"
-                class="menu-link px-3"
+              <router-link to="/apps/forms/edit-task" class="menu-link px-3"
                 >View</router-link
               >
             </div>

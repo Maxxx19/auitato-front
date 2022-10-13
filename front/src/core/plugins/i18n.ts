@@ -117,6 +117,7 @@ const messages = {
     getLanguage: "Language",
     ContinuePage: "Continue",
     BackPage: "Back",
+    EditTask: "Edit task",
   },
   ua: {
     dashboard: "Панель приладів",
@@ -233,6 +234,7 @@ const messages = {
     getLanguage: "Мова",
     ContinuePage: "Продовжити",
     BackPage: "Назад",
+    EditTask: "Редагувати задачу",
   },
   ru: {
     dashboard: "Панель приборов",
@@ -349,6 +351,7 @@ const messages = {
     getLanguage: "Язык",
     ContinuePage: "Продолжить",
     BackPage: "Назад",
+    EditTask: "Редактировать задачу",
   },
   es: {
     dashboard: "Tablero",
