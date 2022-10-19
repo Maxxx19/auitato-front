@@ -121,7 +121,7 @@
                 <!--end::Col-->
 
                 <!--begin::Col-->
-                <div class="col-lg-6 fv-row">
+                <!-- <div class="col-lg-6 fv-row">
                   <Field
                     type="text"
                     name="lname"
@@ -134,7 +134,7 @@
                       <ErrorMessage name="lname" />
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <!--end::Col-->
               </div>
               <!--end::Row-->
@@ -146,13 +146,13 @@
           <!--begin::Input group-->
           <div class="row mb-6">
             <!--begin::Label-->
-            <label class="col-lg-4 col-form-label required fw-semobold fs-6"
+            <!-- <label class="col-lg-4 col-form-label required fw-semobold fs-6"
               >Company</label
-            >
+            > -->
             <!--end::Label-->
 
             <!--begin::Col-->
-            <div class="col-lg-8 fv-row">
+            <!-- <div class="col-lg-8 fv-row">
               <Field
                 type="text"
                 name="company"
@@ -165,13 +165,18 @@
                   <ErrorMessage name="company" />
                 </div>
               </div>
-            </div>
+            </div> -->
             <!--end::Col-->
           </div>
           <!--end::Input group-->
 
           <!--begin::Input group-->
           <div class="row mb-6">
+            <el-input
+              v-model="profileDetails._method"
+              type="hidden"
+              name="_method"
+            ></el-input>
             <!--begin::Label-->
             <label class="col-lg-4 col-form-label fw-semobold fs-6">
               <span class="required">Contact Phone</span>
@@ -207,7 +212,7 @@
           <div class="row mb-6">
             <!--begin::Label-->
             <label class="col-lg-4 col-form-label fw-semobold fs-6"
-              >Company Site</label
+              >Email</label
             >
             <!--end::Label-->
 
@@ -233,7 +238,7 @@
           <!--begin::Input group-->
           <div class="row mb-6">
             <!--begin::Label-->
-            <label class="col-lg-4 col-form-label fw-semobold fs-6">
+            <!-- <label class="col-lg-4 col-form-label fw-semobold fs-6">
               <span class="required">Country</span>
 
               <i
@@ -241,11 +246,11 @@
                 data-bs-toggle="tooltip"
                 title="Country of origination"
               ></i>
-            </label>
+            </label> -->
             <!--end::Label-->
 
             <!--begin::Col-->
-            <div class="col-lg-8 fv-row">
+            <!-- <div class="col-lg-8 fv-row">
               <Field
                 as="select"
                 name="country"
@@ -515,7 +520,7 @@
                   <ErrorMessage name="country" />
                 </div>
               </div>
-            </div>
+            </div> -->
             <!--end::Col-->
           </div>
           <!--end::Input group-->
@@ -523,15 +528,15 @@
           <!--begin::Input group-->
           <div class="row mb-6">
             <!--begin::Label-->
-            <label class="col-lg-4 col-form-label required fw-semobold fs-6"
+            <!-- <label class="col-lg-4 col-form-label required fw-semobold fs-6"
               >Language</label
-            >
+            > -->
             <!--end::Label-->
 
             <!--begin::Col-->
             <div class="col-lg-8 fv-row">
               <!--begin::Input-->
-              <Field
+              <!-- <Field
                 as="select"
                 name="language"
                 class="form-select form-select-solid form-select-lg"
@@ -588,14 +593,14 @@
                 <div class="fv-help-block">
                   <ErrorMessage name="language" />
                 </div>
-              </div>
+              </div> -->
               <!--end::Input-->
 
               <!--begin::Hint-->
-              <div class="form-text">
+              <!-- <div class="form-text">
                 Please select a preferred language, including date, time, and
                 number formatting.
-              </div>
+              </div> -->
               <!--end::Hint-->
             </div>
             <!--end::Col-->
@@ -605,13 +610,13 @@
           <!--begin::Input group-->
           <div class="row mb-6">
             <!--begin::Label-->
-            <label class="col-lg-4 col-form-label required fw-semobold fs-6"
+            <!-- <label class="col-lg-4 col-form-label required fw-semobold fs-6"
               >Time Zone</label
-            >
+            > -->
             <!--end::Label-->
 
             <!--begin::Col-->
-            <div class="col-lg-8 fv-row">
+            <!-- <div class="col-lg-8 fv-row">
               <Field
                 as="select"
                 name="timezone"
@@ -1064,7 +1069,7 @@
                   <ErrorMessage name="timezone" />
                 </div>
               </div>
-            </div>
+            </div> -->
             <!--end::Col-->
           </div>
           <!--end::Input group-->
@@ -1072,13 +1077,13 @@
           <!--begin::Input group-->
           <div class="row mb-6">
             <!--begin::Label-->
-            <label class="col-lg-4 col-form-label required fw-semobold fs-6"
+            <!-- <label class="col-lg-4 col-form-label required fw-semobold fs-6"
               >Currency</label
-            >
+            > -->
             <!--end::Label-->
 
             <!--begin::Col-->
-            <div class="col-lg-8 fv-row">
+            <!-- <div class="col-lg-8 fv-row">
               <Field
                 as="select"
                 name="currency"
@@ -1106,7 +1111,7 @@
                   <ErrorMessage name="currency" />
                 </div>
               </div>
-            </div>
+            </div> -->
             <!--end::Col-->
           </div>
           <!--end::Input group-->
@@ -1114,17 +1119,17 @@
           <!--begin::Input group-->
           <div class="row mb-6">
             <!--begin::Label-->
-            <label class="col-lg-4 col-form-label fw-semobold fs-6"
+            <!-- <label class="col-lg-4 col-form-label fw-semobold fs-6"
               >Communication</label
-            >
+            > -->
             <!--end::Label-->
 
             <!--begin::Col-->
-            <div class="col-lg-8 fv-row">
-              <!--begin::Options-->
-              <div class="d-flex align-items-center mt-3">
-                <!--begin::Option-->
-                <label
+            <!-- <div class="col-lg-8 fv-row"> -->
+            <!--begin::Options-->
+            <!-- <div class="d-flex align-items-center mt-3"> -->
+            <!--begin::Option-->
+            <!-- <label
                   class="form-check form-check-inline form-check-solid me-5"
                 >
                   <input
@@ -1133,22 +1138,22 @@
                     type="checkbox"
                   />
                   <span class="fw-semobold ps-2 fs-6"> Email </span>
-                </label>
-                <!--end::Option-->
+                </label> -->
+            <!--end::Option-->
 
-                <!--begin::Option-->
-                <label class="form-check form-check-inline form-check-solid">
+            <!--begin::Option-->
+            <!-- <label class="form-check form-check-inline form-check-solid">
                   <input
                     class="form-check-input"
                     name="communication[]"
                     type="checkbox"
                   />
                   <span class="fw-semobold ps-2 fs-6"> Phone </span>
-                </label>
-                <!--end::Option-->
-              </div>
-              <!--end::Options-->
-            </div>
+                </label> -->
+            <!--end::Option-->
+            <!-- </div> -->
+            <!--end::Options-->
+            <!-- </div> -->
             <!--end::Col-->
           </div>
           <!--end::Input group-->
@@ -1156,13 +1161,13 @@
           <!--begin::Input group-->
           <div class="row mb-0">
             <!--begin::Label-->
-            <label class="col-lg-4 col-form-label fw-semobold fs-6"
+            <!-- <label class="col-lg-4 col-form-label fw-semobold fs-6"
               >Allow Marketing</label
-            >
+            > -->
             <!--begin::Label-->
 
             <!--begin::Label-->
-            <div class="col-lg-8 d-flex align-items-center">
+            <!-- <div class="col-lg-8 d-flex align-items-center">
               <div class="form-check form-check-solid form-switch fv-row">
                 <input
                   class="form-check-input w-45px h-30px"
@@ -1171,7 +1176,7 @@
                 />
                 <label class="form-check-label" for="allowmarketing"></label>
               </div>
-            </div>
+            </div> -->
             <!--begin::Label-->
           </div>
           <!--end::Input group-->
@@ -1179,7 +1184,7 @@
         <!--end::Card body-->
 
         <!--begin::Actions-->
-        <div class="card-footer d-flex justify-content-end py-6 px-9">
+        <!-- <div class="card-footer d-flex justify-content-end py-6 px-9">
           <button
             type="reset"
             class="btn btn-light btn-active-light-primary me-2"
@@ -1201,7 +1206,7 @@
               ></span>
             </span>
           </button>
-        </div>
+        </div> -->
         <!--end::Actions-->
       </Form>
       <!--end::Form-->
@@ -1213,7 +1218,7 @@
   <!--begin::Sign-in Method-->
   <div class="card mb-5 mb-xl-10">
     <!--begin::Card header-->
-    <div
+    <!-- <div
       class="card-header border-0 cursor-pointer"
       role="button"
       data-bs-toggle="collapse"
@@ -1222,7 +1227,7 @@
       <div class="card-title m-0">
         <h3 class="fw-bolder m-0">Sign-in Method</h3>
       </div>
-    </div>
+    </div> -->
     <!--end::Card header-->
 
     <!--begin::Content-->
@@ -1474,9 +1479,9 @@
   <!--end::Sign-in Method-->
 
   <!--begin::Connected Accounts-->
-  <div class="card mb-5 mb-xl-10">
-    <!--begin::Card header-->
-    <div
+  <!-- <div class="card mb-5 mb-xl-10"> -->
+  <!--begin::Card header-->
+  <!-- <div
       class="card-header border-0 cursor-pointer"
       role="button"
       data-bs-toggle="collapse"
@@ -1487,39 +1492,39 @@
       <div class="card-title m-0">
         <h3 class="fw-bold m-0">Connected Accounts</h3>
       </div>
-    </div>
-    <!--end::Card header-->
+    </div> -->
+  <!--end::Card header-->
 
-    <!--begin::Content-->
-    <div id="kt_account_connected_accounts" class="collapse show">
-      <!--begin::Card body-->
-      <div class="card-body border-top p-9">
+  <!--begin::Content-->
+  <!-- <div id="kt_account_connected_accounts" class="collapse show"> -->
+  <!--begin::Card body-->
+  <!-- <div class="card-body border-top p-9">
         <div
           class="notice d-flex bg-light-primary rounded border-primary border border-dashed mb-9 p-6"
         >
           <span class="svg-icon svg-icon-2tx svg-icon-primary me-4">
             <inline-svg src="media/icons/duotune/art/art006.svg" />
-          </span>
+          </span> -->
 
-          <!--begin::Wrapper-->
-          <div class="d-flex flex-stack flex-grow-1">
-            <!--begin::Content-->
-            <div class="fw-semobold">
+  <!--begin::Wrapper-->
+  <!-- <div class="d-flex flex-stack flex-grow-1"> -->
+  <!--begin::Content-->
+  <!-- <div class="fw-semobold">
               <div class="fs-6 text-gray-600">
                 Two-factor authentication adds an extra layer of security to
                 your account. To log in, in you'll need to provide a 4 digit
                 amazing code. <a href="#" class="fw-bold">Learn More</a>
               </div>
-            </div>
-            <!--end::Content-->
-          </div>
-          <!--end::Wrapper-->
-        </div>
+            </div> -->
+  <!--end::Content-->
+  <!-- </div> -->
+  <!--end::Wrapper-->
+  <!-- </div> -->
 
-        <!--begin::Items-->
-        <div class="py-2">
-          <!--begin::Item-->
-          <div class="d-flex flex-stack">
+  <!--begin::Items-->
+  <!-- <div class="py-2"> -->
+  <!--begin::Item-->
+  <!-- <div class="d-flex flex-stack">
             <div class="d-flex">
               <img
                 src="media/svg/brand-logos/google-icon.svg"
@@ -1547,13 +1552,13 @@
                 <label class="form-check-label" for="googleswitch"></label>
               </div>
             </div>
-          </div>
-          <!--end::Item-->
+          </div> -->
+  <!--end::Item-->
 
-          <div class="separator separator-dashed my-5"></div>
+  <!-- <div class="separator separator-dashed my-5"></div> -->
 
-          <!--begin::Item-->
-          <div class="d-flex flex-stack">
+  <!--begin::Item-->
+  <!-- <div class="d-flex flex-stack">
             <div class="d-flex">
               <img
                 src="media/svg/brand-logos/github.svg"
@@ -1581,13 +1586,13 @@
                 <label class="form-check-label" for="githubswitch"></label>
               </div>
             </div>
-          </div>
-          <!--end::Item-->
+          </div> -->
+  <!--end::Item-->
 
-          <div class="separator separator-dashed my-5"></div>
+  <!-- <div class="separator separator-dashed my-5"></div> -->
 
-          <!--begin::Item-->
-          <div class="d-flex flex-stack">
+  <!--begin::Item-->
+  <!-- <div class="d-flex flex-stack">
             <div class="d-flex">
               <img
                 src="media/svg/brand-logos/slack-icon.svg"
@@ -1614,15 +1619,15 @@
                 <label class="form-check-label" for="slackswitch"></label>
               </div>
             </div>
-          </div>
-          <!--end::Item-->
-        </div>
-        <!--end::Items-->
-      </div>
-      <!--end::Card body-->
+          </div> -->
+  <!--end::Item-->
+  <!-- </div> -->
+  <!--end::Items-->
+  <!-- </div> -->
+  <!--end::Card body-->
 
-      <!--begin::Card footer-->
-      <div class="card-footer d-flex justify-content-end py-6 px-9">
+  <!--begin::Card footer-->
+  <!-- <div class="card-footer d-flex justify-content-end py-6 px-9">
         <button class="btn btn-light btn-active-light-primary me-2">
           Discard
         </button>
@@ -1639,17 +1644,17 @@
             ></span>
           </span>
         </button>
-      </div>
-      <!--end::Card footer-->
-    </div>
-    <!--end::Content-->
-  </div>
+      </div> -->
+  <!--end::Card footer-->
+  <!-- </div> -->
+  <!--end::Content-->
+  <!-- </div> -->
   <!--end::Connected Accounts-->
 
   <!--begin::Notifications-->
-  <div class="card mb-5 mb-xl-10">
-    <!--begin::Card header-->
-    <div
+  <!-- <div class="card mb-5 mb-xl-10"> -->
+  <!--begin::Card header-->
+  <!-- <div
       class="card-header border-0 cursor-pointer"
       role="button"
       data-bs-toggle="collapse"
@@ -1660,216 +1665,216 @@
       <div class="card-title m-0">
         <h3 class="fw-bold m-0">Email Preferences</h3>
       </div>
-    </div>
-    <!--begin::Card header-->
+    </div> -->
+  <!--begin::Card header-->
 
-    <!--begin::Content-->
-    <div id="kt_account_email_preferences" class="collapse show">
-      <!--begin::Form-->
-      <form class="form" @submit.prevent="saveChanges3()">
-        <!--begin::Card body-->
-        <div class="card-body border-top px-9 py-9">
-          <!--begin::Option-->
-          <label
+  <!--begin::Content-->
+  <!-- <div id="kt_account_email_preferences" class="collapse show"> -->
+  <!--begin::Form-->
+  <!-- <form class="form" @submit.prevent="saveChanges3()"> -->
+  <!--begin::Card body-->
+  <!-- <div class="card-body border-top px-9 py-9"> -->
+  <!--begin::Option-->
+  <!-- <label
             class="form-check form-check-custom form-check-solid align-items-start"
-          >
-            <!--begin::Input-->
-            <input
+          > -->
+  <!--begin::Input-->
+  <!-- <input
               class="form-check-input me-3"
               type="checkbox"
               name="email-preferences1"
               value="1"
-            />
-            <!--end::Input-->
+            /> -->
+  <!--end::Input-->
 
-            <!--begin::Label-->
-            <span class="form-check-label d-flex flex-column align-items-start">
+  <!--begin::Label-->
+  <!-- <span class="form-check-label d-flex flex-column align-items-start">
               <span class="fw-bold fs-5 mb-0">Successful Payments</span>
               <span class="text-muted fs-6"
                 >Receive a notification for every successful payment.</span
               >
-            </span>
-            <!--end::Label-->
-          </label>
-          <!--end::Option-->
-          <!--begin::Option-->
-          <div class="separator separator-dashed my-6"></div>
-          <!--end::Option-->
+            </span> -->
+  <!--end::Label-->
+  <!-- </label> -->
+  <!--end::Option-->
+  <!--begin::Option-->
+  <!-- <div class="separator separator-dashed my-6"></div> -->
+  <!--end::Option-->
 
-          <!--begin::Option-->
-          <label
+  <!--begin::Option-->
+  <!-- <label
             class="form-check form-check-custom form-check-solid align-items-start"
-          >
-            <!--begin::Input-->
-            <input
+          > -->
+  <!--begin::Input-->
+  <!-- <input
               class="form-check-input me-3"
               type="checkbox"
               name="email-preferences1"
               checked
               value="1"
-            />
-            <!--end::Input-->
+            /> -->
+  <!--end::Input-->
 
-            <!--begin::Label-->
-            <span class="form-check-label d-flex flex-column align-items-start">
+  <!--begin::Label-->
+  <!-- <span class="form-check-label d-flex flex-column align-items-start">
               <span class="fw-bold fs-5 mb-0">Payouts</span>
               <span class="text-muted fs-6"
                 >Receive a notification for every initiated payout.</span
               >
-            </span>
-            <!--end::Label-->
-          </label>
-          <!--end::Option-->
-          <!--begin::Option-->
-          <div class="separator separator-dashed my-6"></div>
-          <!--end::Option-->
+            </span> -->
+  <!--end::Label-->
+  <!-- </label> -->
+  <!--end::Option-->
+  <!--begin::Option-->
+  <!-- <div class="separator separator-dashed my-6"></div> -->
+  <!--end::Option-->
 
-          <!--begin::Option-->
-          <label
+  <!--begin::Option-->
+  <!-- <label
             class="form-check form-check-custom form-check-solid align-items-start"
-          >
-            <!--begin::Input-->
-            <input
+          > -->
+  <!--begin::Input-->
+  <!-- <input
               class="form-check-input me-3"
               type="checkbox"
               name="email-preferences1"
               value="1"
-            />
-            <!--end::Input-->
+            /> -->
+  <!--end::Input-->
 
-            <!--begin::Label-->
-            <span class="form-check-label d-flex flex-column align-items-start">
+  <!--begin::Label-->
+  <!-- <span class="form-check-label d-flex flex-column align-items-start">
               <span class="fw-bold fs-5 mb-0">Fee Collection</span>
               <span class="text-muted fs-6"
                 >Receive a notification each time you collect a fee from
                 sales</span
               >
-            </span>
-            <!--end::Label-->
-          </label>
-          <!--end::Option-->
-          <!--begin::Option-->
-          <div class="separator separator-dashed my-6"></div>
-          <!--end::Option-->
+            </span> -->
+  <!--end::Label-->
+  <!-- </label> -->
+  <!--end::Option-->
+  <!--begin::Option-->
+  <!-- <div class="separator separator-dashed my-6"></div> -->
+  <!--end::Option-->
 
-          <!--begin::Option-->
-          <label
+  <!--begin::Option-->
+  <!-- <label
             class="form-check form-check-custom form-check-solid align-items-start"
-          >
-            <!--begin::Input-->
-            <input
+          > -->
+  <!--begin::Input-->
+  <!-- <input
               class="form-check-input me-3"
               type="checkbox"
               name="email-preferences1"
               checked
               value="1"
-            />
-            <!--end::Input-->
+            /> -->
+  <!--end::Input-->
 
-            <!--begin::Label-->
-            <span class="form-check-label d-flex flex-column align-items-start">
+  <!--begin::Label-->
+  <!-- <span class="form-check-label d-flex flex-column align-items-start">
               <span class="fw-bold fs-5 mb-0">Customer Payment Dispute</span>
               <span class="text-muted fs-6"
                 >Receive a notification if a payment is disputed by a customer
                 and for dispute purposes.</span
               >
-            </span>
-            <!--end::Label-->
-          </label>
-          <!--end::Option-->
-          <!--begin::Option-->
-          <div class="separator separator-dashed my-6"></div>
-          <!--end::Option-->
+            </span> -->
+  <!--end::Label-->
+  <!-- </label> -->
+  <!--end::Option-->
+  <!--begin::Option-->
+  <!-- <div class="separator separator-dashed my-6"></div> -->
+  <!--end::Option-->
 
-          <!--begin::Option-->
-          <label
+  <!--begin::Option-->
+  <!-- <label
             class="form-check form-check-custom form-check-solid align-items-start"
-          >
-            <!--begin::Input-->
-            <input
+          > -->
+  <!--begin::Input-->
+  <!-- <input
               class="form-check-input me-3"
               type="checkbox"
               name="email-preferences1"
               value="1"
-            />
-            <!--end::Input-->
+            /> -->
+  <!--end::Input-->
 
-            <!--begin::Label-->
-            <span class="form-check-label d-flex flex-column align-items-start">
+  <!--begin::Label-->
+  <!-- <span class="form-check-label d-flex flex-column align-items-start">
               <span class="fw-bold fs-5 mb-0">Refund Alerts</span>
               <span class="text-muted fs-6"
                 >Receive a notification if a payment is stated as risk by the
                 Finance Department.</span
               >
-            </span>
-            <!--end::Label-->
-          </label>
-          <!--end::Option-->
-          <!--begin::Option-->
-          <div class="separator separator-dashed my-6"></div>
-          <!--end::Option-->
+            </span> -->
+  <!--end::Label-->
+  <!-- </label> -->
+  <!--end::Option-->
+  <!--begin::Option-->
+  <!-- <div class="separator separator-dashed my-6"></div> -->
+  <!--end::Option-->
 
-          <!--begin::Option-->
-          <label
+  <!--begin::Option-->
+  <!-- <label
             class="form-check form-check-custom form-check-solid align-items-start"
-          >
-            <!--begin::Input-->
-            <input
+          > -->
+  <!--begin::Input-->
+  <!-- <input
               class="form-check-input me-3"
               type="checkbox"
               name="email-preferences1"
               checked
               value="1"
-            />
-            <!--end::Input-->
+            /> -->
+  <!--end::Input-->
 
-            <!--begin::Label-->
-            <span class="form-check-label d-flex flex-column align-items-start">
+  <!--begin::Label-->
+  <!-- <span class="form-check-label d-flex flex-column align-items-start">
               <span class="fw-bold fs-5 mb-0">Invoice Payments</span>
               <span class="text-muted fs-6"
                 >Receive a notification if a customer sends an incorrect amount
                 to pay their invoice.</span
               >
-            </span>
-            <!--end::Label-->
-          </label>
-          <!--end::Option-->
-          <!--begin::Option-->
-          <div class="separator separator-dashed my-6"></div>
-          <!--end::Option-->
+            </span> -->
+  <!--end::Label-->
+  <!-- </label> -->
+  <!--end::Option-->
+  <!--begin::Option-->
+  <!-- <div class="separator separator-dashed my-6"></div> -->
+  <!--end::Option-->
 
-          <!--begin::Option-->
-          <label
+  <!--begin::Option-->
+  <!-- <label
             class="form-check form-check-custom form-check-solid align-items-start"
-          >
-            <!--begin::Input-->
-            <input
+          > -->
+  <!--begin::Input-->
+  <!-- <input
               class="form-check-input me-3"
               type="checkbox"
               name="email-preferences1"
               value="1"
-            />
-            <!--end::Input-->
+            /> -->
+  <!--end::Input-->
 
-            <!--begin::Label-->
-            <span class="form-check-label d-flex flex-column align-items-start">
+  <!--begin::Label-->
+  <!-- <span class="form-check-label d-flex flex-column align-items-start">
               <span class="fw-bold fs-5 mb-0">Webhook API Endpoints</span>
               <span class="text-muted fs-6"
                 >Receive notifications for consistently failing webhook API
                 endpoints.</span
               >
-            </span>
-            <!--end::Label-->
-          </label>
-          <!--end::Option-->
-          <!--begin::Option-->
-          <div class="separator separator-dashed my-6"></div>
-          <!--end::Option-->
-        </div>
-        <!--end::Card body-->
+            </span> -->
+  <!--end::Label-->
+  <!-- </label> -->
+  <!--end::Option-->
+  <!--begin::Option-->
+  <!-- <div class="separator separator-dashed my-6"></div> -->
+  <!--end::Option-->
+  <!-- </div> -->
+  <!--end::Card body-->
 
-        <!--begin::Card footer-->
-        <div class="card-footer d-flex justify-content-end py-6 px-9">
+  <!--begin::Card footer-->
+  <!-- <div class="card-footer d-flex justify-content-end py-6 px-9">
           <button class="btn btn-light btn-active-light-primary me-2">
             Discard
           </button>
@@ -1886,19 +1891,19 @@
               ></span>
             </span>
           </button>
-        </div>
-        <!--end::Card footer-->
-      </form>
-      <!--end::Form-->
-    </div>
-    <!--end::Content-->
-  </div>
+        </div> -->
+  <!--end::Card footer-->
+  <!-- </form> -->
+  <!--end::Form-->
+  <!-- </div> -->
+  <!--end::Content-->
+  <!-- </div> -->
   <!--end::Notifications-->
 
   <!--begin::Notifications-->
   <div class="card mb-5 mb-xl-10">
     <!--begin::Card header-->
-    <div
+    <!-- <div
       class="card-header border-0 cursor-pointer"
       role="button"
       data-bs-toggle="collapse"
@@ -1909,23 +1914,23 @@
       <div class="card-title m-0">
         <h3 class="fw-bold m-0">Notifications</h3>
       </div>
-    </div>
+    </div> -->
     <!--begin::Card header-->
 
     <!--begin::Content-->
-    <div id="kt_account_notifications" class="collapse show">
-      <!--begin::Form-->
-      <form class="form" @submit.prevent="saveChanges4()">
-        <!--begin::Card body-->
-        <div class="card-body border-top px-9 pt-3 pb-4">
-          <!--begin::Table-->
-          <div class="table-responsive">
+    <!-- <div id="kt_account_notifications" class="collapse show"> -->
+    <!--begin::Form-->
+    <!-- <form class="form" @submit.prevent="saveChanges4()"> -->
+    <!--begin::Card body-->
+    <!-- <div class="card-body border-top px-9 pt-3 pb-4"> -->
+    <!--begin::Table-->
+    <!-- <div class="table-responsive">
             <table
               class="table table-row-dashed border-gray-300 align-middle gy-6"
             >
-              <tbody class="fs-6 fw-semobold">
-                <!--begin::Table row-->
-                <tr>
+              <tbody class="fs-6 fw-semobold"> -->
+    <!--begin::Table row-->
+    <!-- <tr>
                   <td class="min-w-250px fs-4 fw-bold">Notifications</td>
                   <td class="w-125px">
                     <div class="form-check form-check-solid">
@@ -1965,11 +1970,11 @@
                       </label>
                     </div>
                   </td>
-                </tr>
-                <!--begin::Table row-->
+                </tr> -->
+    <!--begin::Table row-->
 
-                <!--begin::Table row-->
-                <tr>
+    <!--begin::Table row-->
+    <!-- <tr>
                   <td>Billing Updates</td>
                   <td>
                     <div class="form-check form-check-solid">
@@ -2003,11 +2008,11 @@
                       ></label>
                     </div>
                   </td>
-                </tr>
-                <!--begin::Table row-->
+                </tr> -->
+    <!--begin::Table row-->
 
-                <!--begin::Table row-->
-                <tr>
+    <!--begin::Table row-->
+    <!-- <tr>
                   <td>New Team Members</td>
                   <td>
                     <div class="form-check form-check-solid">
@@ -2034,11 +2039,11 @@
                       <label class="form-check-label ps-2" for="team2"></label>
                     </div>
                   </td>
-                </tr>
-                <!--begin::Table row-->
+                </tr> -->
+    <!--begin::Table row-->
 
-                <!--begin::Table row-->
-                <tr>
+    <!--begin::Table row-->
+    <!-- <tr>
                   <td>Completed Projects</td>
                   <td>
                     <div class="form-check form-check-solid">
@@ -2071,11 +2076,11 @@
                       ></label>
                     </div>
                   </td>
-                </tr>
-                <!--begin::Table row-->
+                </tr> -->
+    <!--begin::Table row-->
 
-                <!--begin::Table row-->
-                <tr>
+    <!--begin::Table row-->
+    <!-- <tr>
                   <td class="border-bottom-0">Newsletters</td>
                   <td class="border-bottom-0">
                     <div class="form-check form-check-solid">
@@ -2107,17 +2112,17 @@
                       ></label>
                     </div>
                   </td>
-                </tr>
-                <!--begin::Table row-->
-              </tbody>
+                </tr> -->
+    <!--begin::Table row-->
+    <!-- </tbody>
             </table>
-          </div>
-          <!--end::Table-->
-        </div>
-        <!--end::Card body-->
+          </div> -->
+    <!--end::Table-->
+    <!-- </div> -->
+    <!--end::Card body-->
 
-        <!--begin::Card footer-->
-        <div class="card-footer d-flex justify-content-end py-6 px-9">
+    <!--begin::Card footer-->
+    <!-- <div class="card-footer d-flex justify-content-end py-6 px-9">
           <button class="btn btn-light btn-active-light-primary me-2">
             Discard
           </button>
@@ -2134,11 +2139,11 @@
               ></span>
             </span>
           </button>
-        </div>
-        <!--end::Card footer-->
-      </form>
-      <!--end::Form-->
-    </div>
+        </div> -->
+    <!--end::Card footer-->
+    <!-- </form> -->
+    <!--end::Form-->
+    <!-- </div> -->
     <!--end::Content-->
   </div>
   <!--end::Notifications-->
@@ -2146,7 +2151,7 @@
   <!--begin::Deactivate Account-->
   <div class="card mb-5 mb-xl-10">
     <!--begin::Card header-->
-    <div
+    <!-- <div
       class="card-header border-0 cursor-pointer"
       role="button"
       data-bs-toggle="collapse"
@@ -2157,29 +2162,29 @@
       <div class="card-title m-0">
         <h3 class="fw-bolder m-0">Deactivate Account</h3>
       </div>
-    </div>
+    </div> -->
     <!--end::Card header-->
 
     <!--begin::Content-->
-    <div id="kt_account_deactivate" class="collapse show">
-      <!--begin::Form-->
-      <form
+    <!-- <div id="kt_account_deactivate" class="collapse show"> -->
+    <!--begin::Form-->
+    <!-- <form
         id="kt_account_deactivate_form"
         class="form"
         @submit.prevent="deactivateAccount()"
-      >
-        <!--begin::Card body-->
-        <div class="card-body border-top p-9">
+      > -->
+    <!--begin::Card body-->
+    <!-- <div class="card-body border-top p-9">
           <div
             class="notice d-flex bg-light-warning rounded border-warning border border-dashed mb-9 p-6"
           >
             <span class="svg-icon svg-icon-2tx svg-icon-warning me-4">
               <inline-svg src="media/icons/duotune/general/gen044.svg" />
-            </span>
-            <!--begin::Wrapper-->
-            <div class="d-flex flex-stack flex-grow-1">
-              <!--begin::Content-->
-              <div class="fw-semobold">
+            </span> -->
+    <!--begin::Wrapper-->
+    <!-- <div class="d-flex flex-stack flex-grow-1"> -->
+    <!--begin::Content-->
+    <!-- <div class="fw-semobold">
                 <h4 class="text-gray-800 fw-bold">
                   You Are Deactivating Your Account
                 </h4>
@@ -2192,14 +2197,14 @@
                     >Learn more</a
                   >
                 </div>
-              </div>
-              <!--end::Content-->
-            </div>
-            <!--end::Wrapper-->
-          </div>
+              </div> -->
+    <!--end::Content-->
+    <!-- </div> -->
+    <!--end::Wrapper-->
+    <!-- </div> -->
 
-          <!--begin::Form input row-->
-          <div class="form-check form-check-solid fv-row">
+    <!--begin::Form input row-->
+    <!-- <div class="form-check form-check-solid fv-row">
             <input
               name="deactivate"
               class="form-check-input"
@@ -2212,13 +2217,13 @@
               for="deactivate"
               >Confirm Account Deactivation</label
             >
-          </div>
-          <!--end::Form input row-->
-        </div>
-        <!--end::Card body-->
+          </div> -->
+    <!--end::Form input row-->
+    <!-- </div> -->
+    <!--end::Card body-->
 
-        <!--begin::Card footer-->
-        <div class="card-footer d-flex justify-content-end py-6 px-9">
+    <!--begin::Card footer-->
+    <!-- <div class="card-footer d-flex justify-content-end py-6 px-9">
           <button
             id="kt_account_deactivate_account_submit"
             ref="submitButton5"
@@ -2233,11 +2238,11 @@
               ></span>
             </span>
           </button>
-        </div>
-        <!--end::Card footer-->
-      </form>
-      <!--end::Form-->
-    </div>
+        </div> -->
+    <!--end::Card footer-->
+    <!-- </form> -->
+    <!--end::Form-->
+    <!-- </div> -->
     <!--end::Content-->
   </div>
   <!--end::Deactivate Account-->
@@ -2255,6 +2260,7 @@ interface ProfileDetails {
   avatar: string;
   name: string;
   surname: string;
+  _method: string;
   company: string;
   contactPhone: string;
   //companySite: string;
@@ -2330,6 +2336,7 @@ export default defineComponent({
       avatar: "media/avatars/300-1.jpg",
       name: "Max",
       surname: "Smith",
+      _method: "",
       company: "Keenthemes",
       contactPhone: "044 3276 454 935",
       //companySite: "keenthemes.com",

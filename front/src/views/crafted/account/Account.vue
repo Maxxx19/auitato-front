@@ -30,7 +30,7 @@
                 <a
                   href="#"
                   class="text-gray-800 text-hover-primary fs-2 fw-bold me-1"
-                  >Max Smith</a
+                  >{{ selectedUser }}</a
                 >
                 <a href="#">
                   <span class="svg-icon svg-icon-1 svg-icon-primary">
@@ -79,7 +79,7 @@
                       src="media/icons/duotune/communication/com011.svg"
                     />
                   </span>
-                  max@kt.com
+                  {{ email }}
                 </a>
               </div>
               <!--end::Info-->
