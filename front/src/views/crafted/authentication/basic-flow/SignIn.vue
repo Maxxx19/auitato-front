@@ -35,7 +35,9 @@
       <!--begin::Input group-->
       <div class="fv-row mb-10">
         <!--begin::Label-->
-        <label class="form-label fs-6 fw-bold text-dark">Phone</label>
+        <label class="form-label fs-6 fw-bold text-dark">
+          {{ translate("UserName") }}
+        </label>
         <!--end::Label-->
 
         <!--begin::Input-->
@@ -60,7 +62,9 @@
         <!--begin::Wrapper-->
         <div class="d-flex flex-stack mb-2">
           <!--begin::Label-->
-          <label class="form-label fw-bold text-dark fs-6 mb-0">Password</label>
+          <label class="form-label fw-bold text-dark fs-6 mb-0">
+            {{ translate("passwordSet") }}
+          </label>
           <!--end::Label-->
 
           <!--begin::Link-->

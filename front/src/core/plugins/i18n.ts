@@ -118,6 +118,10 @@ const messages = {
     ContinuePage: "Continue",
     BackPage: "Back",
     EditTask: "Edit task",
+    passwordSet: "Password",
+    passwordConfirm: "Confirm password",
+    chooseTask: "Choose task",
+    chooseTaskDescription: "Orders are waiting for quick performance",
   },
   ua: {
     dashboard: "Панель приладів",
@@ -235,6 +239,10 @@ const messages = {
     ContinuePage: "Продовжити",
     BackPage: "Назад",
     EditTask: "Редагувати задачу",
+    passwordSet: "Пароль",
+    passwordConfirm: "Підтвердити пароль",
+    chooseTask: "Вибрати задачу",
+    chooseTaskDescription: "Замовлення чекають швидкого виконання",
   },
   ru: {
     dashboard: "Панель приборов",
@@ -352,6 +360,10 @@ const messages = {
     ContinuePage: "Продолжить",
     BackPage: "Назад",
     EditTask: "Редактировать задачу",
+    passwordSet: "Пароль",
+    passwordConfirm: "Подтвердить пароль",
+    chooseTask: "Выбрать задачу",
+    chooseTaskDescription: "Заказы ждут быстрого исполнения",
   },
   es: {
     dashboard: "Tablero",
@@ -637,7 +649,7 @@ const messages = {
 
 const i18n = createI18n({
   legacy: false,
-  locale: "en",
+  locale: "ua",
   globalInjection: true,
   messages,
 });

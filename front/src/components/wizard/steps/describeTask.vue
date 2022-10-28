@@ -27,7 +27,9 @@
       <div class="row fv-row mb-7">
         <!--begin::Col-->
         <div class="fv-row mb-7">
-          <label class="form-label fw-bold text-dark fs-6 required">Name</label>
+          <label class="form-label fw-bold text-dark fs-6 required">
+            {{ translate("UserName") }}
+          </label>
           <Field
             class="form-control form-control-lg form-control-solid"
             type="text"
@@ -46,7 +48,9 @@
 
       <!--begin::Input group-->
       <div class="fv-row mb-7">
-        <label class="form-label fw-bold text-dark fs-6 required">Phone</label>
+        <label class="form-label fw-bold text-dark fs-6 required">
+          {{ translate("PhoneNumber") }}
+        </label>
         <Field
           class="form-control form-control-lg form-control-solid"
           type="text"
@@ -68,7 +72,7 @@
         <div class="mb-1">
           <!--begin::Label-->
           <label class="form-label fw-bold text-dark fs-6 required">
-            Password
+            {{ translate("PhoneNumber") }}
           </label>
           <!--end::Label-->
 
@@ -119,9 +123,9 @@
 
       <!--begin::Input group-->
       <div class="fv-row mb-5">
-        <label class="form-label fw-bold text-dark fs-6"
-          >Confirm Password</label
-        >
+        <label class="form-label fw-bold text-dark fs-6">
+          {{ translate("ContinuePage") }}
+        </label>
         <Field
           class="form-control form-control-lg form-control-solid"
           type="password"

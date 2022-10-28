@@ -29,128 +29,48 @@
             <img alt="Logo" src="media/logos/default.svg" class="h-40px" />
           </router-link>
           <!--end::Logo-->
-          <!--begin::Nav-->
-          <div class="stepper-nav">
-            <!--begin::Step 1-->
-            <div class="stepper-item current" data-kt-stepper-element="nav">
-              <!--begin::Line-->
-              <div class="stepper-line w-40px"></div>
-              <!--end::Line-->
-
-              <!--begin::Icon-->
-              <div class="stepper-icon w-40px h-40px">
-                <i class="stepper-check fas fa-check"></i>
-                <span class="stepper-number">1</span>
-              </div>
-              <!--end::Icon-->
-
-              <!--begin::Label-->
-              <div class="stepper-label">
-                <h3 class="stepper-title">{{ translate("describeTask") }}</h3>
-
-                <div class="stepper-desc fw-semobold">
-                  {{ translate("describeTaskDescription") }}
-                </div>
-              </div>
-              <!--end::Label-->
-            </div>
-            <!--end::Step 1-->
-
-            <!--begin::Step 2-->
-            <div class="stepper-item" data-kt-stepper-element="nav">
-              <!--begin::Line-->
-              <div class="stepper-line w-40px"></div>
-              <!--end::Line-->
-
-              <!--begin::Icon-->
-              <div class="stepper-icon w-40px h-40px">
-                <i class="stepper-check fas fa-check"></i>
-                <span class="stepper-number">2</span>
-              </div>
-              <!--end::Icon-->
-
-              <!--begin::Label-->
-              <div class="stepper-label">
-                <h3 class="stepper-title">{{ translate("getFeedbacks") }}</h3>
-                <div class="stepper-desc fw-semobold">
-                  {{ translate("getFeedbacksDescription") }}
-                </div>
-              </div>
-              <!--end::Label-->
-            </div>
-            <!--end::Step 2-->
-
-            <!--begin::Step 3-->
-            <div class="stepper-item" data-kt-stepper-element="nav">
-              <!--begin::Line-->
-              <div class="stepper-line w-40px"></div>
-              <!--end::Line-->
-
-              <!--begin::Icon-->
-              <div class="stepper-icon w-40px h-40px">
-                <i class="stepper-check fas fa-check"></i>
-                <span class="stepper-number">3</span>
-              </div>
-              <!--end::Icon-->
-
-              <!--begin::Label-->
-              <div class="stepper-label">
-                <h3 class="stepper-title">{{ translate("chosePerformer") }}</h3>
-                <div class="stepper-desc fw-semobold">
-                  {{ translate("chosePerformerDescription") }}
-                </div>
-              </div>
-              <!--end::Label-->
-            </div>
-            <!--end::Step 3-->
-
-            <!--begin::Step 4-->
-            <div class="stepper-item" data-kt-stepper-element="nav">
-              <!--begin::Line-->
-              <div class="stepper-line w-40px"></div>
-              <!--end::Line-->
-
-              <!--begin::Icon-->
-              <div class="stepper-icon w-40px h-40px">
-                <i class="stepper-check fas fa-check"></i>
-                <span class="stepper-number">4</span>
-              </div>
-              <!--end::Icon-->
-
-              <!--begin::Label-->
-              <div class="stepper-label">
-                <h3 class="stepper-title">Billing Details</h3>
-                <div class="stepper-desc fw-semobold">
-                  Set Your Payment Methods
-                </div>
-              </div>
-              <!--end::Label-->
-            </div>
-            <!--end::Step 4-->
-
-            <!--begin::Step 5-->
-            <div class="stepper-item" data-kt-stepper-element="nav">
-              <!--begin::Line-->
-              <div class="stepper-line w-40px"></div>
-              <!--end::Line-->
-
-              <!--begin::Icon-->
-              <div class="stepper-icon w-40px h-40px">
-                <i class="stepper-check fas fa-check"></i>
-                <span class="stepper-number">5</span>
-              </div>
-              <!--end::Icon-->
-
-              <!--begin::Label-->
-              <div class="stepper-label">
-                <h3 class="stepper-title">Completed</h3>
-                <div class="stepper-desc fw-semobold">Woah, we are here</div>
-              </div>
-              <!--end::Label-->
-            </div>
-            <!--end::Step 5-->
-          </div>
-          <!--end::Nav-->
+          <ul
+            class="nav nav-tabs nav-pills flex-row border-0 flex-md-column me-5 mb-3 mb-md-0 fs-6"
+          >
+            <li class="nav-item me-0 mb-md-2">
+              <a
+                class="nav-link btn btn-flex btn-active-light-success"
+                id="overview"
+                @click="(link1 = true), (link2 = false)"
+              >
+                <span class="svg-icon svg-icon-2 svg-icon-primary me-3">
+                  <inline-svg src="media/icons/duotune/general/gen001.svg" />
+                </span>
+                <span class="d-flex flex-column align-items-start">
+                  <span class="fs-4 fw-bolder">
+                    {{ translate("CreateTask") }}
+                  </span>
+                  <span class="fs-7">
+                    {{ translate("describeTaskDescription") }}
+                  </span>
+                </span>
+              </a>
+            </li>
+            <li class="nav-item me-0 mb-md-2">
+              <a
+                class="nav-link btn btn-flex btn-active-light-info"
+                id="aboutcompany"
+                @click="(link1 = false), (link2 = true)"
+              >
+                <span class="svg-icon svg-icon-2 svg-icon-primary">
+                  <inline-svg src="media/icons/duotune/general/gen003.svg" />
+                </span>
+                <span class="d-flex flex-column align-items-start">
+                  <span class="fs-4 fw-bolder">
+                    {{ translate("chooseTask") }}
+                  </span>
+                  <span class="fs-7">
+                    {{ translate("chooseTaskDescription") }}
+                  </span>
+                </span>
+              </a>
+            </li>
+          </ul>
         </div>
         <!--end::Header-->
 
@@ -164,166 +84,215 @@
       <!--end::Wrapper-->
     </div>
     <!--begin::Aside-->
-
-    <!--begin::Body-->
-    <div class="d-flex flex-column flex-lg-row-fluid py-10">
-      <!--begin::Content-->
-      <div class="d-flex flex-center flex-column flex-column-fluid">
-        <!--begin::Wrapper-->
-        <div class="w-lg-500px p-10 p-lg-15 mx-auto">
-          <!--begin::Form-->
-          <form
-            class="my-auto pb-5"
-            novalidate="novalidate"
-            id="kt_create_account_form"
-            @submit="handleStep"
-          >
-            <!--begin::Step 1-->
-            <div class="current" data-kt-stepper-element="content">
-              <describeTask />
-            </div>
-            <!--end::Step 1-->
-
-            <!--begin::Step 2-->
-            <div class="" data-kt-stepper-element="content">
-              <Step1 />
-            </div>
-            <!--end::Step 2-->
-
-            <!--begin::Step 3-->
-            <div class="" data-kt-stepper-element="content">
-              <Step3 />
-            </div>
-            <!--end::Step 3-->
-
-            <!--begin::Step 4-->
-            <div class="" data-kt-stepper-element="content">
-              <Step4 />
-            </div>
-            <!--end::Step 4-->
-
-            <!--begin::Step 5-->
-            <div class="" data-kt-stepper-element="content">
-              <Step5 />
-            </div>
-            <!--end::Step 5-->
-
-            <!--begin::Actions-->
-            <div class="d-flex flex-stack pt-15">
-              <!--begin::Wrapper-->
-              <div class="mr-2">
-                <button
-                  type="button"
-                  class="btn btn-lg btn-light-primary me-3"
-                  data-kt-stepper-action="previous"
-                  @click="previousStep"
-                >
-                  <span class="svg-icon svg-icon-4 me-1">
-                    <inline-svg src="media/icons/duotune/arrows/arr063.svg" />
-                  </span>
-                  {{ translate("BackPage") }}
-                </button>
-              </div>
-              <!--end::Wrapper-->
-
-              <!--begin::Wrapper-->
-              <div>
-                <button
-                  type="button"
-                  class="btn btn-lg btn-primary me-3"
-                  data-kt-stepper-action="submit"
-                  @click="formSubmit()"
-                >
-                  <!-- v-if="currentStepIndex === totalSteps - 1" -->
-                  <span class="indicator-label">
-                    Submit
-                    <span class="svg-icon svg-icon-3 ms-2 me-0">
-                      <inline-svg src="media/icons/duotune/arrows/arr064.svg" />
-                    </span>
-                  </span>
-                  <span class="indicator-progress">
-                    Please wait...
-                    <span
-                      class="spinner-border spinner-border-sm align-middle ms-2"
-                    ></span>
-                  </span>
-                </button>
-
-                <button type="text" class="btn btn-lg btn-primary">
-                  {{ translate("ContinuePage") }}
-                  <span class="svg-icon svg-icon-4 ms-1 me-0">
-                    <inline-svg src="media/icons/duotune/arrows/arr064.svg" />
-                  </span>
-                </button>
-              </div>
-              <!--end::Wrapper-->
-            </div>
-            <!--end::Actions-->
-          </form>
-          <!--end::Form-->
-        </div>
-        <!--end::Wrapper-->
-      </div>
-      <!--end::Content-->
-
-      <!--begin::Body-->
-      <div class="d-flex flex-column flex-lg-row-fluid py-10">
-        <!--begin::Content-->
-        <div class="d-flex flex-center flex-column flex-column-fluid">
-          <ul>
-            <h3 class="stepper-title">{{ translate("FAQ") }}</h3>
-            <li v-for="(item, index) in items" :key="item.id">
-              <p
-                @click="showProd(item.id)"
-                class="fw-bold text-gray-800 text-hover-primary fs-5 cursor-pointer"
+    <div class="card-body">
+      <div
+        id="over"
+        class="{show : activeTab == 'OVER', hide : activeTab != 'OVER'}"
+        v-show="link1"
+      >
+        <!--begin::Body-->
+        <div class="d-flex flex-column flex-lg-row-fluid py-10">
+          <!--begin::Content-->
+          <div class="d-flex flex-center flex-column flex-column-fluid">
+            <!--begin::Wrapper-->
+            <div class="w-lg-500px p-10 p-lg-15 mx-auto" id="kt_vtab_pane_4">
+              <!--begin::Form-->
+              <form
+                class="my-auto pb-5"
+                novalidate="novalidate"
+                id="kt_create_account_form"
+                @submit="handleStep"
               >
-                {{ index + 1 }} {{ item.question }}
-              </p>
-              <div
-                ref="dropProd"
-                class="dropProd"
-                :class="{ activate: active_el == 6 }"
-                v-if="value1"
+                <!--begin::Step 1-->
+                <div class="current" data-kt-stepper-element="content">
+                  <describeTask />
+                </div>
+                <!--end::Step 1-->
+
+                <!--begin::Step 2-->
+                <div class="" data-kt-stepper-element="content">
+                  <Step1 />
+                </div>
+                <!--end::Step 2-->
+
+                <!--begin::Step 3-->
+                <div class="" data-kt-stepper-element="content">
+                  <Step3 />
+                </div>
+                <!--end::Step 3-->
+
+                <!--begin::Step 4-->
+                <div class="" data-kt-stepper-element="content">
+                  <Step4 />
+                </div>
+                <!--end::Step 4-->
+
+                <!--begin::Step 5-->
+                <div class="" data-kt-stepper-element="content">
+                  <Step5 />
+                </div>
+                <!--end::Step 5-->
+
+                <!--begin::Actions-->
+                <div class="d-flex flex-stack pt-15">
+                  <!--begin::Wrapper-->
+                  <div class="mr-2">
+                    <button
+                      type="button"
+                      class="btn btn-lg btn-light-primary me-3"
+                      data-kt-stepper-action="previous"
+                      @click="previousStep"
+                    >
+                      <span class="svg-icon svg-icon-4 me-1">
+                        <inline-svg
+                          src="media/icons/duotune/arrows/arr063.svg"
+                        />
+                      </span>
+                      {{ translate("BackPage") }}
+                    </button>
+                  </div>
+                  <!--end::Wrapper-->
+
+                  <!--begin::Wrapper-->
+                  <div>
+                    <button
+                      type="button"
+                      class="btn btn-lg btn-primary me-3"
+                      data-kt-stepper-action="submit"
+                      @click="formSubmit()"
+                    >
+                      <!-- v-if="currentStepIndex === totalSteps - 1" -->
+                      <span class="indicator-label">
+                        Submit
+                        <span class="svg-icon svg-icon-3 ms-2 me-0">
+                          <inline-svg
+                            src="media/icons/duotune/arrows/arr064.svg"
+                          />
+                        </span>
+                      </span>
+                      <span class="indicator-progress">
+                        Please wait...
+                        <span
+                          class="spinner-border spinner-border-sm align-middle ms-2"
+                        ></span>
+                      </span>
+                    </button>
+
+                    <!-- <button type="text" class="btn btn-lg btn-primary">
+                      {{ translate("ContinuePage") }}
+                      <span class="svg-icon svg-icon-4 ms-1 me-0">
+                        <inline-svg
+                          src="media/icons/duotune/arrows/arr064.svg"
+                        />
+                      </span>
+                    </button> -->
+                  </div>
+                  <!--end::Wrapper-->
+                </div>
+                <!--end::Actions-->
+              </form>
+              <!--end::Form-->
+            </div>
+            <!--end::Wrapper-->
+          </div>
+          <!--end::Content-->
+
+          <!--begin::Body-->
+          <div class="d-flex flex-column flex-lg-row-fluid py-10">
+            <!--begin::Content-->
+            <div class="d-flex flex-center flex-column flex-column-fluid">
+              <ul>
+                <h3 class="stepper-title">{{ translate("FAQ") }}</h3>
+                <li v-for="(item, index) in items" :key="item.id">
+                  <p
+                    @click="showProd(item.id)"
+                    class="fw-bold text-gray-800 text-hover-primary fs-5 cursor-pointer"
+                  >
+                    {{ index + 1 }} {{ item.question }}
+                  </p>
+                  <div
+                    ref="dropProd"
+                    class="dropProd"
+                    :class="{ activate: active_el == 6 }"
+                    v-if="value1"
+                  >
+                    <p>{{ item.answer }}</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!--begin::Footer-->
+          <div class="d-flex flex-center flex-wrap fs-6 p-5 pb-0">
+            <!--begin::Links-->
+            <div class="d-flex flex-center fw-semobold fs-6">
+              <a
+                href="#"
+                class="text-muted text-hover-primary px-2"
+                target="_blank"
+                >About</a
               >
-                <p>{{ item.answer }}</p>
-              </div>
-            </li>
-          </ul>
+
+              <a
+                href="#"
+                class="text-muted text-hover-primary px-2"
+                target="_blank"
+                >Support</a
+              >
+
+              <a
+                href="#"
+                class="text-muted text-hover-primary px-2"
+                target="_blank"
+                >Purchase</a
+              >
+            </div>
+            <!--end::Links-->
+          </div>
+          <!--end::Footer-->
+        </div>
+        <!--end::Body-->
+      </div>
+      <div
+        id="about"
+        class="{show : activeTab == 'ABOUT', hide : activeTab != 'ABOUT'}"
+        v-show="link2"
+      >
+        <!--begin::Body-->
+        <div class="d-flex flex-column flex-lg-row-fluid py-10">
+          <!--begin::Content-->
+          <div class="d-flex flex-center flex-column flex-column-fluid">
+            <span class="fs-4 fw-bolder">
+              {{ translate("chooseTask") }}
+            </span>
+            <div>
+              <ListTasksMain :taskData="tasks[0]" :key="componentKey" />
+            </div>
+          </div>
         </div>
       </div>
-      <!--begin::Footer-->
-      <div class="d-flex flex-center flex-wrap fs-6 p-5 pb-0">
-        <!--begin::Links-->
-        <div class="d-flex flex-center fw-semobold fs-6">
-          <a href="#" class="text-muted text-hover-primary px-2" target="_blank"
-            >About</a
-          >
-
-          <a href="#" class="text-muted text-hover-primary px-2" target="_blank"
-            >Support</a
-          >
-
-          <a href="#" class="text-muted text-hover-primary px-2" target="_blank"
-            >Purchase</a
-          >
-        </div>
-        <!--end::Links-->
-      </div>
-      <!--end::Footer-->
+      <div class="tab-pane fade" id="kt_vtab_pane_6" role="tabpanel">...</div>
     </div>
-    <!--end::Body-->
   </div>
   <!--end::Authentication - Multi-steps-->
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, onUnmounted, ref } from "vue";
+import {
+  computed,
+  defineComponent,
+  onMounted,
+  onUnmounted,
+  ref,
+  nextTick,
+} from "vue";
 import { getIllustrationsPath } from "@/core/helpers/assets";
 import Step1 from "@/components/wizard/steps/Step1.vue";
 import describeTask from "@/components/wizard/steps/describeTask.vue";
 import Step3 from "@/components/wizard/steps/Step3.vue";
 import Step4 from "@/components/wizard/steps/Step4.vue";
 import Step5 from "@/components/wizard/steps/Step5.vue";
+import ListTasksMain from "@/views/representations/ListTasksMain.vue";
 import { StepperComponent } from "@/assets/ts/components";
 import { setCurrentPageBreadcrumbs } from "@/core/helpers/breadcrumb";
 import * as Yup from "yup";
@@ -371,11 +340,37 @@ export default defineComponent({
     Step3,
     Step4,
     Step5,
+    ListTasksMain,
   },
   data: function () {
     return {
       items: null,
       value1: false,
+      componentKey: 0,
+      tasks: [
+        {
+          title: "overview",
+          description: "Company Overview",
+          budget: "1000",
+        },
+        {
+          name: "about",
+          displayName: "About us",
+        },
+      ],
+      tabs: [
+        {
+          name: "overview",
+          displayName: "Company Overview",
+        },
+        {
+          name: "about",
+          displayName: "About us",
+        },
+      ],
+      activeTabName: "",
+      link1: true,
+      link2: false,
     };
   },
   methods: {
@@ -387,11 +382,33 @@ export default defineComponent({
       }
       console.log(this.$refs.dropProd);
     },
+    setActiveTabName(name) {
+      this.activeTabName = name;
+    },
+    displayContents(name) {
+      return this.activeTabName === name;
+    },
+    forceRerender() {
+      this.componentKey += 1;
+    },
   },
   mounted: async function () {
+    //alert(this.activeTab);
     const store = useStore();
     await store.dispatch(Actions.GET_FAQ);
     this.items = store.state.AuthModule.faq.faq;
+    this.tasks = store.state.AuthModule.faq.tasks;
+    this.activeTabName = this.tabs[0].name;
+    this.forceRerender();
+  },
+  asyncComputed: {
+    resolvedValue: {
+      get() {
+        const store = useStore();
+        var tasks = store.state.AuthModule.faq.tasks;
+        return tasks;
+      },
+    },
   },
   setup() {
     const store = useStore();
@@ -399,6 +416,7 @@ export default defineComponent({
     const _stepperObj = ref<StepperComponent | null>(null);
     const wizardRef = ref<HTMLElement | null>(null);
     const currentStepIndex = ref(0);
+    const componentKey = ref(0);
     const { t, te } = useI18n();
     const route = useRoute();
     const translate = (text) => {
