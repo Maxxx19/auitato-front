@@ -72,7 +72,7 @@
         <div class="mb-1">
           <!--begin::Label-->
           <label class="form-label fw-bold text-dark fs-6 required">
-            {{ translate("PhoneNumber") }}
+            {{ translate("passwordSet") }}
           </label>
           <!--end::Label-->
 
@@ -124,7 +124,7 @@
       <!--begin::Input group-->
       <div class="fv-row mb-5">
         <label class="form-label fw-bold text-dark fs-6">
-          {{ translate("ContinuePage") }}
+          {{ translate("passwordConfirm") }}
         </label>
         <Field
           class="form-control form-control-lg form-control-solid"

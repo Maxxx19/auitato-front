@@ -380,7 +380,7 @@ export default defineComponent({
       } else {
         this.value1 = false;
       }
-      console.log(this.$refs.dropProd);
+      //console.log(this.$refs.dropProd);
     },
     setActiveTabName(name) {
       this.activeTabName = name;
@@ -395,6 +395,7 @@ export default defineComponent({
   mounted: async function () {
     //alert(this.activeTab);
     const store = useStore();
+    //await store.dispatch(Actions.GET_FAQ);
     await store.dispatch(Actions.GET_FAQ);
     this.items = store.state.AuthModule.faq.faq;
     this.tasks = store.state.AuthModule.faq.tasks;

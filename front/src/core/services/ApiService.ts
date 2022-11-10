@@ -3,6 +3,7 @@ import axios from "axios";
 import VueAxios from "vue-axios";
 import JwtService from "@/core/services/JwtService";
 import { AxiosResponse, AxiosRequestConfig } from "axios";
+import { useStore } from "vuex";
 
 /**
  * @description service to call HTTP request via Axios
@@ -17,6 +18,7 @@ class ApiService {
    * @description initialize vue axios
    */
   public static init(app: App<Element>) {
+    const store = useStore();
     ApiService.vueInstance = app;
     ApiService.vueInstance.use(VueAxios, axios);
     ApiService.vueInstance.axios.defaults.baseURL = process.env.VUE_APP_API_URL;
@@ -28,7 +30,7 @@ class ApiService {
   public static setHeader(): void {
     ApiService.vueInstance.axios.defaults.headers.common[
       "Authorization"
-    ] = `Token ${JwtService.getToken()}`;
+    ] = `Bearer ${JwtService.getToken()}`;
     ApiService.vueInstance.axios.defaults.headers.common["Accept"] =
       "application/json";
   }
