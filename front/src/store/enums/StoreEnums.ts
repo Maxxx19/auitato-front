@@ -39,6 +39,7 @@ enum Mutations {
   SET_THEME_MODE_MUTATION = "setThemeModeMutation",
   SET_TASK = "setTask",
   SET_TASKS = "setTasks",
+  SET_AUTH_TASKS = "setAuthTasks",
 }
 
 export { Actions, Mutations };

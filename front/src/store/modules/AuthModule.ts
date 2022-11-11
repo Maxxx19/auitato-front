@@ -13,6 +13,7 @@ export interface User {
   api_token: string;
   FAQ: string;
   task: string;
+  tasks: string;
 }
 
 export interface Task {
@@ -97,7 +98,11 @@ export default class AuthModule
     this.errors = {};
     JwtService.saveToken(user.api_token);
   }
-
+  @Mutation
+  [Mutations.SET_AUTH_TASKS](user) {
+    this.errors = {};
+    JwtService.saveToken(user.user.api_token);
+  }
   @Mutation
   [Mutations.SET_USER](user) {
     this.user = user;
@@ -109,8 +114,8 @@ export default class AuthModule
   }
 
   @Mutation
-  [Mutations.SET_TASKS](task) {
-    this.user.task = task;
+  [Mutations.SET_TASKS](tasks) {
+    this.user.tasks = tasks;
   }
 
   @Mutation
@@ -150,6 +155,7 @@ export default class AuthModule
     return ApiService.post("api/profile", credentials)
       .then(({ data }) => {
         this.context.commit(Mutations.SET_AUTH_MAIN, data);
+        this.context.commit(Mutations.SET_AUTH_TASKS, data);
         this.context.commit(Mutations.SET_USER, data);
       })
       .catch(({ response }) => {
@@ -174,7 +180,6 @@ export default class AuthModule
     ApiService.setHeader();
     return ApiService.post("api/tasks", credentials)
       .then(({ data }) => {
-        this.context.commit(Mutations.SET_AUTH_MAIN, data);
         this.context.commit(Mutations.SET_TASKS, data);
       })
       .catch(({ response }) => {
