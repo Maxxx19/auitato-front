@@ -292,6 +292,9 @@ import contacts from "@/core/data/contacts";
 import MessageIn from "@/components/messenger-parts/MessageIn.vue";
 import MessageOut from "@/components/messenger-parts/MessageOut.vue";
 import { setCurrentPageBreadcrumbs } from "@/core/helpers/breadcrumb";
+import { useI18n } from "vue-i18n/index";
+import { useStore } from "vuex";
+import { Actions } from "@/store/enums/StoreEnums";
 
 interface KTMessage {
   type: string;
@@ -308,13 +311,27 @@ export default defineComponent({
     MessageOut,
     Dropdown4,
   },
+  data: function () {
+    return {
+      user_id: 0,
+      task_id: 0,
+    };
+  },
+  mounted: async function () {
+    const store = useStore();
+    this.user_id = store.state.user.user.id;
+    this.task_id = 2;
+  },
   setup() {
     const messagesRef = ref<null | HTMLElement>(null);
     const messagesInRef = ref<null | HTMLElement>(null);
     const messagesOutRef = ref<null | HTMLElement>(null);
 
     const route = useRoute();
+    const i18n = useI18n();
+    const store = useStore();
 
+    store.dispatch(Actions.ADDCHAT);
     const messages = ref<Array<KTMessage>>([
       {
         type: "in",
@@ -365,11 +382,13 @@ export default defineComponent({
     ]);
 
     const newMessageText = ref("");
+    //const newMessageUser = store.state.user.user.id;
 
     const addNewMessage = () => {
       if (!newMessageText.value) {
         return;
       }
+      store.dispatch(Actions.SENDNEWMESSAGE, newMessageText);
       messages.value.push({
         type: "out",
         image: "media/avatars/300-1.jpg",

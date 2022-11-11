@@ -431,7 +431,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/apps/Calendar.vue"),
       },
       {
-        path: "/apps/representations/chat/private-chat",
+        path: "/apps/representations/chat/private-chat/:id",
         name: "apps-private-chat",
         component: () => import("@/views/apps/chat/Chat.vue"),
       },

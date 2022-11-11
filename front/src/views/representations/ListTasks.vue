@@ -123,7 +123,7 @@
           <!-- <img :src="customer.payment.icon" class="w-35px me-3" alt="" />-->
           {{ tasks.status.name }}
         </template>
-        <template v-slot:actions="{ row: customer }">
+        <template v-slot:actions="{ row: tasks }">
           <a
             href="#"
             class="btn btn-sm btn-light btn-active-light-primary"
@@ -153,6 +153,13 @@
                 </span>
                 {{ translate("EditTask") }}
               </button>
+              <router-link
+                :to="`/apps/representations/chat/private-chat/${tasks.id}`"
+                class="btn btn-primary"
+                active-class="active"
+              >
+                {{ translate("AddChat") }}
+              </router-link>
             </div>
             <!--end::Menu item-->
             <!--begin::Menu item-->
@@ -196,6 +203,7 @@ import KTNewTargetModal from "@/components/modals/forms/NewTargetModal.vue";
 import KTNewTargetEditModal from "@/components/modals/forms/NewTargetEditModal.vue";
 import { useI18n } from "vue-i18n/index";
 import { useRoute } from "vue-router";
+import Chat from "@/views/apps/chat/Chat.vue";
 import moment from "moment";
 
 export default defineComponent({

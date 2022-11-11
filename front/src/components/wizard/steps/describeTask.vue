@@ -142,34 +142,19 @@
       <!--end::Input group-->
 
       <!--begin::Input group-->
-      <div class="d-flex flex-column mb-8 fv-row">
-        <!--begin::Label-->
-        <label class="d-flex align-items-center fs-6 fw-semobold mb-2">
-          <span class="required">{{ translate("TaskTitle") }} </span>
-          <i
-            class="fas fa-exclamation-circle ms-2 fs-7"
-            data-bs-toggle="tooltip"
-            title="Specify a target name for future usage and reference"
-          ></i>
+      <div class="d-flex flex-column mb-8">
+        <label class="fs-6 fw-semobold mb-2">
+          {{ translate("TaskTitle") }}
         </label>
-        <!--end::Label-->
-        <div class="col-lg-8 fv-row">
-          <el-form-item
-            prop="title"
-            class="form-control form-control-lg form-control-solid"
-          >
-            <el-input
-              v-model="targetData.title"
-              placeholder="Enter Target Title"
-              name="title"
-            ></el-input>
-            <div class="fv-plugins-message-container">
-              <div class="fv-help-block">
-                <ErrorMessage name="password" />
-              </div>
-            </div>
-          </el-form-item>
-        </div>
+
+        <el-form-item prop="title">
+          <el-input
+            v-model="targetData.title"
+            type="textarea"
+            name="title"
+            placeholder="Type Task Title"
+          />
+        </el-form-item>
       </div>
       <!--end::Input group-->
 
@@ -291,6 +276,7 @@
           ref="submitButton"
           type="submit"
           class="btn btn-lg btn-primary"
+          v-on:click="onSubmitRegister2"
         >
           <span class="indicator-label"> Submit </span>
           <span class="indicator-progress">
@@ -641,13 +627,13 @@ export default defineComponent({
 
     const submitButton = ref<HTMLButtonElement | null>(null);
     const registration = Yup.object().shape({
-      name: Yup.string().required().label("Name"),
-      title: Yup.string().required().label("Task title"),
+      name: Yup.string().label("Name"),
+      title: Yup.string().label("Task title"),
       category: Yup.string().required().label("Select category"),
       currency: Yup.string().required().label("Select currency"),
       user_role_id: Yup.string().required().label("Select role"),
-      phone: Yup.string().min(11).max(12).required().label("Phone"),
-      password: Yup.string().required().label("Password"),
+      phone: Yup.string().min(11).max(12).label("Phone"),
+      password: Yup.string().label("Password"),
       password_confirmation: Yup.string()
         .required()
         .oneOf([Yup.ref("password"), null], "Passwords must match")

@@ -14,6 +14,7 @@ export interface User {
   FAQ: string;
   task: string;
   tasks: string;
+  chat: string;
 }
 
 export interface Task {
@@ -129,6 +130,10 @@ export default class AuthModule
   }
 
   @Mutation
+  [Mutations.SET_CHAT](chat) {
+    this.user.chat = chat;
+  }
+  @Mutation
   [Mutations.PURGE_AUTH]() {
     this.isAuthenticated = false;
     this.user = {} as User;
@@ -229,6 +234,32 @@ export default class AuthModule
       .then(({ data }) => {
         //alert("main");
         this.context.commit(Mutations.SET_AUTH_MAIN, data);
+      })
+      .catch(({ response }) => {
+        this.context.commit(Mutations.SET_ERROR, response.data.errors);
+      });
+  }
+
+  @Action
+  [Actions.ADDCHAT](credentials) {
+    ApiService.setHeader();
+    return ApiService.post("api/chat/2", credentials)
+      .then(({ data }) => {
+        //alert("main");
+        this.context.commit(Mutations.SET_CHAT, data);
+      })
+      .catch(({ response }) => {
+        this.context.commit(Mutations.SET_ERROR, response.data.errors);
+      });
+  }
+
+  @Action
+  [Actions.SENDNEWMESSAGE](credentials) {
+    ApiService.setHeader();
+    return ApiService.post("api/chat/send", credentials)
+      .then(({ data }) => {
+        //alert("main");
+        this.context.commit(Mutations.SET_CHAT, data);
       })
       .catch(({ response }) => {
         this.context.commit(Mutations.SET_ERROR, response.data.errors);

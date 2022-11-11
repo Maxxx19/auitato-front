@@ -122,6 +122,7 @@ const messages = {
     passwordConfirm: "Confirm password",
     chooseTask: "Choose task",
     chooseTaskDescription: "Orders are waiting for quick performance",
+    AddChat: "Add chat",
   },
   ua: {
     dashboard: "Панель приладів",
@@ -243,6 +244,7 @@ const messages = {
     passwordConfirm: "Підтвердити пароль",
     chooseTask: "Вибрати задачу",
     chooseTaskDescription: "Замовлення чекають швидкого виконання",
+    AddChat: "Додати чат",
   },
   ru: {
     dashboard: "Панель приборов",
@@ -364,6 +366,7 @@ const messages = {
     passwordConfirm: "Подтвердить пароль",
     chooseTask: "Выбрать задачу",
     chooseTaskDescription: "Заказы ждут быстрого исполнения",
+    AddChat: "Добавить чат",
   },
   es: {
     dashboard: "Tablero",
