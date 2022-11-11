@@ -2,6 +2,7 @@ import ApiService from "@/core/services/ApiService";
 import JwtService from "@/core/services/JwtService";
 import { Actions, Mutations } from "@/store/enums/StoreEnums";
 import { Module, Action, Mutation, VuexModule } from "vuex-module-decorators";
+import { useStore } from "vuex";
 
 export interface User {
   name: string;
@@ -134,7 +135,9 @@ export default class AuthModule
   [Actions.LOGIN](credentials) {
     return ApiService.post("api/auth/login", credentials)
       .then(({ data }) => {
+        const store = useStore();
         this.context.commit(Mutations.SET_AUTH, data);
+        JwtService.saveToken(data.access_token);
       })
       .catch(({ response }) => {
         this.context.commit(Mutations.SET_ERROR, response.data.errors);
@@ -142,8 +145,9 @@ export default class AuthModule
   }
 
   @Action
-  [Actions.GET_USER]() {
-    return ApiService.get("api/profile")
+  [Actions.GET_USER](credentials) {
+    ApiService.setHeader();
+    return ApiService.post("api/profile", credentials)
       .then(({ data }) => {
         this.context.commit(Mutations.SET_AUTH_MAIN, data);
         this.context.commit(Mutations.SET_USER, data);
@@ -155,7 +159,8 @@ export default class AuthModule
 
   @Action
   [Actions.CREATE_TASK](credentials) {
-    return ApiService.post("task", credentials)
+    ApiService.setHeader();
+    return ApiService.post("api/task", credentials)
       .then(({ data }) => {
         this.context.commit(Mutations.SET_TASK, data);
       })
@@ -166,8 +171,10 @@ export default class AuthModule
 
   @Action
   [Actions.SHOW_TASKS](credentials) {
-    return ApiService.get("tasks", credentials)
+    ApiService.setHeader();
+    return ApiService.post("api/tasks", credentials)
       .then(({ data }) => {
+        this.context.commit(Mutations.SET_AUTH_MAIN, data);
         this.context.commit(Mutations.SET_TASKS, data);
       })
       .catch(({ response }) => {
@@ -177,7 +184,8 @@ export default class AuthModule
 
   @Action
   [Actions.GET_FAQ](credentials) {
-    return ApiService.post("main", credentials)
+    ApiService.setHeader();
+    return ApiService.post("api/main", credentials)
       .then(({ data }) => {
         //alert("data");
         this.context.commit(Mutations.SET_FAQ, data);
@@ -211,9 +219,10 @@ export default class AuthModule
 
   @Action
   [Actions.MAINREGISTER](credentials) {
-    return ApiService.post("main/task", credentials)
+    ApiService.setHeader();
+    return ApiService.post("api/main/task", credentials)
       .then(({ data }) => {
-        alert("main");
+        //alert("main");
         this.context.commit(Mutations.SET_AUTH_MAIN, data);
       })
       .catch(({ response }) => {
