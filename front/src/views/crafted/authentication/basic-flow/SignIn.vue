@@ -231,7 +231,7 @@ export default defineComponent({
 
       if (!error) {
         await store.dispatch(
-          Actions.GET_USER,
+          Actions.GET_USER2,
           store.state.AuthModule.user.api_token
         );
         Swal.fire({
