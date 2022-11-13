@@ -205,6 +205,7 @@ import { useI18n } from "vue-i18n/index";
 import { useRoute } from "vue-router";
 import Chat from "@/views/apps/chat/Chat.vue";
 import moment from "moment";
+import { Actions } from "@/store/enums/StoreEnums";
 
 export default defineComponent({
   name: "list-tasks-representation",
@@ -230,6 +231,7 @@ export default defineComponent({
   mounted: function () {
     const store = useStore();
     this.tasks = store.state.AuthModule.user.tasks;
+    store.dispatch(Actions.ADDCHAT);
     //alert(this.tasks);
   },
   setup() {

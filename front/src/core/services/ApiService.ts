@@ -28,6 +28,7 @@ class ApiService {
    * @description set the default HTTP request headers
    */
   public static setHeader(): void {
+    //console.log(JwtService.getToken());
     ApiService.vueInstance.axios.defaults.headers.common[
       "Authorization"
     ] = `Bearer ${JwtService.getToken()}`;

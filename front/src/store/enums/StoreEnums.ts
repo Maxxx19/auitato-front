@@ -21,6 +21,7 @@ enum Actions {
   SHOW_TASKS = "showTasks",
   ADDCHAT = "AddChat",
   SENDNEWMESSAGE = "SendNewMessage",
+  GET_USER2 = "getUser2",
 }
 
 enum Mutations {
@@ -43,6 +44,7 @@ enum Mutations {
   SET_TASKS = "setTasks",
   SET_AUTH_TASKS = "setAuthTasks",
   SET_CHAT = "setChat",
+  SET_AUTH_MAIN2 = "setAuthMain2",
 }
 
 export { Actions, Mutations };

@@ -105,7 +105,7 @@
           <div class="card-title">
             <!--begin::User-->
             <div class="d-flex justify-content-center flex-column me-3">
-              <div v-if="isGroupChat" class="symbol-group symbol-hover">
+              <div v-if="isGroupChat1" class="symbol-group symbol-hover">
                 <div class="symbol symbol-35px symbol-circle">
                   <img alt="Pic" src="media/avatars/300-5.jpg" />
                 </div>
@@ -154,7 +154,7 @@
                 <a
                   href="#"
                   class="fs-4 fw-bold text-gray-900 text-hover-primary me-1 mb-2 lh-1"
-                  >Brian Cox</a
+                  ><div v-show="chat">{{ chat }}</div></a
                 >
 
                 <!--begin::Info-->
@@ -205,8 +205,18 @@
             data-kt-scroll-wrappers="#kt_content, #kt_chat_messenger_body"
             data-kt-scroll-offset="-2px"
           >
-            <template v-for="(item, index) in messages" :key="index">
+            <template v-for="(item, index) in chats" :key="index">
               <MessageIn
+                ref="messagesInRef"
+                v-if="item.message"
+                :name="item.user.name"
+                :image="item.image"
+                :time="item.updated_at"
+                :text="item.message"
+              >
+                {{ messages3 }}
+              </MessageIn>
+              <!-- <MessageIn
                 ref="messagesInRef"
                 v-if="item.type === 'in'"
                 :name="item.name"
@@ -220,8 +230,26 @@
                 :image="item.image"
                 :time="item.time"
                 :text="item.text"
-              ></MessageOut>
+              ></MessageOut> -->
             </template>
+            <div v-if="messages3[1]">
+              <MessageOut
+                ref="messagesOutRef"
+                :name="messages3[1].name"
+                :image="messages3[1].image"
+                :time="messages3[1].time"
+                :text="messages3[1].text"
+              ></MessageOut>
+            </div>
+            <div v-if="messages3[2]">
+              <MessageOut
+                ref="messagesOutRef"
+                :name="messages3[2].name"
+                :image="messages3[2].image"
+                :time="messages3[2].time"
+                :text="messages3[2].text"
+              ></MessageOut>
+            </div>
           </div>
           <!--end::Messages-->
         </div>
@@ -312,15 +340,19 @@ export default defineComponent({
     Dropdown4,
   },
   data: function () {
+    const store = useStore();
     return {
       user_id: 0,
       task_id: 0,
+      chat: store.state.AuthModule.user.chat[0].user.name,
+      chats: store.state.AuthModule.user.chat,
     };
   },
   mounted: async function () {
     const store = useStore();
-    this.user_id = store.state.user.user.id;
+    this.user_id = store.state.AuthModule.user.user.id;
     this.task_id = 2;
+    this.chat = store.state.AuthModule.user.chat[0].user.name;
   },
   setup() {
     const messagesRef = ref<null | HTMLElement>(null);
@@ -330,7 +362,7 @@ export default defineComponent({
     const route = useRoute();
     const i18n = useI18n();
     const store = useStore();
-
+    console.log("The id is: " + route.params.id);
     store.dispatch(Actions.ADDCHAT);
     const messages = ref<Array<KTMessage>>([
       {
@@ -380,16 +412,72 @@ export default defineComponent({
         text: "Company BBQ to celebrate the last quater achievements and goals. Food and drinks provided",
       },
     ]);
-
+    const messages2 = ref<Array<KTMessage>>([
+      {
+        type: "in",
+        name: "Brian Cox",
+        image: "media/avatars/300-25.jpg",
+        time: "5 Hours",
+        text: "How likely are you to recommend our company to your friends and family ?",
+      },
+      {
+        type: "out",
+        image: "media/avatars/300-1.jpg",
+        time: "2 Hours",
+        text: "Hey there, we’re just writing to let you know that you’ve been subscribed to a repository on GitHub.",
+      },
+      {
+        type: "in",
+        name: "Brian Cox",
+        image: "media/avatars/300-25.jpg",
+        time: "2 Hour",
+        text: "Ok, Understood!",
+      },
+      {
+        type: "out",
+        image: "media/avatars/300-1.jpg",
+        time: "2 Hours",
+        text: "You’ll receive notifications for all issues, pull requests!",
+      },
+      {
+        type: "in",
+        name: "Brian Cox",
+        image: "media/avatars/300-25.jpg",
+        time: "1 Hour",
+        text: "You can unwatch this repository immediately by clicking here: Keenthemes.com",
+      },
+      {
+        type: "out",
+        image: "media/avatars/300-1.jpg",
+        time: "4 mins",
+        text: "Most purchased Business courses during this sale!",
+      },
+      {
+        type: "in",
+        name: "Brian Cox",
+        image: "media/avatars/300-25.jpg",
+        time: "2 mins",
+        text: "Company BBQ to celebrate the last quater achievements and goals. Food and drinks provided",
+      },
+    ]);
+    const messages3 = ref<Array<KTMessage>>([
+      { type: "out", name: "", image: "", time: "", text: "" },
+    ]);
     const newMessageText = ref("");
-    //const newMessageUser = store.state.user.user.id;
+    const newMessageUser = store.state.AuthModule.user.user.id;
+    const newMessageTask = route.params.id;
 
     const addNewMessage = () => {
       if (!newMessageText.value) {
         return;
       }
-      store.dispatch(Actions.SENDNEWMESSAGE, newMessageText);
-      messages.value.push({
+      //console.log(newMessageText.value);
+      store.dispatch(Actions.SENDNEWMESSAGE, {
+        message: newMessageText.value,
+        task_id: newMessageTask,
+        user_id: newMessageUser,
+      });
+      messages3.value.push({
         type: "out",
         image: "media/avatars/300-1.jpg",
         time: "Just now",
@@ -430,6 +518,7 @@ export default defineComponent({
 
     return {
       messages,
+      messages3,
       messagesRef,
       newMessageText,
       addNewMessage,

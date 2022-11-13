@@ -20,7 +20,7 @@
       class="form w-100 fv-plugins-bootstrap5 fv-plugins-framework"
       novalidate="novalidate"
       @submit="onSubmitRegister2"
-      id="kt_login_signup_form"
+      id="kt_login_signup_form2"
       :validation-schema="registration"
     >
       <!--begin::Input group-->
@@ -33,13 +33,14 @@
           <Field
             class="form-control form-control-lg form-control-solid"
             type="text"
+            v-model="targetData.name1"
             placeholder=""
-            name="name"
+            name="name1"
             autocomplete="off"
           />
           <div class="fv-plugins-message-container">
             <div class="fv-help-block">
-              <ErrorMessage name="name" />
+              <ErrorMessage name="name1" />
             </div>
           </div>
         </div>
@@ -54,13 +55,14 @@
         <Field
           class="form-control form-control-lg form-control-solid"
           type="text"
+          v-model="targetData.phone1"
           placeholder=""
-          name="phone"
+          name="phone1"
           autocomplete="off"
         />
         <div class="fv-plugins-message-container">
           <div class="fv-help-block">
-            <ErrorMessage name="phone" />
+            <ErrorMessage name="phone1" />
           </div>
         </div>
       </div>
@@ -81,13 +83,14 @@
             <Field
               class="form-control form-control-lg form-control-solid"
               type="password"
+              v-model="targetData.password1"
               placeholder=""
-              name="password"
+              name="password1"
               autocomplete="off"
             />
             <div class="fv-plugins-message-container">
               <div class="fv-help-block">
-                <ErrorMessage name="password" />
+                <ErrorMessage name="password1" />
               </div>
             </div>
           </div>
@@ -129,13 +132,14 @@
         <Field
           class="form-control form-control-lg form-control-solid"
           type="password"
+          v-model="targetData.password_confirmation1"
           placeholder=""
-          name="password_confirmation"
+          name="password_confirmation1"
           autocomplete="off"
         />
         <div class="fv-plugins-message-container">
           <div class="fv-help-block">
-            <ErrorMessage name="password_confirmation" />
+            <ErrorMessage name="password_confirmation1" />
           </div>
         </div>
       </div>
@@ -276,8 +280,9 @@
           ref="submitButton"
           type="submit"
           class="btn btn-lg btn-primary"
-          v-on:click="onSubmitRegister2"
+          @click="onSubmitRegister2"
         >
+          <!-- v-on:click="onSubmitRegister2" -->
           <span class="indicator-label"> Submit </span>
           <span class="indicator-progress">
             Please wait...
@@ -579,10 +584,10 @@ interface NewAddressData {
   title: string;
   description: string;
   budget: string;
-  name: string;
-  phone: string;
-  password: string;
-  password_confirmation: string;
+  name1: string;
+  phone1: string;
+  password1: string;
+  password_confirmation1: string;
 }
 
 export default defineComponent({
@@ -606,7 +611,6 @@ export default defineComponent({
   },
   setup() {
     const { t, te } = useI18n();
-
     const translate = (text) => {
       if (te(text)) {
         return t(text);
@@ -615,6 +619,7 @@ export default defineComponent({
       }
     };
     onMounted(() => {
+      //console.log(forma.value);
       nextTick(() => {
         PasswordMeterComponent.bootstrap();
       });
@@ -627,16 +632,16 @@ export default defineComponent({
 
     const submitButton = ref<HTMLButtonElement | null>(null);
     const registration = Yup.object().shape({
-      name: Yup.string().label("Name"),
-      title: Yup.string().label("Task title"),
+      name1: Yup.string().min(3).required().label("Name"),
+      title: Yup.string().required().label("Task title"),
       category: Yup.string().required().label("Select category"),
       currency: Yup.string().required().label("Select currency"),
       user_role_id: Yup.string().required().label("Select role"),
-      phone: Yup.string().min(11).max(12).label("Phone"),
-      password: Yup.string().label("Password"),
-      password_confirmation: Yup.string()
+      phone1: Yup.string().required().min(11).max(12).label("Phone"),
+      password1: Yup.string().min(8).required().label("Password"),
+      password_confirmation1: Yup.string()
         .required()
-        .oneOf([Yup.ref("password"), null], "Passwords must match")
+        .oneOf([Yup.ref("password1"), null], "Passwords must match")
         .label("Password Confirmation"),
     });
     const targetData = ref<NewAddressData>({
@@ -648,15 +653,17 @@ export default defineComponent({
       title: "",
       description: "",
       budget: "",
-      name: "",
-      phone: "",
-      password: "",
-      password_confirmation: "",
+      name1: "",
+      phone1: "",
+      password1: "",
+      password_confirmation1: "",
     });
+
     const onSubmitRegister2 = async (values) => {
       // Clear existing errors
       store.dispatch(Actions.LOGOUT);
-
+      //console.log("form");
+      //console.log(targetData.value);
       // eslint-disable-next-line
       submitButton.value!.disabled = true;
 
@@ -664,12 +671,26 @@ export default defineComponent({
       submitButton.value?.setAttribute("data-kt-indicator", "on");
 
       // Send login request
-      await store.dispatch(Actions.MAINREGISTER, values);
+      await store.dispatch(Actions.MAINREGISTER, {
+        name: targetData.value.name1,
+        phone: targetData.value.phone1,
+        password: targetData.value.password1,
+        password_confirmation: targetData.value.password_confirmation1,
+        title: targetData.value.title,
+        description: targetData.value.description,
+        budget: targetData.value.budget,
+        currency_id: targetData.value.currency,
+        category_id: targetData.value.category,
+      });
 
       const [errorName] = Object.keys(store.getters.getErrors);
       const error = store.getters.getErrors[errorName];
 
       if (!error) {
+        await store.dispatch(
+          Actions.GET_USER2,
+          store.state.AuthModule.user.api_token
+        );
         Swal.fire({
           text: "You have successfully logged in!",
           icon: "success",
@@ -680,7 +701,7 @@ export default defineComponent({
           },
         }).then(function () {
           // Go to page after successfully login
-          //router.push({ name: "sign-in" });
+          router.push({ name: "dashboard" });
         });
       } else {
         Swal.fire({

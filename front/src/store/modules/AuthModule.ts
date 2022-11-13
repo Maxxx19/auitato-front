@@ -97,7 +97,17 @@ export default class AuthModule
     this.isAuthenticated = true;
     this.user.api_token = user;
     this.errors = {};
+    //console.log(user);
     JwtService.saveToken(user.api_token);
+  }
+
+  @Mutation
+  [Mutations.SET_AUTH_MAIN2](user) {
+    this.isAuthenticated = true;
+    this.user.api_token = user[0].api_token;
+    this.errors = {};
+    //console.log(user);
+    JwtService.saveToken(user[0].api_token);
   }
   @Mutation
   [Mutations.SET_AUTH_TASKS](user) {
@@ -156,7 +166,9 @@ export default class AuthModule
 
   @Action
   [Actions.GET_USER](credentials) {
+    JwtService.saveToken(credentials[0].api_token);
     ApiService.setHeader();
+    //console.log(credentials);
     return ApiService.post("api/profile", credentials)
       .then(({ data }) => {
         this.context.commit(Mutations.SET_AUTH_MAIN, data);
@@ -168,6 +180,21 @@ export default class AuthModule
       });
   }
 
+  @Action
+  [Actions.GET_USER2](credentials) {
+    //JwtService.saveToken(credentials);
+    ApiService.setHeader();
+    //console.log(credentials);
+    return ApiService.post("api/profile", credentials)
+      .then(({ data }) => {
+        //this.context.commit(Mutations.SET_AUTH_MAIN2, data);
+        this.context.commit(Mutations.SET_AUTH_TASKS, data);
+        this.context.commit(Mutations.SET_USER, data);
+      })
+      .catch(({ response }) => {
+        this.context.commit(Mutations.SET_ERROR, response.data.errors);
+      });
+  }
   @Action
   [Actions.CREATE_TASK](credentials) {
     ApiService.setHeader();
@@ -233,7 +260,7 @@ export default class AuthModule
     return ApiService.post("api/main/task", credentials)
       .then(({ data }) => {
         //alert("main");
-        this.context.commit(Mutations.SET_AUTH_MAIN, data);
+        this.context.commit(Mutations.SET_AUTH_MAIN2, data);
       })
       .catch(({ response }) => {
         this.context.commit(Mutations.SET_ERROR, response.data.errors);
