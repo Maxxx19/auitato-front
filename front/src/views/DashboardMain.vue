@@ -19,8 +19,8 @@
         >
           <!--begin::Menu item-->
           <div>
-            <router-link to="/sign-in" class="link-primary fw-bold"
-              >Sign in</router-link
+            <router-link to="/sign-in" class="link-primary fw-bold">
+              {{ translate("SignIn") }}</router-link
             >
           </div>
           <!--end::Menu item-->

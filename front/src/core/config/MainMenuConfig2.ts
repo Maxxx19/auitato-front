@@ -9,7 +9,13 @@ const DocMenuConfig = [
       },
       {
         heading: "myOrders",
-        route: "/builder",
+        route: "/apps/forms/search-responses",
+        svgIcon: "media/icons/duotune/general/gen019.svg",
+        fontIcon: "bi-layers",
+      },
+      {
+        heading: "myDoing",
+        route: "/apps/forms/search-doing",
         svgIcon: "media/icons/duotune/general/gen019.svg",
         fontIcon: "bi-layers",
       },
@@ -273,13 +279,13 @@ const DocMenuConfig = [
         svgIcon: "media/icons/duotune/finance/fin006.svg",
         fontIcon: "bi-printer",
         sub: [
-          {
-            heading: "categories",
-            route: "/apps/representations/categories",
-          },
+          // {
+          //   heading: "categories",
+          //   route: "/apps/representations/categories",
+          // },
           {
             heading: "listOfTasks",
-            route: "/apps/representations/list-of-tasks",
+            route: "/apps/forms/search-task",
           },
           {
             heading: "listOfResponses",

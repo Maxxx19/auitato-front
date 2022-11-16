@@ -273,10 +273,10 @@ const DocMenuConfig = [
         svgIcon: "media/icons/duotune/finance/fin006.svg",
         fontIcon: "bi-printer",
         sub: [
-          {
-            heading: "categories",
-            route: "/apps/representations/categories",
-          },
+          // {
+          //   heading: "categories",
+          //   route: "/apps/representations/categories",
+          // },
           {
             heading: "listOfTasks",
             route: "/apps/representations/list-of-tasks",

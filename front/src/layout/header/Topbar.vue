@@ -2,6 +2,31 @@
   <!--begin::Toolbar wrapper-->
   <div class="d-flex align-items-stretch flex-shrink-0">
     <!--begin::Search-->
+    <div>
+      <a
+        href="#"
+        class="btn btn-icon btn-active-light-primary btn-custom w-30px h-30px w-md-40px h-md-40px show menu-dropdown"
+        data-kt-menu-trigger="click"
+        data-kt-menu-placement="bottom"
+      >
+        <router-link to="/pages/profile/overview" class="menu-link px-5">
+          <span class="menu-title position-relative">
+            {{ translate("getLanguage") }}
+            <span
+              class="fs-8 rounded bg-light px-3 py-2 mt-3 position-absolute translate-middle-y top-50 end-0"
+            >
+              {{ currentLangugeLocale.name }}
+              <img
+                class="w-15px h-15px rounded-1 ms-2"
+                :src="currentLangugeLocale.flag"
+                alt="metronic"
+              />
+            </span>
+          </span>
+        </router-link>
+      </a>
+      <!--end::Menu item-->
+    </div>
     <div class="d-flex align-items-stretch ms-1 ms-lg-3">
       <KTSearch></KTSearch>
     </div>
@@ -152,6 +177,10 @@ import KTQuickLinksMenu from "@/layout/header/partials/QuickLinksMenu.vue";
 import KTUserMenu from "@/layout/header/partials/UserMenu.vue";
 import KTThemeModeSwitcher from "@/layout/theme-mode/ThemeModeSwitcher.vue";
 import { useStore } from "vuex";
+import { useI18n } from "vue-i18n/index";
+import { Actions } from "@/store/enums/StoreEnums";
+import { useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 
 export default defineComponent({
   name: "header-topbar",
@@ -164,13 +193,86 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
+    const { t, te } = useI18n();
+    const i18n = useI18n();
+    const router = useRouter();
 
+    i18n.locale.value = localStorage.getItem("lang")
+      ? (localStorage.getItem("lang") as string)
+      : "ua";
+
+    const countries = {
+      en: {
+        flag: "media/flags/united-states.svg",
+        name: "English",
+      },
+      ua: {
+        flag: "media/flags/ukraine.svg",
+        name: "Ukrainian",
+      },
+      ru: {
+        flag: "media/flags/russia.png",
+        name: "Russian",
+      },
+      es: {
+        flag: "media/flags/spain.svg",
+        name: "Spanish",
+      },
+      de: {
+        flag: "media/flags/germany.svg",
+        name: "German",
+      },
+      ja: {
+        flag: "media/flags/japan.svg",
+        name: "Japanese",
+      },
+      fr: {
+        flag: "media/flags/france.svg",
+        name: "French",
+      },
+    };
+
+    const signOut = () => {
+      store.dispatch(Actions.LOGOUT).then(() => router.push({ name: "main" }));
+    };
+
+    const setLang = (lang) => {
+      localStorage.setItem("lang", lang);
+      i18n.locale.value = lang;
+    };
+
+    const currentLanguage = (lang) => {
+      return i18n.locale.value === lang;
+    };
+
+    const currentLangugeLocale = computed(() => {
+      return countries[i18n.locale.value];
+    });
+    const translate = (text) => {
+      if (te(text)) {
+        return t(text);
+      } else {
+        return text;
+      }
+    };
     const themeMode = computed(() => {
       return store.getters.getThemeMode;
     });
 
+    const route = useRoute();
+    const hasActiveChildren = (match) => {
+      return route.path.indexOf(match) !== -1;
+    };
+
     return {
       themeMode,
+      signOut,
+      setLang,
+      currentLanguage,
+      currentLangugeLocale,
+      countries,
+      hasActiveChildren,
+      translate,
     };
   },
 });

@@ -204,41 +204,8 @@
       <!--end::Input group-->
       <!--begin::Input group-->
       <div class="row mb-6">
-        <!--begin::Label-->
-        <label class="col-lg-4 col-form-label fw-semobold fs-6">
-          <span class="required">{{ translate("SelectCurrency") }}</span>
-
-          <i
-            class="fas fa-exclamation-circle ms-1 fs-7"
-            data-bs-toggle="tooltip"
-            title="Select currency"
-          ></i>
-        </label>
-        <!--end::Label-->
-
         <!--begin::Col-->
-        <div class="col-lg-8 fv-row">
-          <Field
-            as="select"
-            name="currency"
-            placeholder="Select currency"
-            class="form-select form-select-solid form-select-lg fw-semobold"
-            v-model="targetData.currency"
-          >
-            <option
-              v-for="currency in this.currencies"
-              :key="currency"
-              :value="currency.id"
-            >
-              {{ currency.symbol }}
-            </option>
-          </Field>
-          <div class="fv-plugins-message-container">
-            <div class="fv-help-block">
-              <ErrorMessage name="currency" />
-            </div>
-          </div>
-        </div>
+        <div class="col-lg-8 fv-row"></div>
         <!--end::Col-->
       </div>
       <!--end::Input group-->
@@ -258,20 +225,46 @@
         </el-form-item>
       </div>
       <!--end::Input group-->
-      <div class="d-flex flex-column mb-8 fv-row">
+      <div class="column">
         <!--begin::Label-->
         <label class="d-flex align-items-center fs-6 fw-semobold mb-2">
           <span>{{ translate("BudgetData") }} </span>
         </label>
         <!--end::Label-->
-        <el-form-item prop="budget">
-          <el-input
-            v-model="targetData.budget"
-            placeholder="Enter Budget Data"
-            type="number"
-            name="budget"
-          ></el-input>
-        </el-form-item>
+        <div class="d-flex flex-row mb-8 fv-row">
+          <el-form-item prop="budget">
+            <el-input
+              v-model="targetData.budget"
+              placeholder="Enter Budget Data"
+              class="pt-5"
+              type="number"
+              name="budget"
+            ></el-input>
+          </el-form-item>
+          <div class="m-3">
+            <Field
+              as="select"
+              name="currency"
+              placeholder="Select currency"
+              class="form-select form-select-solid form-select-lg fw-semobold"
+              v-model="targetData.currency"
+            >
+              <option
+                v-for="currency in this.currencies"
+                :key="currency"
+                :value="currency.id"
+                :selected="currency.id == 1"
+              >
+                {{ currency.symbol }}
+              </option>
+            </Field>
+          </div>
+        </div>
+        <div class="fv-plugins-message-container">
+          <div class="fv-help-block">
+            <ErrorMessage name="currency" />
+          </div>
+        </div>
       </div>
       <!--begin::Actions-->
       <div class="text-center">
@@ -283,7 +276,7 @@
           @click="onSubmitRegister2"
         >
           <!-- v-on:click="onSubmitRegister2" -->
-          <span class="indicator-label"> Submit </span>
+          <span class="indicator-label"> {{ translate("SubmitForm") }} </span>
           <span class="indicator-progress">
             Please wait...
             <span

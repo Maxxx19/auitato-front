@@ -15,6 +15,8 @@ export interface User {
   task: string;
   tasks: string;
   chat: string;
+  responses: string;
+  doing: string;
 }
 
 export interface Task {
@@ -130,6 +132,21 @@ export default class AuthModule
   }
 
   @Mutation
+  [Mutations.SET_PERFORMER_TASKS](tasks) {
+    this.user.tasks = tasks;
+  }
+
+  @Mutation
+  [Mutations.SET_PERFORMER_RESPONSES](responses) {
+    this.user.responses = responses;
+  }
+
+  @Mutation
+  [Mutations.SET_PERFORMER_DOING](doing) {
+    this.user.doing = doing;
+  }
+
+  @Mutation
   [Mutations.SET_FAQ](FAQ) {
     this.faq = FAQ;
   }
@@ -218,7 +235,42 @@ export default class AuthModule
         this.context.commit(Mutations.SET_ERROR, response.data.errors);
       });
   }
-
+  @Action
+  [Actions.SHOW_PERFORMER_TASKS](credentials) {
+    console.log(credentials);
+    ApiService.setHeader();
+    return ApiService.post("/api/tasks/available", credentials)
+      .then(({ data }) => {
+        this.context.commit(Mutations.SET_PERFORMER_TASKS, data);
+      })
+      .catch(({ response }) => {
+        this.context.commit(Mutations.SET_ERROR, response.data.errors);
+      });
+  }
+  @Action
+  [Actions.SHOW_PERFORMER_RESPONSES](credentials) {
+    console.log(credentials);
+    ApiService.setHeader();
+    return ApiService.post("/api/tasks/responsed", credentials)
+      .then(({ data }) => {
+        this.context.commit(Mutations.SET_PERFORMER_RESPONSES, data);
+      })
+      .catch(({ response }) => {
+        this.context.commit(Mutations.SET_ERROR, response.data.errors);
+      });
+  }
+  @Action
+  [Actions.SHOW_PERFORMER_DOING](credentials) {
+    //console.log(credentials);
+    ApiService.setHeader();
+    return ApiService.post("/api/tasks/doing", credentials)
+      .then(({ data }) => {
+        this.context.commit(Mutations.SET_PERFORMER_DOING, data);
+      })
+      .catch(({ response }) => {
+        this.context.commit(Mutations.SET_ERROR, response.data.errors);
+      });
+  }
   @Action
   [Actions.GET_FAQ](credentials) {
     ApiService.setHeader();

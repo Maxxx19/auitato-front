@@ -20,7 +20,7 @@
       id="#kt_header_menu"
       data-kt-menu="true"
     >
-      <div class="d-flex flex-row" v-show="order">
+      <div class="d-flex flex-row" v-if="order">
         <template v-for="(item, i) in MainMenuConfig" :key="i">
           <template v-if="!item.heading">
             <template v-for="(menuItem, j) in item.pages" :key="j">
@@ -170,7 +170,7 @@
           </div>
         </template>
       </div>
-      <div class="d-flex flex-row" v-show="perform">
+      <div class="d-flex flex-row" v-if="perform">
         <template v-for="(item, i) in MainMenuConfig2" :key="i">
           <template v-if="!item.heading">
             <template v-for="(menuItem, j) in item.pages" :key="j">
@@ -608,7 +608,9 @@ export default defineComponent({
     var perform = false;
     if (store.state.AuthModule.user.user.user_role_id == 1) {
       order = true;
+      perform = false;
     } else {
+      order = false;
       perform = true;
     }
     const hasActiveChildren = (match) => {

@@ -12,15 +12,15 @@
       <!--begin::Heading-->
       <div class="mb-10 text-center">
         <!--begin::Title-->
-        <h1 class="text-dark mb-3">Create an Account</h1>
+        <h1 class="text-dark mb-3">{{ translate("CreateAccount") }}</h1>
         <!--end::Title-->
 
         <!--begin::Link-->
         <div class="text-gray-400 fw-semobold fs-4">
-          Already have an account?
+          {{ translate("AlreadyHave") }}
 
           <router-link to="/sign-in" class="link-primary fw-bold">
-            Sign in here
+            {{ translate("SignIn") }}
           </router-link>
         </div>
         <!--end::Link-->
@@ -50,7 +50,9 @@
       <div class="row fv-row mb-7">
         <!--begin::Col-->
         <div class="fv-row mb-7">
-          <label class="form-label fw-bold text-dark fs-6">Name</label>
+          <label class="form-label fw-bold text-dark fs-6">
+            {{ translate("UserName") }}
+          </label>
           <Field
             class="form-control form-control-lg form-control-solid"
             type="text"
@@ -88,7 +90,9 @@
 
       <!--begin::Input group-->
       <div class="fv-row mb-7">
-        <label class="form-label fw-bold text-dark fs-6">Phone</label>
+        <label class="form-label fw-bold text-dark fs-6">
+          {{ translate("PhoneNumber") }}
+        </label>
         <Field
           class="form-control form-control-lg form-control-solid"
           type="text"
@@ -109,7 +113,9 @@
         <!--begin::Wrapper-->
         <div class="mb-1">
           <!--begin::Label-->
-          <label class="form-label fw-bold text-dark fs-6"> Password </label>
+          <label class="form-label fw-bold text-dark fs-6">
+            {{ translate("passwordSet") }}
+          </label>
           <!--end::Label-->
 
           <!--begin::Input wrapper-->
@@ -151,7 +157,7 @@
         <!--end::Wrapper-->
         <!--begin::Hint-->
         <div class="text-muted">
-          Use 8 or more characters with a mix of letters, numbers & symbols.
+          {{ translate("Use8OrMore") }}
         </div>
         <!--end::Hint-->
       </div>
@@ -159,9 +165,9 @@
 
       <!--begin::Input group-->
       <div class="fv-row mb-5">
-        <label class="form-label fw-bold text-dark fs-6"
-          >Confirm Password</label
-        >
+        <label class="form-label fw-bold text-dark fs-6">
+          {{ translate("passwordConfirm") }}
+        </label>
         <Field
           class="form-control form-control-lg form-control-solid"
           type="password"
@@ -217,8 +223,10 @@
             value="1"
           />
           <span class="form-check-label fw-semobold text-gray-700 fs-6">
-            I Agree &
-            <a href="#" class="ms-1 link-primary">Terms and conditions</a>.
+            {{ translate("IAgree") }}
+            <a href="#" class="ms-1 link-primary">
+              {{ translate("TermsCond") }}
+            </a>
           </span>
         </label>
       </div>
@@ -232,7 +240,7 @@
           type="submit"
           class="btn btn-lg btn-primary"
         >
-          <span class="indicator-label"> Submit </span>
+          <span class="indicator-label"> {{ translate("SubmitForm") }} </span>
           <span class="indicator-progress">
             Please wait...
             <span

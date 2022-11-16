@@ -11,12 +11,14 @@
       <!--begin::Heading-->
       <div class="text-center mb-10">
         <!--begin::Title-->
-        <h1 class="text-dark mb-3">Forgot Password ?</h1>
+        <h1 class="text-dark mb-3">
+          {{ translate("ForgotPassword") }}
+        </h1>
         <!--end::Title-->
 
         <!--begin::Link-->
         <div class="text-gray-400 fw-semobold fs-4">
-          Enter your email to reset your password.
+          {{ translate("EnterEmail") }}
         </div>
         <!--end::Link-->
       </div>
@@ -24,7 +26,9 @@
 
       <!--begin::Input group-->
       <div class="fv-row mb-10">
-        <label class="form-label fw-bold text-gray-900 fs-6">Email</label>
+        <label class="form-label fw-bold text-gray-900 fs-6">
+          {{ translate("YourEmail") }}
+        </label>
         <Field
           class="form-control form-control-solid"
           type="email"
@@ -48,7 +52,7 @@
           id="kt_password_reset_submit"
           class="btn btn-lg btn-primary fw-bold me-4"
         >
-          <span class="indicator-label"> Submit </span>
+          <span class="indicator-label"> {{ translate("SubmitForm") }} </span>
           <span class="indicator-progress">
             Please wait...
             <span
@@ -58,8 +62,8 @@
         </button>
 
         <router-link to="/sign-up" class="btn btn-lg btn-light-primary fw-bold"
-          >Cancel</router-link
-        >
+          >{{ translate("SubmitForm") }}
+        </router-link>
       </div>
       <!--end::Actions-->
     </Form>
@@ -72,6 +76,8 @@
 import { defineComponent, ref } from "vue";
 import { ErrorMessage, Field, Form } from "vee-validate";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n/index";
 import * as Yup from "yup";
 import { Actions } from "@/store/enums/StoreEnums";
 import Swal from "sweetalert2/dist/sweetalert2.min.js";
@@ -85,7 +91,16 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
+    const router = useRouter();
+    const { t, te } = useI18n();
 
+    const translate = (text) => {
+      if (te(text)) {
+        return t(text);
+      } else {
+        return text;
+      }
+    };
     const submitButton = ref<HTMLButtonElement | null>(null);
 
     //Create form validation object
@@ -138,6 +153,7 @@ export default defineComponent({
       onSubmitForgotPassword,
       forgotPassword,
       submitButton,
+      translate,
     };
   },
 });

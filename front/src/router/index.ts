@@ -274,11 +274,11 @@ const routes: Array<RouteRecordRaw> = [
         name: "replenishment-balance-forms",
         component: () => import("@/views/forms/ReplenishmentBalance.vue"),
       },
-      {
-        path: "/apps/representations/categories",
-        name: "categories-representations",
-        component: () => import("@/views/representations/Categories.vue"),
-      },
+      // {
+      //   path: "/apps/representations/categories",
+      //   name: "categories-representations",
+      //   component: () => import("@/views/representations/Categories.vue"),
+      // },
       {
         path: "/apps/representations/list-of-tasks",
         name: "list-tasks-representations",
@@ -564,22 +564,36 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: "/apps/forms/search-task",
         name: "search-task-forms",
-        component: () => import("@/views/representations/ListTasks.vue"),
+        component: () =>
+          import("@/views/representations/ListPerformerTasks.vue"),
+      },
+      {
+        path: "/apps/forms/search-responses",
+        name: "search-responses-forms",
+        component: () =>
+          import("@/views/representations/ListPerformerResponses.vue"),
+      },
+      {
+        path: "/apps/forms/search-doing",
+        name: "search-doing-forms",
+        component: () =>
+          import("@/views/representations/ListPerformerDoing.vue"),
       },
       {
         path: "/apps/forms/replenishment-balance",
         name: "replenishment-balance-forms",
         component: () => import("@/views/forms/ReplenishmentBalance.vue"),
       },
+      // {
+      //   path: "/apps/representations/categories",
+      //   name: "categories-representations",
+      //   component: () => import("@/views/representations/Categories.vue"),
+      // },
       {
-        path: "/apps/representations/categories",
-        name: "categories-representations",
-        component: () => import("@/views/representations/Categories.vue"),
-      },
-      {
-        path: "/apps/representations/list-of-tasks",
-        name: "list-tasks-representations",
-        component: () => import("@/views/representations/ListTasks.vue"),
+        path: "/apps/forms/search-task",
+        name: "search-task-forms",
+        component: () =>
+          import("@/views/representations/ListPerformerTasks.vue"),
       },
       {
         path: "/apps/representations/list-of-responses",

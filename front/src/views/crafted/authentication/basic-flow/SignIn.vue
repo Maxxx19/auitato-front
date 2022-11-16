@@ -11,15 +11,15 @@
       <!--begin::Heading-->
       <div class="text-center mb-10">
         <!--begin::Title-->
-        <h1 class="text-dark mb-3">Sign In to Metronic</h1>
+        <h1 class="text-dark mb-3">{{ translate("SignInAiuto") }}</h1>
         <!--end::Title-->
 
         <!--begin::Link-->
         <div class="text-gray-400 fw-semobold fs-4">
-          New Here?
+          {{ translate("NewHere") }}
 
           <router-link to="/sign-up" class="link-primary fw-bold">
-            Create an Account
+            {{ translate("CreateAccount") }}
           </router-link>
         </div>
         <!--end::Link-->
@@ -36,7 +36,7 @@
       <div class="fv-row mb-10">
         <!--begin::Label-->
         <label class="form-label fs-6 fw-bold text-dark">
-          {{ translate("UserName") }}
+          {{ translate("PhoneNumber") }}
         </label>
         <!--end::Label-->
 
@@ -69,7 +69,7 @@
 
           <!--begin::Link-->
           <router-link to="/password-reset" class="link-primary fs-6 fw-bold">
-            Forgot Password ?
+            {{ translate("ForgotPassword") }}
           </router-link>
           <!--end::Link-->
         </div>
