@@ -447,6 +447,7 @@ import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { Actions } from "@/store/enums/StoreEnums";
 import { Field } from "vee-validate";
+import { useRouter } from "vue-router";
 
 interface NewAddressData {
   title: string;
@@ -470,7 +471,7 @@ export default defineComponent({
     const newTargetModalRef = ref<null | HTMLElement>(null);
     const loading = ref<boolean>(false);
     const store = useStore();
-
+    const router = useRouter();
     const targetData = ref<NewAddressData>({
       title: "",
       description: "",
@@ -540,8 +541,17 @@ export default defineComponent({
               },
             }).then(() => {
               //alert(targetData);
-              store.dispatch(Actions.CREATE_TASK, targetData);
+              store.dispatch(Actions.CREATE_TASK, {
+                user_id: targetData.value.customer_id,
+                title: targetData.value.title,
+                category: targetData.value.category,
+                description: targetData.value.description,
+                currency_id: targetData.value.currency_id,
+                budget: targetData.value.budget,
+                _metod: "put",
+              });
               hideModal(newTargetModalRef.value);
+              router.push({ name: "search-task-forms" });
             });
           }, 2000);
         } else {

@@ -3,7 +3,7 @@ const DocMenuConfig = [
     pages: [
       {
         heading: "findTask",
-        route: "/apps/forms/search-task",
+        route: "/apps/forms/search-task-performer",
         svgIcon: "media/icons/duotune/general/gen019.svg",
         fontIcon: "bi-layers",
       },
@@ -265,7 +265,7 @@ const DocMenuConfig = [
           },
           {
             heading: "searchingTaskForm",
-            route: "/apps/forms/search-task",
+            route: "/apps/forms/search-task-performer",
           },
           {
             heading: "replenishmentBalanceForm",
@@ -285,7 +285,7 @@ const DocMenuConfig = [
           // },
           {
             heading: "listOfTasks",
-            route: "/apps/forms/search-task",
+            route: "/apps/forms/search-task-performer",
           },
           {
             heading: "listOfResponses",

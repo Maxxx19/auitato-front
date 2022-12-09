@@ -275,6 +275,12 @@ export default defineComponent({
     Form,
     ErrorMessage,
   },
+  data: function () {
+    return {
+      terms: "no data",
+      title: "no data",
+    };
+  },
   setup() {
     const store = useStore();
     const router = useRouter();

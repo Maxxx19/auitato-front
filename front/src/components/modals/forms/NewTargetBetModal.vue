@@ -3,7 +3,7 @@
   <div
     class="modal fade"
     id="kt_modal_new_address"
-    ref="newTargetModalRef"
+    ref="newTargetBetModalRef"
     tabindex="-1"
     aria-hidden="true"
   >
@@ -40,7 +40,7 @@
             <!--begin::Heading-->
             <div class="mb-13 text-center">
               <!--begin::Title-->
-              <h1 class="mb-3">{{ translate("EditTask") }}</h1>
+              <h1 class="mb-3">{{ translate("MakeBet") }}</h1>
               <!--end::Title-->
 
               <!--begin::Description-->
@@ -67,9 +67,9 @@
 
               <el-form-item prop="title">
                 <el-input
-                  v-model="targetData.title"
+                  :v-model="titleData"
                   :placeholder="titleData"
-                  type="text"
+                  :value="titleData"
                   name="title"
                 ></el-input>
               </el-form-item>
@@ -149,7 +149,7 @@
                 <Field
                   as="select"
                   name="category"
-                  placeholder="Select category"
+                  placeholder="Select currency"
                   class="form-select form-select-solid form-select-lg fw-semobold"
                   v-model="targetData.currency"
                 >
@@ -246,9 +246,10 @@
 
               <el-form-item prop="description">
                 <el-input
-                  :v-model="targetData.description"
-                  type="text"
+                  :v-model="descriptionData"
+                  type="textarea"
                   name="description"
+                  :value="descriptionData"
                   :placeholder="descriptionData"
                 />
               </el-form-item>
@@ -262,7 +263,7 @@
               <!--end::Label-->
               <el-form-item prop="budget">
                 <el-input
-                  :v-model="targetData.budget"
+                  :autocomplete="budgetData"
                   :placeholder="budgetData"
                   :value="budgetData"
                   type="number"
@@ -277,6 +278,20 @@
             </div>
             <!--begin::Input group-->
             <div class="d-flex flex-column mb-8 fv-row">
+              <label
+                class="d-flex align-items-center fs-6 fw-semobold mb-2 required"
+              >
+                <span>{{ translate("YourBet") }} </span>
+              </label>
+              <el-input v-model="targetData.bet" type="number" name="bet">
+              </el-input>
+              <label
+                class="d-flex align-items-center fs-6 fw-semobold mb-2 mt-5 required"
+              >
+                <span>{{ translate("YourMessage") }} </span>
+              </label>
+              <el-input v-model="targetData.message" type="text" name="message">
+              </el-input>
               <!--begin::Label-->
               <!-- <label class="d-flex align-items-center fs-6 fw-semobold mb-2">
                 <span class="required">{{ translate("Importance") }}</span>
@@ -399,9 +414,21 @@
               >
                 Cancel
               </button>
-
-              <!--begin::Button-->
               <button
+                class="btn btn-light fw-bolder px-6"
+                @click="sendBet(this.bet)"
+              >
+                {{ translate("MakeBet") }}
+              </button>
+              <router-link
+                :to="`/apps/representations/chat/private-chat/{{taskId}}`"
+                class="btn btn-primary"
+                active-class="active"
+              >
+                {{ translate("AddChat") }}
+              </router-link>
+              <!--begin::Button-->
+              <!-- <button
                 :data-kt-indicator="loading ? 'on' : null"
                 class="btn btn-lg btn-primary"
                 type="submit"
@@ -418,7 +445,7 @@
                     class="spinner-border spinner-border-sm align-middle ms-2"
                   ></span>
                 </span>
-              </button>
+              </button> -->
               <!--end::Button-->
             </div>
             <!--end::Actions-->
@@ -461,43 +488,70 @@ interface NewAddressData {
   customer_id: string;
   budget: string;
   currency_id: string;
-  category_id: string;
+  category: string;
   categories: string;
   currency: string;
   _method: string;
+  bet: string;
+  message: string;
 }
 
 export default defineComponent({
-  name: "new-target-edit-modal",
+  name: "new-target-bet-modal",
   components: {
     Field,
   },
   props: {
-    titleData: { type: String, required: false, default: "" },
-    categoryData: { type: String, required: false, default: "" },
+    taskId: Number,
+    titleData: String,
+    categoryData: String,
     currencyData: String,
-    descriptionData: { type: String, required: false, default: "" },
-    budgetData: { type: String, required: false, default: "" },
+    descriptionData: String,
+    budgetData: String,
+  },
+  data: function (props) {
+    return {
+      tasks: null,
+      getTasks: false,
+      task_id: props.taskId,
+    };
+  },
+  computed: {
+    getTask() {
+      const store = useStore();
+      var tasks = store.state.AuthModule.user.tasks;
+      return tasks;
+    },
+  },
+  mounted: function () {
+    const store = useStore();
+    this.tasks = store.state.AuthModule.user.tasks;
+    store.dispatch(Actions.ADDCHAT, { task_id: this.task_id });
+    //alert(this.tasks);
   },
   setup(props) {
     const formRef = ref<null | HTMLFormElement>(null);
-    const newTargetModalRef = ref<null | HTMLElement>(null);
+    const newTargetBetModalRef = ref<null | HTMLElement>(null);
     const loading = ref<boolean>(false);
     const store = useStore();
-
+    console.log(props.taskId);
     const targetData = ref<NewAddressData>({
-      title: props.titleData,
-      description: props.descriptionData,
+      title: "",
+      description: "",
       customer_id: store.state.AuthModule.user.user.id,
-      budget: props.budgetData,
+      budget: "",
       currency_id: "1",
-      category_id: props.categoryData,
+      category: "",
       categories: store.state.AuthModule.faq.categories,
       currency: store.state.AuthModule.user.currencies,
       _method: "",
+      bet: "",
+      message: "",
     });
+
     const { t, te } = useI18n();
     const route = useRoute();
+
     const translate = (text) => {
       if (te(text)) {
         return t(text);
@@ -529,57 +583,64 @@ export default defineComponent({
       //   },
       // ],
     });
+    loading.value = true;
+
+    const sendBet = (bet) => {
+      setTimeout(() => {
+        loading.value = false;
+        store.dispatch(Actions.SENDBET, {
+          user_id: targetData.value.customer_id,
+          task_id: props.taskId,
+          bet: targetData.value.bet,
+          message: targetData.value.message,
+          currency_id: targetData.value.currency_id,
+        });
+        console.log("hide");
+        hideModal(newTargetBetModalRef.value);
+      }, 2000);
+    };
 
     const submit = () => {
-      if (!formRef.value) {
+      if (formRef.value) {
+        //hideModal(newTargetBetModalRef.value);
         return;
       }
-
-      formRef.value.validate((valid) => {
-        if (valid) {
-          loading.value = true;
-
-          setTimeout(() => {
-            loading.value = false;
-
-            Swal.fire({
-              text: "Form has been successfully submitted!",
-              icon: "success",
-              buttonsStyling: false,
-              confirmButtonText: "Ok, got it!",
-              customClass: {
-                confirmButton: "btn btn-primary",
-              },
-            }).then(() => {
-              //alert(targetData);
-              //console.log(targetData.value.category_id);
-              store.dispatch(Actions.EDIT_TASK, {
-                task_id: 33,
-                user_id: targetData.value.customer_id,
-                title: targetData.value.title,
-                category_id: 15, //targetData.value.category_id,
-                description: targetData.value.description,
-                currency_id: targetData.value.currency_id,
-                budget: targetData.value.budget,
-                _metod: "put",
-              });
-              hideModal(newTargetModalRef.value);
-            });
-          }, 2000);
-        } else {
-          Swal.fire({
-            text: "Sorry, looks like there are some errors detected, please try again.",
-            icon: "error",
-            buttonsStyling: false,
-            confirmButtonText: "Ok, got it!",
-            customClass: {
-              confirmButton: "btn btn-primary",
-            },
-          });
-          return false;
-        }
-      });
     };
+    // formRef.value.validate(() => {
+    //   //valid
+    //   // if (valid) {
+    //   loading.value = true;
+
+    //   setTimeout(() => {
+    //     loading.value = false;
+
+    //     Swal.fire({
+    //       text: "Form has been successfully submitted!",
+    //       icon: "success",
+    //       buttonsStyling: false,
+    //       confirmButtonText: "Ok, got it!",
+    //       customClass: {
+    //         confirmButton: "btn btn-primary",
+    //       },
+    //     }).then(() => {
+    //       //alert(targetData);
+    //       store.dispatch(Actions.CREATE_TASK, targetData);
+    //       hideModal(newTargetModalRef.value);
+    //     });
+    //   }, 2000);
+    //   //     } else {
+    //   //       Swal.fire({
+    //   //         text: "Sorry, looks like there are some errors detected, please try again.",
+    //   //         icon: "error",
+    //   //         buttonsStyling: false,
+    //   //         confirmButtonText: "Ok, got it!",
+    //   //         customClass: {
+    //   //           confirmButton: "btn btn-primary",
+    //   //         },
+    //   //       });
+    //   //       return false;
+    //   //}
+    // });
 
     return {
       targetData,
@@ -588,7 +649,8 @@ export default defineComponent({
       loading,
       formRef,
       rules,
-      newTargetModalRef,
+      newTargetBetModalRef,
+      sendBet,
     };
   },
 });

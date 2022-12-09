@@ -15,13 +15,20 @@ export interface User {
   task: string;
   tasks: string;
   chat: string;
+  terms: string;
   responses: string;
   doing: string;
+  bet: string;
 }
 
 export interface Task {
   targetTitle: string;
   targetDetails: string;
+}
+
+export interface Bet {
+  accept: string;
+  reject: string;
 }
 
 export interface Category {
@@ -53,6 +60,7 @@ export default class AuthModule
 {
   errors = {};
   user = {} as User;
+  bet = {} as Bet;
   categories = {} as Category;
   faq = {} as FAQ;
   isAuthenticated = !!JwtService.getToken();
@@ -160,6 +168,27 @@ export default class AuthModule
   [Mutations.SET_CHAT](chat) {
     this.user.chat = chat;
   }
+
+  @Mutation
+  [Mutations.SET_TERMS](terms) {
+    this.user.terms = terms;
+  }
+
+  @Mutation
+  [Mutations.SET_BET](bet) {
+    this.user.bet = bet;
+  }
+
+  @Mutation
+  [Mutations.ACCEPT_BET](bet) {
+    this.bet.accept = bet;
+  }
+
+  @Mutation
+  [Mutations.REJECT_BET](bet) {
+    this.bet.reject = bet;
+  }
+
   @Mutation
   [Mutations.PURGE_AUTH]() {
     this.isAuthenticated = false;
@@ -224,6 +253,17 @@ export default class AuthModule
       });
   }
 
+  @Action
+  [Actions.EDIT_TASK](credentials) {
+    ApiService.setHeader();
+    return ApiService.put("api/task/" + credentials.task_id, credentials)
+      .then(({ data }) => {
+        this.context.commit(Mutations.SET_TASK, data);
+      })
+      .catch(({ response }) => {
+        this.context.commit(Mutations.SET_ERROR, response.data.errors);
+      });
+  }
   @Action
   [Actions.SHOW_TASKS](credentials) {
     ApiService.setHeader();
@@ -322,10 +362,23 @@ export default class AuthModule
   @Action
   [Actions.ADDCHAT](credentials) {
     ApiService.setHeader();
-    return ApiService.post("api/chat/2", credentials)
+    return ApiService.post("api/chat/" + credentials.task_id, credentials)
       .then(({ data }) => {
         //alert("main");
         this.context.commit(Mutations.SET_CHAT, data);
+      })
+      .catch(({ response }) => {
+        this.context.commit(Mutations.SET_ERROR, response.data.errors);
+      });
+  }
+
+  @Action
+  [Actions.ADDTERMS]() {
+    ApiService.setHeader();
+    return ApiService.get("api/agreement")
+      .then(({ data }) => {
+        //alert("main");
+        this.context.commit(Mutations.SET_TERMS, data);
       })
       .catch(({ response }) => {
         this.context.commit(Mutations.SET_ERROR, response.data.errors);
@@ -339,6 +392,42 @@ export default class AuthModule
       .then(({ data }) => {
         //alert("main");
         this.context.commit(Mutations.SET_CHAT, data);
+      })
+      .catch(({ response }) => {
+        this.context.commit(Mutations.SET_ERROR, response.data.errors);
+      });
+  }
+
+  @Action
+  [Actions.SENDBET](credentials) {
+    ApiService.setHeader();
+    return ApiService.post("api/response", credentials)
+      .then(({ data }) => {
+        this.context.commit(Mutations.SET_BET, data);
+      })
+      .catch(({ response }) => {
+        this.context.commit(Mutations.SET_ERROR, response.data.errors);
+      });
+  }
+
+  @Action
+  [Actions.ACCEPTBET](credentials) {
+    ApiService.setHeader();
+    return ApiService.post("api/response/accept", credentials)
+      .then(({ data }) => {
+        this.context.commit(Mutations.ACCEPT_BET, data);
+      })
+      .catch(({ response }) => {
+        this.context.commit(Mutations.SET_ERROR, response.data.errors);
+      });
+  }
+
+  @Action
+  [Actions.REJECTBET](credentials) {
+    ApiService.setHeader();
+    return ApiService.post("api/response/reject", credentials)
+      .then(({ data }) => {
+        this.context.commit(Mutations.REJECT_BET, data);
       })
       .catch(({ response }) => {
         this.context.commit(Mutations.SET_ERROR, response.data.errors);

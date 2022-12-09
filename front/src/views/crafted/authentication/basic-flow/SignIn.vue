@@ -184,7 +184,6 @@ export default defineComponent({
     const store = useStore();
     const router = useRouter();
     const { t, te } = useI18n();
-
     const translate = (text) => {
       if (te(text)) {
         return t(text);

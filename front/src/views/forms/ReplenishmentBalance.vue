@@ -15,6 +15,7 @@ import KTModalCard from "@/components/cards/Card.vue";
 import KTUpgradePlanModal from "@/components/modals/general/UpgradePlanModal.vue";
 import { setCurrentPageBreadcrumbs } from "@/core/helpers/breadcrumb";
 import { getIllustrationsPath } from "@/core/helpers/assets";
+import { useI18n } from "vue-i18n/index";
 
 export default defineComponent({
   name: "replenishment-balance-forms",
@@ -24,7 +25,8 @@ export default defineComponent({
   },
   setup() {
     onMounted(() => {
-      setCurrentPageBreadcrumbs("Replenishmentbalance", ["Forms"]);
+      const { t, te } = useI18n();
+      setCurrentPageBreadcrumbs(t("replenishmentBalanceForm"), [t("forms")]);
     });
 
     return {

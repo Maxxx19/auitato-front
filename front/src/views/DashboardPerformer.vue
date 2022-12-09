@@ -83,6 +83,7 @@ import MixedWidget7 from "@/components/widgets/mixed/Widget7.vue";
 import MixedWidget10 from "@/components/widgets/mixed/Widget10.vue";
 import { setCurrentPageTitle } from "@/core/helpers/breadcrumb";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 import { Actions } from "@/store/enums/StoreEnums";
 import { setCurrentPageBreadcrumbs } from "@/core/helpers/breadcrumb";
 
@@ -103,6 +104,7 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
+    const router = useRouter();
     onMounted(async () => {
       store.dispatch(Actions.ADD_BODY_CLASSNAME, "bg-body");
       await store.dispatch(
@@ -117,7 +119,8 @@ export default defineComponent({
         Actions.SHOW_PERFORMER_DOING,
         store.state.AuthModule.user.user.api_token
       );
-      console.log(store.state.AuthModule.user.user.api_token);
+      router.push({ name: "search-task-forms-performer" });
+      //console.log(store.state.AuthModule.user.user.api_token);
       setCurrentPageBreadcrumbs("Horizontal", ["Pages", "Wizards"]);
     });
   },

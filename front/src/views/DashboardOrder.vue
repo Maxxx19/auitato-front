@@ -302,6 +302,7 @@ import { useStore } from "vuex";
 import { Actions } from "@/store/enums/StoreEnums";
 import { useI18n } from "vue-i18n/index";
 import { useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 
 interface IStep1 {
   accountType: string;
@@ -343,6 +344,7 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
+    const router = useRouter();
     const _stepperObj = ref<StepperComponent | null>(null);
     const wizardRef = ref<HTMLElement | null>(null);
     const currentStepIndex = ref(0);
@@ -384,10 +386,47 @@ export default defineComponent({
       );
 
       store.dispatch(Actions.ADD_BODY_CLASSNAME, "bg-body");
-      await store.dispatch(
+      const tasksData = await store.dispatch(
         Actions.SHOW_TASKS,
         store.state.AuthModule.user.api_token
       );
+      if (store.state.AuthModule.user.tasks[0].responses[0]) {
+        Swal.fire({
+          title:
+            "Do you want to accept: " +
+            store.state.AuthModule.user.tasks[0].title +
+            ", the bet - " +
+            store.state.AuthModule.user.tasks[0].responses[0].bet +
+            " ?  " +
+            "Message: " +
+            store.state.AuthModule.user.tasks[0].responses[0].message,
+          showDenyButton: true,
+          showCancelButton: true,
+          confirmButtonText: `Accept`,
+          denyButtonText: `Don't accept`,
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            Swal.fire("Accepted!", "", "success");
+            setTimeout(() => {
+              store.dispatch(Actions.ACCEPTBET, {
+                _method: "put",
+                response_id: 3,
+              });
+            }, 3000);
+          } else {
+            Swal.fire("The bet is rejected", "", "info");
+            setTimeout(() => {
+              store.dispatch(Actions.REJECTBET, {
+                _method: "put",
+                response_id: 3,
+              });
+            }, 3000);
+          }
+        });
+      } else {
+        router.push({ name: "search-task-forms" });
+      }
       setCurrentPageBreadcrumbs("Horizontal", ["Pages", "Wizards"]);
     });
 

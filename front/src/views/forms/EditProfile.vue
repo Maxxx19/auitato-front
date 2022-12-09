@@ -280,11 +280,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onMounted } from "vue";
 import Dropdown3 from "@/components/dropdown/Dropdown3.vue";
 import { useI18n } from "vue-i18n/index";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
+import { setCurrentPageBreadcrumbs } from "@/core/helpers/breadcrumb";
 
 export default defineComponent({
   name: "kt-account",
@@ -294,6 +295,11 @@ export default defineComponent({
   setup() {
     const { t, te } = useI18n();
     const route = useRoute();
+
+    onMounted(() => {
+      const { t, te } = useI18n();
+      setCurrentPageBreadcrumbs(t("editProfileForm"), [t("forms")]);
+    });
 
     const translate = (text) => {
       if (te(text)) {

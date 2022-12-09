@@ -300,6 +300,7 @@ import { useForm } from "vee-validate";
 import Swal from "sweetalert2/dist/sweetalert2.min.js";
 import { useStore } from "vuex";
 import { Actions } from "@/store/enums/StoreEnums";
+import { useI18n } from "vue-i18n/index";
 
 interface IStep1 {
   accountType: string;
@@ -367,10 +368,9 @@ export default defineComponent({
       _stepperObj.value = StepperComponent.createInsance(
         wizardRef.value as HTMLElement
       );
-
+      const { t, te } = useI18n();
       store.dispatch(Actions.ADD_BODY_CLASSNAME, "bg-body");
-
-      setCurrentPageBreadcrumbs("Horizontal", ["Pages", "Wizards"]);
+      setCurrentPageBreadcrumbs(t("authorizationForm"), [t("forms")]);
     });
 
     onUnmounted(() => {

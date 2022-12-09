@@ -16,6 +16,7 @@ import KTModalCard from "@/components/cards/Card.vue";
 import KTNewRegistrationModal from "@/components/modals/forms/NewRegistrationModal.vue";
 import { setCurrentPageBreadcrumbs } from "@/core/helpers/breadcrumb";
 import { getIllustrationsPath } from "@/core/helpers/assets";
+import { useI18n } from "vue-i18n/index";
 
 export default defineComponent({
   name: "registration-forms",
@@ -25,7 +26,8 @@ export default defineComponent({
   },
   setup() {
     onMounted(() => {
-      setCurrentPageBreadcrumbs("Registration", ["Forms"]);
+      const { t, te } = useI18n();
+      setCurrentPageBreadcrumbs(t("registrationForm"), [t("forms")]);
     });
 
     return {

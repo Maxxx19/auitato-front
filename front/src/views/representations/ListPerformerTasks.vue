@@ -41,7 +41,7 @@
           </button>
           <!--end::Export-->
           <!--begin::Add customer-->
-          <button
+          <!-- <button
             type="button"
             class="btn btn-primary"
             data-bs-toggle="modal"
@@ -51,7 +51,7 @@
               <inline-svg src="media/icons/duotune/arrows/arr075.svg" />
             </span>
             {{ translate("CreateTask") }}
-          </button>
+          </button> -->
           <!--end::Add customer-->
         </div>
         <!--end::Toolbar-->
@@ -108,8 +108,9 @@
         :checkbox-enabled="true"
         checkbox-label="id"
       >
-        <template v-slot:name="{ row: tasks }">
+        <template v-slot:name="{ row: tasks, index }">
           {{ tasks.title || "no data" }}
+          {{ index }}
         </template>
         <template v-slot:description="{ row: tasks }">
           <a href="#" class="text-gray-600 text-hover-primary mb-1">
@@ -151,7 +152,7 @@
                 <span class="svg-icon svg-icon-2">
                   <inline-svg src="media/icons/duotune/arrows/arr075.svg" />
                 </span>
-                {{ translate("EditTask") }}
+                {{ translate("MakeBet") }}
               </button>
               <router-link
                 :to="`/apps/representations/chat/private-chat/${tasks.id}`"
@@ -160,13 +161,6 @@
               >
                 {{ translate("AddChat") }}
               </router-link>
-            </div>
-            <!--end::Menu item-->
-            <!--begin::Menu item-->
-            <div class="menu-item px-3">
-              <a @click="deleteCustomer(customer.id)" class="menu-link px-3"
-                >Delete</a
-              >
             </div>
             <!--end::Menu item-->
           </div>
@@ -178,15 +172,17 @@
 
   <ExportCustomerModal></ExportCustomerModal>
   <AddCustomerModal></AddCustomerModal>
-  <KTNewTargetModal></KTNewTargetModal>
-  <KTNewTargetEditModal
-    v-if="getTask[0]"
-    :titleData="getTask[0].title || null"
-    :categoryData="getTask[0].category_id || null"
-    :descriptionData="getTask[0].description || null"
-    :budgetData="getTask[0].budget || null"
-  >
-  </KTNewTargetEditModal>
+  <div v-for="task in getTask" :key="task.id">
+    <KTNewTargetBetModal
+      v-if="task"
+      :taskId="task.id || null"
+      :titleData="task.title || null"
+      :categoryData="task.category_id || null"
+      :descriptionData="task.description || null"
+      :budgetData="task.budget || null"
+    >
+    </KTNewTargetBetModal>
+  </div>
 </template>
 
 <script lang="ts">
@@ -200,27 +196,25 @@ import customers from "@/core/data/customers";
 import { ICustomer } from "@/core/data/customers";
 import arraySort from "array-sort";
 import { useStore } from "vuex";
-import KTNewTargetModal from "@/components/modals/forms/NewTargetModal.vue";
-import KTNewTargetEditModal from "@/components/modals/forms/NewTargetEditModal.vue";
+import KTNewTargetBetModal from "@/components/modals/forms/NewTargetBetModal.vue";
 import { useI18n } from "vue-i18n/index";
 import { useRoute } from "vue-router";
 import Chat from "@/views/apps/chat/Chat.vue";
-import moment from "moment";
 import { Actions } from "@/store/enums/StoreEnums";
 
 export default defineComponent({
-  name: "list-tasks-representation",
+  name: "search-task-forms-performer",
   components: {
     Datatable,
     ExportCustomerModal,
     AddCustomerModal,
-    KTNewTargetModal,
-    KTNewTargetEditModal,
+    KTNewTargetBetModal,
   },
   data: function () {
     return {
       tasks: null,
       getTasks: false,
+      index: 1,
     };
   },
   computed: {
@@ -233,9 +227,15 @@ export default defineComponent({
   mounted: function () {
     const store = useStore();
     this.tasks = store.state.AuthModule.user.tasks;
-    store.dispatch(Actions.ADDCHAT);
+    store.dispatch(Actions.ADDCHAT, { task_id: 2 });
     if (this.tasks) this.getTasks = true;
-    //alert(this.tasks);
+    var data = store.state.AuthModule.user.tasks;
+    this.index = data.map((items, index) => ({
+      ...items,
+      index: index + 1,
+    }));
+    //console.log("111111");
+    //console.log(this.index);
   },
   setup() {
     const tableHeader = ref([

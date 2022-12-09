@@ -354,7 +354,7 @@ export default defineComponent({
     this.task_id = 2;
     this.chat = store.state.AuthModule.user.chat[0].user.name;
   },
-  setup() {
+  setup(task_id) {
     const messagesRef = ref<null | HTMLElement>(null);
     const messagesInRef = ref<null | HTMLElement>(null);
     const messagesOutRef = ref<null | HTMLElement>(null);
@@ -363,7 +363,7 @@ export default defineComponent({
     const i18n = useI18n();
     const store = useStore();
     console.log("The id is: " + route.params.id);
-    store.dispatch(Actions.ADDCHAT);
+    store.dispatch(Actions.ADDCHAT, { task_id: task_id });
     const messages = ref<Array<KTMessage>>([
       {
         type: "in",

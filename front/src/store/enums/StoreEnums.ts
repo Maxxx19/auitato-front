@@ -18,6 +18,7 @@ enum Actions {
   SET_THEME_MODE_ACTION = "setThemeModeAction",
   GET_CATEGORIES = "getCategories",
   CREATE_TASK = "createTask",
+  EDIT_TASK = "editTask",
   SHOW_TASKS = "showTasks",
   ADDCHAT = "AddChat",
   SENDNEWMESSAGE = "SendNewMessage",
@@ -25,6 +26,10 @@ enum Actions {
   SHOW_PERFORMER_TASKS = "showPerformerTasks",
   SHOW_PERFORMER_RESPONSES = "ShowPerformerResponses",
   SHOW_PERFORMER_DOING = "ShowPerformerDoing",
+  SENDBET = "sendBet",
+  ACCEPTBET = "acceptBet",
+  REJECTBET = "rejectBet",
+  ADDTERMS = "addTerms",
 }
 
 enum Mutations {
@@ -51,6 +56,10 @@ enum Mutations {
   SET_PERFORMER_TASKS = "setPerformerTasks",
   SET_PERFORMER_RESPONSES = "setPerformerResponses",
   SET_PERFORMER_DOING = "setPerformerDoing",
+  SET_BET = "setBet",
+  ACCEPT_BET = "accept_Bet",
+  REJECT_BET = "reject_Bet",
+  SET_TERMS = "setTerms",
 }
 
 export { Actions, Mutations };

@@ -242,29 +242,18 @@
             ></el-input>
           </el-form-item>
           <div class="m-3">
-            <Field
-              as="select"
-              name="currency"
-              placeholder="Select currency"
-              class="form-select form-select-solid form-select-lg fw-semobold"
-              v-model="targetData.currency"
-            >
-              <option
-                v-for="currency in this.currencies"
-                :key="currency"
-                :value="currency.id"
-                :selected="currency.id == 1"
-              >
-                {{ currency.symbol }}
-              </option>
-            </Field>
+            <el-form-item prop="symbol">
+              <span class="pt-5" type="number" name="budget">
+                {{ this.currencies }}
+              </span>
+            </el-form-item>
           </div>
         </div>
-        <div class="fv-plugins-message-container">
+        <!-- <div class="fv-plugins-message-container">
           <div class="fv-help-block">
             <ErrorMessage name="currency" />
           </div>
-        </div>
+        </div> -->
       </div>
       <!--begin::Actions-->
       <div class="text-center">
@@ -600,7 +589,8 @@ export default defineComponent({
     const store = useStore();
     await store.dispatch(Actions.GET_FAQ);
     this.categories = store.state.AuthModule.faq.categories;
-    this.currencies = store.state.AuthModule.faq.currencies;
+    this.currencies = store.state.AuthModule.faq.currencies[0].symbol;
+    //console.log(this.currencies);
   },
   setup() {
     const { t, te } = useI18n();

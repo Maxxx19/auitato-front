@@ -562,8 +562,8 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/forms/EditTask.vue"),
       },
       {
-        path: "/apps/forms/search-task",
-        name: "search-task-forms",
+        path: "/apps/forms/search-task-performer",
+        name: "search-task-forms-performer",
         component: () =>
           import("@/views/representations/ListPerformerTasks.vue"),
       },
@@ -590,8 +590,8 @@ const routes: Array<RouteRecordRaw> = [
       //   component: () => import("@/views/representations/Categories.vue"),
       // },
       {
-        path: "/apps/forms/search-task",
-        name: "search-task-forms",
+        path: "/apps/forms/search-task-performer",
+        name: "search-task-forms-performer",
         component: () =>
           import("@/views/representations/ListPerformerTasks.vue"),
       },

@@ -16,6 +16,7 @@ import KTModalCard from "@/components/cards/Card.vue";
 import KTNewTargetModal from "@/components/modals/forms/NewTargetModal.vue";
 import { setCurrentPageBreadcrumbs } from "@/core/helpers/breadcrumb";
 import { getIllustrationsPath } from "@/core/helpers/assets";
+import { useI18n } from "vue-i18n/index";
 
 export default defineComponent({
   name: "new-target",
@@ -25,7 +26,8 @@ export default defineComponent({
   },
   setup() {
     onMounted(() => {
-      setCurrentPageBreadcrumbs("New Task", ["Modals", "Forms"]);
+      const { t, te } = useI18n();
+      setCurrentPageBreadcrumbs(t("createTaskForm"), [t("forms")]);
     });
 
     return {

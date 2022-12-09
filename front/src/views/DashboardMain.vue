@@ -343,6 +343,7 @@ export default defineComponent({
     ListTasksMain,
   },
   data: function () {
+    const store = useStore();
     return {
       items: null,
       value1: false,
@@ -397,6 +398,7 @@ export default defineComponent({
     const store = useStore();
     //await store.dispatch(Actions.GET_FAQ);
     await store.dispatch(Actions.GET_FAQ);
+    store.dispatch(Actions.ADDTERMS);
     this.items = store.state.AuthModule.faq.faq;
     this.tasks = store.state.AuthModule.faq.tasks;
     this.activeTabName = this.tabs[0].name;
@@ -414,6 +416,7 @@ export default defineComponent({
   setup() {
     const store = useStore();
     store.dispatch(Actions.GET_FAQ);
+    store.dispatch(Actions.ADDTERMS);
     const _stepperObj = ref<StepperComponent | null>(null);
     const wizardRef = ref<HTMLElement | null>(null);
     const currentStepIndex = ref(0);
@@ -454,7 +457,6 @@ export default defineComponent({
         wizardRef.value as HTMLElement
       );
       store.dispatch(Actions.ADD_BODY_CLASSNAME, "bg-body");
-
       setCurrentPageBreadcrumbs("Horizontal", ["Pages", "Wizards"]);
     });
 

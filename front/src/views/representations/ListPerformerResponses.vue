@@ -209,7 +209,7 @@ import moment from "moment";
 import { Actions } from "@/store/enums/StoreEnums";
 
 export default defineComponent({
-  name: "list-tasks-representation",
+  name: "search-responses-forms",
   components: {
     Datatable,
     ExportCustomerModal,
@@ -233,7 +233,7 @@ export default defineComponent({
   mounted: function () {
     const store = useStore();
     this.tasks = store.state.AuthModule.user.responses;
-    store.dispatch(Actions.ADDCHAT);
+    store.dispatch(Actions.ADDCHAT, { task_id: 2 });
     if (this.tasks) this.getTasks = true;
     //alert(this.tasks);
   },

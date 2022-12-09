@@ -180,10 +180,17 @@
   <AddCustomerModal></AddCustomerModal>
   <KTNewTargetModal></KTNewTargetModal>
   <KTNewTargetEditModal
-    :titleData="getTask[0].title"
-    :categoryData="getTask[0].category.id"
-    :descriptionData="getTask[0].description"
-    :budgetData="getTask[0].budget"
+    :titleData="getTask[2].title"
+    :categoryData="getTask[2].category.id"
+    :descriptionData="getTask[2].description"
+    :budgetData="getTask[2].budget"
+  >
+  </KTNewTargetEditModal>
+  <KTNewTargetEditModal
+    :titleData="getTask[1].title"
+    :categoryData="getTask[1].category.id"
+    :descriptionData="getTask[1].description"
+    :budgetData="getTask[1].budget"
   >
   </KTNewTargetEditModal>
 </template>
@@ -208,7 +215,7 @@ import moment from "moment";
 import { Actions } from "@/store/enums/StoreEnums";
 
 export default defineComponent({
-  name: "list-tasks-representation",
+  name: "search-task-forms",
   components: {
     Datatable,
     ExportCustomerModal,
@@ -231,7 +238,7 @@ export default defineComponent({
   mounted: function () {
     const store = useStore();
     this.tasks = store.state.AuthModule.user.tasks;
-    store.dispatch(Actions.ADDCHAT);
+    store.dispatch(Actions.ADDCHAT, { task_id: 2 });
     //alert(this.tasks);
   },
   setup() {
@@ -279,10 +286,11 @@ export default defineComponent({
     const tableData = store.state.AuthModule.user.tasks;
     const initCustomers = [];
     onMounted(() => {
-      setCurrentPageBreadcrumbs("ListTasks", ["Representations"]);
+      const { t, te } = useI18n();
+      setCurrentPageBreadcrumbs(t("listOfTasks"), [t("forms")]);
       initCustomers.splice(0, tableData.length);
     });
-    //.value .value.value
+    //.value .value.valuet
     const deleteFewCustomers = () => {
       selectedIds.value.forEach((item) => {
         deleteCustomer(item);
