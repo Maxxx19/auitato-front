@@ -224,7 +224,7 @@
           />
           <span class="form-check-label fw-semobold text-gray-700 fs-6">
             {{ translate("IAgree") }}
-            <a href="#" class="ms-1 link-primary">
+            <a class="ms-1 link-primary cursor-pointer" @click="openTerms">
               {{ translate("TermsCond") }}
             </a>
           </span>
@@ -363,12 +363,16 @@ export default defineComponent({
     const hasActiveChildren = (match) => {
       return route.path.indexOf(match) !== -1;
     };
+    const openTerms = () => {
+      router.push({ name: "terms-description" });
+    };
     return {
       registration,
       onSubmitRegister,
       submitButton,
       translate,
       hasActiveChildren,
+      openTerms,
     };
   },
 });

@@ -85,7 +85,10 @@
           {{ taskData.title }}
         </template>
         <template v-slot:description="{ row: taskData }">
-          <a href="#" class="text-gray-600 text-hover-primary mb-1">
+          <a
+            @click="goToSignUp"
+            class="text-gray-600 text-hover-primary mb-1 cursor-pointer"
+          >
             {{ taskData.description }}
           </a>
         </template>
@@ -162,6 +165,7 @@ import { useI18n } from "vue-i18n/index";
 import { useRoute } from "vue-router";
 import moment from "moment";
 import { Actions } from "@/store/enums/StoreEnums";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "list-tasks-representation",
@@ -237,6 +241,12 @@ export default defineComponent({
     const i18n = useI18n();
     var tableData = store.state.AuthModule.faq.tasks;
     const initCustomers = [];
+    const route = useRoute();
+    const router = useRouter();
+
+    const goToSignUp = () => {
+      router.push({ name: "sign-up" });
+    };
     onMounted(() => {
       setCurrentPageBreadcrumbs("ListTasks", ["Representations"]);
       //initCustomers.splice(0, tableData.length);
@@ -272,8 +282,6 @@ export default defineComponent({
       }
     };
     const { t, te } = useI18n();
-    const route = useRoute();
-
     const translate = (text) => {
       if (te(text)) {
         return t(text);
@@ -320,6 +328,7 @@ export default defineComponent({
       onItemSelect,
       translate,
       hasActiveChildren,
+      goToSignUp,
     };
   },
 });

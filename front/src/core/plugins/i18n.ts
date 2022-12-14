@@ -142,6 +142,7 @@ const messages = {
     YourBet: "Your bet",
     YourMessage: "Your message",
     Home: "Home page",
+    BackSignUp: "Back",
   },
   ua: {
     dashboard: "Панель приладів",
@@ -283,6 +284,7 @@ const messages = {
     YourBet: "Ваша ставка",
     YourMessage: "Ваше повідомлення",
     Home: "Домашня сторінка",
+    BackSignUp: "Повентутися назад",
   },
   ru: {
     dashboard: "Панель приборов",
@@ -424,6 +426,7 @@ const messages = {
     YourBet: "Ваша ставка",
     YourMessage: "Ваше сообщение",
     Home: "Домашняя страница",
+    BackSignUp: "Вернуться назад",
   },
   es: {
     dashboard: "Tablero",

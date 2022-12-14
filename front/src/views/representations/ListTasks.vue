@@ -180,10 +180,10 @@
   <AddCustomerModal></AddCustomerModal>
   <KTNewTargetModal></KTNewTargetModal>
   <KTNewTargetEditModal
-    :titleData="getTask[2].title"
-    :categoryData="getTask[2].category.id"
-    :descriptionData="getTask[2].description"
-    :budgetData="getTask[2].budget"
+    :titleData="getTask[0].title"
+    :categoryData="getTask[0].category.id"
+    :descriptionData="getTask[0].description"
+    :budgetData="getTask[0].budget"
   >
   </KTNewTargetEditModal>
   <KTNewTargetEditModal
@@ -232,6 +232,7 @@ export default defineComponent({
     getTask() {
       const store = useStore();
       var tasks = store.state.AuthModule.user.tasks;
+      //console.log(tasks[0]);
       return tasks;
     },
   },

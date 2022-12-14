@@ -373,9 +373,9 @@ export default class AuthModule
   }
 
   @Action
-  [Actions.ADDTERMS]() {
+  [Actions.ADDTERMS](credentials) {
     ApiService.setHeader();
-    return ApiService.get("api/agreement")
+    return ApiService.post("api/agreement", credentials)
       .then(({ data }) => {
         //alert("main");
         this.context.commit(Mutations.SET_TERMS, data);

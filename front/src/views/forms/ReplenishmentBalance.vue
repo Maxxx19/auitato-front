@@ -1,9 +1,9 @@
 <template>
   <KTModalCard
-    title="Upgrade Plan Modal Example"
+    title="Пополнить баланс"
     description="Click on the below buttons to launch <br/>a upgrade plan example."
     :image="getIllustrationsPath('8.png')"
-    button-text="Upgrade Plan"
+    button-text="Пополнение баланса"
     modal-id="kt_modal_upgrade_plan"
   ></KTModalCard>
   <KTUpgradePlanModal></KTUpgradePlanModal>

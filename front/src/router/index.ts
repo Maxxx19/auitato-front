@@ -620,6 +620,17 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/",
+    component: () => import("@/views/representations/Terms.vue"),
+    children: [
+      {
+        path: "/terms/description",
+        name: "terms-description",
+        component: () => import("@/views/representations/Terms.vue"),
+      },
+    ],
+  },
+  {
+    path: "/",
     component: () => import("@/components/page-layouts/Auth.vue"),
     children: [
       {
